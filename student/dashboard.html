@@ -12,9 +12,10 @@
     <link rel="stylesheet" href="../admin/admin.css">
     <link rel="stylesheet" href="student.css">
 </head>
-<body>
+<body class="student-app">
     <div class="app-layout">
         <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
             <div class="sidebar-brand">
                 <div class="sidebar-brand-icon">
                     <span class="material-icons-outlined">auto_stories</span>
@@ -23,6 +24,10 @@
                     <h2>The Archivist</h2>
                     <span class="student-brand-sub">Student Portal</span>
                 </div>
+            </div>
+            <button type="button" class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse navigation" aria-expanded="true" aria-controls="sidebar">
+                <span class="material-icons-outlined" aria-hidden="true">chevron_left</span>
+            </button>
             </div>
             <nav class="sidebar-nav">
                 <a href="dashboard.html" class="nav-item active" data-page="dashboard">
@@ -146,7 +151,7 @@
                             <h2>Currently borrowed</h2>
                             <a href="my-books.html">See all</a>
                         </div>
-                        <div class="table-container" style="margin-bottom: 24px;">
+                        <div class="table-container student-loans-table-wrap">
                             <table class="data-table">
                                 <thead>
                                     <tr>
@@ -224,27 +229,27 @@
                         <div class="section-header">
                             <h2>Announcements</h2>
                         </div>
-                        <div class="info-card" style="padding: 0; overflow: hidden;">
-                            <div class="announcement-card" style="border: none; border-radius: 0; border-bottom: 1px solid var(--gray-100);">
+                        <div class="info-card announcement-stack">
+                            <div class="announcement-item">
                                 <div class="tag">Hours</div>
                                 <h3>Extended hours during exams</h3>
                                 <p>Main reading room open until midnight Apr 15–26. Group study rooms require booking.</p>
                             </div>
-                            <div class="announcement-card" style="border: none; border-radius: 0;">
+                            <div class="announcement-item">
                                 <div class="tag">Workshops</div>
                                 <h3>Citation management drop-in</h3>
                                 <p>Wednesdays 2–4pm, digital scholarship lab. Bring your laptop.</p>
                             </div>
                         </div>
 
-                        <div class="section-header" style="margin-top: 24px;">
+                        <div class="section-header spaced-top">
                             <h2>Hold ready</h2>
                         </div>
                         <div class="info-card highlight-blue">
                             <h3>Neuromancer — G. Gibson</h3>
                             <p>Held under your account until Apr 6. Check out at the main desk with your student ID.</p>
                             <button type="button" class="btn-dark">
-                                <span class="material-icons-outlined" style="font-size: 1rem;">place</span>
+                                <span class="material-icons-outlined">place</span>
                                 Directions
                             </button>
                         </div>

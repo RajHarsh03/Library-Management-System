@@ -12,9 +12,10 @@
     <link rel="stylesheet" href="../admin/admin.css">
     <link rel="stylesheet" href="student.css">
 </head>
-<body>
+<body class="student-app">
     <div class="app-layout">
         <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
             <div class="sidebar-brand">
                 <div class="sidebar-brand-icon">
                     <span class="material-icons-outlined">auto_stories</span>
@@ -23,6 +24,10 @@
                     <h2>The Archivist</h2>
                     <span class="student-brand-sub">Student Portal</span>
                 </div>
+            </div>
+            <button type="button" class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse navigation" aria-expanded="true" aria-controls="sidebar">
+                <span class="material-icons-outlined" aria-hidden="true">chevron_left</span>
+            </button>
             </div>
             <nav class="sidebar-nav">
                 <a href="dashboard.html" class="nav-item" data-page="dashboard">
@@ -60,6 +65,9 @@
                     <button type="button" class="topbar-icon-btn" aria-label="Notifications">
                         <span class="material-icons-outlined">notifications</span>
                     </button>
+                    <button type="button" class="topbar-icon-btn" aria-label="Help">
+                        <span class="material-icons-outlined">help_outline</span>
+                    </button>
                     <div class="topbar-profile">
                         <div class="topbar-profile-info">
                             <div class="name">Jordan Lee</div>
@@ -96,7 +104,7 @@
                             <p class="author">Amira Okonkwo</p>
                             <div class="browse-card-actions">
                                 <span class="availability-dot">3 copies</span>
-                                <button type="button" class="btn-primary hold-btn" style="padding: 8px 14px; font-size: 0.8rem;">Hold</button>
+                                <button type="button" class="btn-primary hold-btn btn-hold">Hold</button>
                             </div>
                         </div>
                     </article>
@@ -109,7 +117,7 @@
                             <p class="author">Noah Weiss</p>
                             <div class="browse-card-actions">
                                 <span class="availability-dot unavailable">Checked out</span>
-                                <button type="button" class="btn-outline hold-btn" style="padding: 8px 14px; font-size: 0.8rem;">Join queue</button>
+                                <button type="button" class="btn-outline hold-btn btn-hold">Join queue</button>
                             </div>
                         </div>
                     </article>
@@ -122,7 +130,7 @@
                             <p class="author">Julian Thorne</p>
                             <div class="browse-card-actions">
                                 <span class="availability-dot">1 copy</span>
-                                <button type="button" class="btn-primary hold-btn" style="padding: 8px 14px; font-size: 0.8rem;">Hold</button>
+                                <button type="button" class="btn-primary hold-btn btn-hold">Hold</button>
                             </div>
                         </div>
                     </article>
@@ -134,8 +142,8 @@
                             <h3>Archive Protocols</h3>
                             <p class="author">Institutional Press</p>
                             <div class="browse-card-actions">
-                                <span class="availability-dot">E-book</span>
-                                <button type="button" class="btn-primary hold-btn" style="padding: 8px 14px; font-size: 0.8rem;">Read</button>
+                                <span class="availability-dot ebook">E-book</span>
+                                <button type="button" class="btn-primary hold-btn btn-hold">Read</button>
                             </div>
                         </div>
                     </article>
