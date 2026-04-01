@@ -315,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
             signupBtn.disabled = false;
 
             // Success
-            showToast('✓ Account created successfully! Welcome to The Digital Archivist', 'success');
+            showToast('Account created successfully! Let\'s begin the journey', 'success');
 
             // Simulate form data submission
             const formData = {

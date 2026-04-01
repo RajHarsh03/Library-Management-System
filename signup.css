@@ -8,12 +8,12 @@
 /* === Signup Hero Panel === */
 .signup-hero {
     position: relative;
-    flex: 0 0 45%;
+    flex: 0 0 55%;
     background: linear-gradient(135deg, #001a4d 0%, #003d99 25%, #0066cc 50%, #1a7fd4 80%, #0066cc 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 20px 35px;
+    padding: 25px 35px;
     overflow: hidden;
 }
 
@@ -50,12 +50,12 @@
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 2px;
-    margin-bottom: 24px;
+    margin-bottom: 30px;
 }
 
 .signup-hero .hero-title {
     font-family: var(--font-display);
-    font-size: 1.9rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: var(--white);
     line-height: 1.1;
@@ -63,7 +63,7 @@
 }
 
 .signup-hero .hero-description {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: rgba(255,255,255,0.7);
     line-height: 1.5;
     max-width: 320px;
