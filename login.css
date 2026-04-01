@@ -12,6 +12,8 @@
     --primary-dark: #0f2566;
     --primary-light: #3366cc;
     --accent: #2563eb;
+    --accent-vivid: #3b82f6;
+    --accent-soft: rgba(37, 99, 235, 0.08);
     --white: #ffffff;
     --gray-50: #f8f9fc;
     --gray-100: #f1f3f8;
@@ -24,7 +26,9 @@
     --gray-800: #1e2433;
     --gray-900: #0f1219;
     --success: #22c55e;
+    --success-deep: #16a34a;
     --danger: #ef4444;
+    --danger-deep: #dc2626;
     --warning: #f59e0b;
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-display: 'Space Grotesk', 'Inter', sans-serif;
@@ -55,7 +59,7 @@ html, body {
 .login-hero {
     position: relative;
     flex: 0 0 55%;
-    background: linear-gradient(135deg, #0a1628 0%, #1a3a8f 50%, #0f2566 100%);
+    background: linear-gradient(135deg, #070d1a 0%, #0f2566 30%, #1a3a8f 55%, #1e40af 80%, #1a3a8f 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -76,8 +80,9 @@ html, body {
     position: absolute;
     inset: 0;
     background: 
-        radial-gradient(ellipse at 30% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 70%),
-        radial-gradient(ellipse at 70% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+        radial-gradient(ellipse at 25% 40%, rgba(37, 99, 235, 0.2) 0%, transparent 65%),
+        radial-gradient(ellipse at 75% 15%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 80%, rgba(96, 165, 250, 0.08) 0%, transparent 40%);
 }
 
 .hero-content {
@@ -297,7 +302,8 @@ html, body {
     justify-content: center;
     align-items: center;
     padding: 60px 50px;
-    background: var(--white);
+    background: linear-gradient(180deg, #ffffff 0%, #fafcff 50%, #f8f9fc 100%);
+    position: relative;
 }
 
 .login-form-wrapper {
@@ -396,10 +402,13 @@ html, body {
     color: var(--accent);
     text-decoration: none;
     transition: color 0.2s;
+    padding: 2px 4px;
+    border-radius: 4px;
 }
 
 .forgot-link:hover {
-    color: var(--primary-dark);
+    color: var(--primary);
+    background: var(--accent-soft);
 }
 
 .input-wrapper {
@@ -469,7 +478,7 @@ html, body {
     justify-content: center;
     gap: 10px;
     padding: 16px;
-    background: var(--primary);
+    background: linear-gradient(180deg, var(--accent) 0%, var(--primary) 100%);
     color: var(--white);
     border: none;
     border-radius: var(--radius-md);
@@ -480,6 +489,7 @@ html, body {
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
 }
 
 .btn-login::before {
@@ -492,9 +502,9 @@ html, body {
 }
 
 .btn-login:hover {
-    background: var(--primary-dark);
+    background: linear-gradient(180deg, var(--accent-vivid) 0%, var(--accent) 100%);
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(26, 58, 143, 0.35);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
 }
 
 .btn-login:hover::before {
@@ -563,13 +573,18 @@ html, body {
 
 .sso-btn:hover {
     border-color: var(--accent);
-    background: var(--gray-50);
-    box-shadow: var(--shadow-sm);
+    background: var(--accent-soft);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.06);
 }
 
 .sso-btn .material-icons-outlined {
     font-size: 1.2rem;
     color: var(--gray-500);
+    transition: color 0.2s ease;
+}
+
+.sso-btn:hover .material-icons-outlined {
+    color: var(--accent);
 }
 
 /* Signup Prompt */
@@ -691,10 +706,12 @@ html, body {
 .form-group.has-error .form-input {
     border-color: var(--danger);
     background: #fef2f2;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.06);
 }
 
 .form-group.has-error .form-input:focus {
-    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.08);
+    border-color: var(--danger-deep);
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
 }
 
 /* === Toast Notifications === */
@@ -715,14 +732,15 @@ html, body {
     gap: 12px;
     padding: 14px 20px;
     background: var(--white);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(0,0,0,0.04);
     border-left: 4px solid var(--accent);
     font-size: 0.9rem;
     color: var(--gray-800);
     pointer-events: auto;
     animation: toastIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     max-width: 380px;
+    backdrop-filter: blur(8px);
 }
 
 .toast.error {
