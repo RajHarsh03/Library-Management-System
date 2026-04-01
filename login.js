@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const passwordError = document.getElementById('passwordError');
 
     let currentRole = 'student';
+    const errorTimeouts = new WeakMap(); // Store timeout IDs for auto-dismiss
 
     // ===== Toast Notification System =====
     function showToast(message, type = 'info') {
@@ -57,13 +58,47 @@ document.addEventListener('DOMContentLoaded', () => {
         group.classList.add('has-error');
         errorEl.textContent = message;
         errorEl.classList.add('visible');
+        
+        // Clear any existing timeout
+        const existingTimeout = errorTimeouts.get(errorEl);
+        if (existingTimeout) {
+            clearTimeout(existingTimeout);
+        }
+        
+        // Auto-dismiss after 4 seconds
+        const timeout = setTimeout(() => {
+            clearError(input, errorEl);
+        }, 4000);
+        
+        errorTimeouts.set(errorEl, timeout);
     }
 
     function clearError(input, errorEl) {
         const group = input.closest('.form-group');
-        group.classList.remove('has-error');
-        errorEl.textContent = '';
-        errorEl.classList.remove('visible');
+        // Start fade-out animation
+        if (errorEl.classList.contains('visible')) {
+            errorEl.classList.remove('visible');
+            // Remove outline and clear text after fade animation completes (250ms)
+            setTimeout(() => {
+                if (group) {
+                    group.classList.remove('has-error');
+                }
+                errorEl.textContent = '';
+            }, 250);
+        } else {
+            // If not visible, remove immediately
+            if (group) {
+                group.classList.remove('has-error');
+            }
+            errorEl.textContent = '';
+        }
+        
+        // Cancel auto-dismiss timeout
+        const timeout = errorTimeouts.get(errorEl);
+        if (timeout) {
+            clearTimeout(timeout);
+            errorTimeouts.delete(errorEl);
+        }
     }
 
     // Clear errors on input
@@ -115,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (!valid) {
-            showToast('Please correct the errors above.', 'error');
+            showToast('Please fill the details', 'error');
             return;
         }
 
