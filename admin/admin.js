@@ -30,7 +30,7 @@ function initSidebar() {
         logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
             if (confirm('Are you sure you want to logout?')) {
-                window.location.href = '../index.html';
+                window.location.href = '../index';
             }
         });
     }
@@ -190,19 +190,19 @@ function generateSidebarHTML(activePage) {
         </div>
     </div>
     <nav class="sidebar-nav">
-        <a href="dashboard.html" class="nav-item" data-page="dashboard">
+        <a href="dashboard" class="nav-item" data-page="dashboard">
             <span class="material-icons-outlined">dashboard</span>
             <span>Dashboard</span>
         </a>
-        <a href="books.html" class="nav-item" data-page="books">
+        <a href="books" class="nav-item" data-page="books">
             <span class="material-icons-outlined">auto_stories</span>
             <span>Books</span>
         </a>
-        <a href="users.html" class="nav-item" data-page="users">
+        <a href="users" class="nav-item" data-page="users">
             <span class="material-icons-outlined">group</span>
             <span>Users</span>
         </a>
-        <a href="transactions.html" class="nav-item" data-page="transactions">
+        <a href="transactions" class="nav-item" data-page="transactions">
             <span class="material-icons-outlined">swap_horiz</span>
             <span>Transactions</span>
         </a>
@@ -212,7 +212,7 @@ function generateSidebarHTML(activePage) {
             <span class="material-icons-outlined">settings</span>
             <span>Settings</span>
         </a>
-        <a href="../index.html" class="nav-item logout-btn">
+        <a href="../index" class="nav-item logout-btn">
             <span class="material-icons-outlined">logout</span>
             <span>Logout</span>
         </a>

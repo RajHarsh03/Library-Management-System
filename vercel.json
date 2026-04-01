@@ -1,0 +1,48 @@
+{
+    "rewrites": [
+        {
+            "source": "/index",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/login",
+            "destination": "/login.html"
+        },
+        {
+            "source": "/signup",
+            "destination": "/signup.html"
+        },
+        {
+            "source": "/forgot-password",
+            "destination": "/forgot-password.html"
+        },
+        {
+            "source": "/admin/dashboard",
+            "destination": "/admin/dashboard.html"
+        },
+        {
+            "source": "/admin/books",
+            "destination": "/admin/books.html"
+        },
+        {
+            "source": "/admin/users",
+            "destination": "/admin/users.html"
+        },
+        {
+            "source": "/admin/transactions",
+            "destination": "/admin/transactions.html"
+        },
+        {
+            "source": "/student/dashboard",
+            "destination": "/student/dashboard.html"
+        },
+        {
+            "source": "/student/browse",
+            "destination": "/student/browse.html"
+        },
+        {
+            "source": "/student/my-books",
+            "destination": "/student/my-books.html"
+        }
+    ]
+}
