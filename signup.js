@@ -1,28 +1,37 @@
-// ===== SIGNUP PAGE LOGIC =====
+// ===== SIGNUP PAGE LOGIC - TWO STEP FORM =====
 document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.getElementById('signupForm');
+    const nextBtn = document.getElementById('nextBtn');
+    const backBtn = document.getElementById('backBtn');
     const signupBtn = document.getElementById('signupBtn');
     
-    // Form inputs
+    // Form steps
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step1Indicator = document.getElementById('step1Indicator');
+    const step2Indicator = document.getElementById('step2Indicator');
+    
+    // Step 1 inputs
     const firstNameInput = document.getElementById('firstName');
     const lastNameInput = document.getElementById('lastName');
     const emailInput = document.getElementById('email');
-    const studentIdInput = document.getElementById('studentId');
     const phoneInput = document.getElementById('phone');
-    const majorInput = document.getElementById('major');
+    const mobileVerificationInput = document.getElementById('mobileVerification');
+    
+    // Step 2 inputs
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirmPassword');
     const passwordToggle = document.getElementById('passwordToggle');
     const passwordToggleIcon = document.getElementById('passwordToggleIcon');
     const agreeTermsInput = document.getElementById('agreeTerms');
     
-    // Error elements
+    // Error elements - Step 1
     const firstNameError = document.getElementById('firstNameError');
     const lastNameError = document.getElementById('lastNameError');
     const emailError = document.getElementById('emailError');
-    const studentIdError = document.getElementById('studentIdError');
     const phoneError = document.getElementById('phoneError');
-    const majorError = document.getElementById('majorError');
+    
+    // Error elements - Step 2
     const passwordError = document.getElementById('passwordError');
     const confirmPasswordError = document.getElementById('confirmPasswordError');
     const termsError = document.getElementById('termsError');
@@ -32,6 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const reqUpper = document.getElementById('req-upper');
     const reqLower = document.getElementById('req-lower');
     const reqNumber = document.getElementById('req-number');
+
+    let currentStep = 1;
 
     // ===== Toast Notification System =====
     function showToast(message, type = 'info') {
@@ -61,7 +72,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 fill: 'forwards'
             });
             setTimeout(() => toast.remove(), 300);
-        }, 4000);
+        }, 5000);
+    }
+
+    // ===== Step Navigation =====
+    function goToStep(step) {
+        if (step === 1) {
+            step1.classList.add('active');
+            step2.classList.remove('active');
+            step1Indicator.classList.add('active');
+            step2Indicator.classList.remove('active');
+            currentStep = 1;
+        } else if (step === 2) {
+            step1.classList.remove('active');
+            step2.classList.add('active');
+            step1Indicator.classList.remove('active');
+            step2Indicator.classList.add('active');
+            currentStep = 2;
+        }
     }
 
     // ===== Password Visibility Toggle =====
@@ -104,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function validatePhone(phone) {
+        if (!phone) return true; // Phone is optional on Step 1
         return /^[\d\s\-\+\(\)]+$/.test(phone.replace(/\s/g, '')) && phone.replace(/\D/g, '').length >= 10;
     }
 
@@ -125,13 +154,13 @@ document.addEventListener('DOMContentLoaded', () => {
         errorEl.classList.remove('visible');
     }
 
-    // Clear errors on input
+    // Clear errors on input - Step 1
     firstNameInput.addEventListener('input', () => clearError(firstNameInput, firstNameError));
     lastNameInput.addEventListener('input', () => clearError(lastNameInput, lastNameError));
     emailInput.addEventListener('input', () => clearError(emailInput, emailError));
-    studentIdInput.addEventListener('input', () => clearError(studentIdInput, studentIdError));
     phoneInput.addEventListener('input', () => clearError(phoneInput, phoneError));
-    majorInput.addEventListener('change', () => clearError(majorInput, majorError));
+    
+    // Clear errors on input - Step 2
     passwordInput.addEventListener('input', () => {
         clearError(passwordInput, passwordError);
         if (passwordInput.value) {
@@ -146,12 +175,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ===== Form Submission =====
-    signupForm.addEventListener('submit', (e) => {
+    // ===== Next Button - Validate Step 1 =====
+    nextBtn.addEventListener('click', (e) => {
         e.preventDefault();
 
-        // Reset all errors
-        document.querySelectorAll('.form-error').forEach(el => {
+        // Clear previous errors
+        [firstNameError, lastNameError, emailError, phoneError].forEach(el => {
             el.classList.remove('visible');
             el.textContent = '';
         });
@@ -179,26 +208,39 @@ document.addEventListener('DOMContentLoaded', () => {
             isValid = false;
         }
 
-        // Validate Student ID
-        if (!studentIdInput.value.trim()) {
-            showError(studentIdInput, studentIdError, 'Student ID is required');
-            isValid = false;
-        }
-
-        // Validate Phone
-        if (!phoneInput.value.trim()) {
-            showError(phoneInput, phoneError, 'Phone number is required');
-            isValid = false;
-        } else if (!validatePhone(phoneInput.value)) {
+        // Validate Phone (optional, but if provided must be valid)
+        if (phoneInput.value && !validatePhone(phoneInput.value)) {
             showError(phoneInput, phoneError, 'Please enter a valid phone number');
             isValid = false;
         }
 
-        // Validate Major
-        if (!majorInput.value) {
-            showError(majorInput, majorError, 'Please select your major/field');
-            isValid = false;
+        if (!isValid) {
+            showToast('Please fix the errors above', 'error');
+            return;
         }
+
+        // Move to Step 2
+        goToStep(2);
+        showToast('✓ Great! Now let\'s set up your password', 'success');
+    });
+
+    // ===== Back Button =====
+    backBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        goToStep(1);
+    });
+
+    // ===== Form Submission - Step 2 =====
+    signupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Clear previous errors
+        [passwordError, confirmPasswordError, termsError].forEach(el => {
+            el.classList.remove('visible');
+            el.textContent = '';
+        });
+
+        let isValid = true;
 
         // Validate Password
         if (!passwordInput.value) {
@@ -240,17 +282,16 @@ document.addEventListener('DOMContentLoaded', () => {
             signupBtn.disabled = false;
 
             // Success
-            showToast('Account created successfully! Redirecting to login...', 'success');
+            showToast('✓ Account created successfully! Welcome to The Digital Archivist', 'success');
 
             // Simulate form data submission
             const formData = {
                 firstName: firstNameInput.value,
                 lastName: lastNameInput.value,
                 email: emailInput.value,
-                studentId: studentIdInput.value,
                 phone: phoneInput.value,
-                major: majorInput.value,
-                newsletter: document.getElementById('agreeNewsletter').checked
+                mobileVerification: mobileVerificationInput.checked,
+                newsletter: false
             };
 
             console.log('Form Data:', formData);

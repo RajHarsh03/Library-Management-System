@@ -95,10 +95,23 @@
                     <p class="form-subtitle">Join our learning community in just a few steps.</p>
                 </div>
 
+                <!-- Step Indicator -->
+                <div class="step-indicator">
+                    <div class="step-item active" id="step1Indicator">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Basic Info</div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="step-item" id="step2Indicator">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Password</div>
+                    </div>
+                </div>
+
                 <form id="signupForm" autocomplete="off" novalidate>
-                    <!-- Personal Information -->
-                    <div class="form-section">
-                        <h3 class="section-title">Personal Information</h3>
+                    <!-- STEP 1: Basic Information -->
+                    <div class="form-step active" id="step1">
+                        <h3 class="section-title">Basic Information</h3>
                         
                         <div class="form-row">
                             <div class="form-group">
@@ -119,12 +132,7 @@
                                 <span class="form-error" id="lastNameError" role="alert" aria-live="assertive"></span>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Account Information -->
-                    <div class="form-section">
-                        <h3 class="section-title">Account Information</h3>
-                        
                         <div class="form-group">
                             <label class="form-label" for="email">EMAIL ADDRESS</label>
                             <div class="input-wrapper">
@@ -135,51 +143,37 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label" for="studentId">STUDENT ID</label>
+                            <label class="form-label" for="phone">PHONE NUMBER <span class="optional">(Optional)</span></label>
                             <div class="input-wrapper">
-                                <input type="text" id="studentId" class="form-input" placeholder="SID-2024-XXXXX" required aria-required="true">
-                                <span class="material-icons-outlined input-icon" aria-hidden="true">badge</span>
+                                <input type="tel" id="phone" class="form-input" placeholder="+1 (555) 123-4567">
+                                <span class="material-icons-outlined input-icon" aria-hidden="true">phone</span>
                             </div>
-                            <span class="form-error" id="studentIdError" role="alert" aria-live="assertive"></span>
+                            <span class="form-error" id="phoneError" role="alert" aria-live="assertive"></span>
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label" for="phone">PHONE NUMBER</label>
-                                <div class="input-wrapper">
-                                    <input type="tel" id="phone" class="form-input" placeholder="+1 (555) 123-4567" required aria-required="true">
-                                    <span class="material-icons-outlined input-icon" aria-hidden="true">phone</span>
-                                </div>
-                                <span class="form-error" id="phoneError" role="alert" aria-live="assertive"></span>
-                            </div>
+                        <div class="terms-check">
+                            <input type="checkbox" id="mobileVerification" class="check-input">
+                            <label for="mobileVerification" class="check-label">
+                                Verify my account via mobile SMS
+                            </label>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="form-label" for="major">MAJOR/FIELD</label>
-                                <div class="input-wrapper">
-                                    <select id="major" class="form-input" required aria-required="true">
-                                        <option value="">Select your major...</option>
-                                        <option value="cs">Computer Science</option>
-                                        <option value="eng">Engineering</option>
-                                        <option value="lib">Liberal Arts</option>
-                                        <option value="bus">Business</option>
-                                        <option value="sci">Natural Sciences</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                    <span class="material-icons-outlined input-icon" aria-hidden="true">school</span>
-                                </div>
-                                <span class="form-error" id="majorError" role="alert" aria-live="assertive"></span>
-                            </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-signup btn-next" id="nextBtn">
+                                <span>Next</span>
+                                <span class="material-icons-outlined">arrow_forward</span>
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Security Information -->
-                    <div class="form-section">
-                        <h3 class="section-title">Security Information</h3>
+                    <!-- STEP 2: Password Setup -->
+                    <div class="form-step" id="step2">
+                        <h3 class="section-title">Create Your Password</h3>
                         
                         <div class="form-group">
                             <label class="form-label" for="password">PASSWORD</label>
                             <div class="input-wrapper">
-                                <input type="password" id="password" class="form-input" placeholder="••••••••" required aria-required="true">
+                                <input type="password" id="password" class="form-input" placeholder="••••••••" aria-required="true">
                                 <button type="button" class="password-toggle" id="passwordToggle" aria-label="Toggle password visibility">
                                     <span class="material-icons-outlined" id="passwordToggleIcon">visibility_off</span>
                                 </button>
@@ -211,15 +205,12 @@
                         <div class="form-group">
                             <label class="form-label" for="confirmPassword">CONFIRM PASSWORD</label>
                             <div class="input-wrapper">
-                                <input type="password" id="confirmPassword" class="form-input" placeholder="••••••••" required aria-required="true">
+                                <input type="password" id="confirmPassword" class="form-input" placeholder="••••••••" aria-required="true">
                                 <span class="material-icons-outlined input-icon" aria-hidden="true">lock</span>
                             </div>
                             <span class="form-error" id="confirmPasswordError" role="alert" aria-live="assertive"></span>
                         </div>
-                    </div>
 
-                    <!-- Terms and Conditions -->
-                    <div class="form-section">
                         <div class="terms-check">
                             <input type="checkbox" id="agreeTerms" class="check-input" required>
                             <label for="agreeTerms" class="check-label">
@@ -228,19 +219,16 @@
                             <span class="form-error" id="termsError" role="alert" aria-live="assertive"></span>
                         </div>
 
-                        <div class="terms-check">
-                            <input type="checkbox" id="agreeNewsletter" class="check-input">
-                            <label for="agreeNewsletter" class="check-label">
-                                Send me updates about new books and library events
-                            </label>
+                        <div class="form-actions">
+                            <button type="button" class="btn-signup btn-back" id="backBtn">
+                                <span class="material-icons-outlined">arrow_back</span>
+                                <span>Back</span>
+                            </button>
+                            <button type="submit" class="btn-signup btn-submit" id="signupBtn">
+                                <span>Create Account</span>
+                            </button>
                         </div>
                     </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" class="btn-signup" id="signupBtn">
-                        <span>Create Account</span>
-                        <span class="material-icons-outlined">check_circle</span>
-                    </button>
                 </form>
 
                 <div class="login-prompt">

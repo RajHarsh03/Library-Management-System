@@ -63,7 +63,7 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 60px 70px;
+    padding: 25px 35px;
     overflow: hidden;
 }
 
@@ -105,19 +105,19 @@ html, body {
 
 .hero-title {
     font-family: var(--font-display);
-    font-size: 4rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: var(--white);
     line-height: 1.1;
-    margin-bottom: 24px;
+    margin-bottom: 10px;
 }
 
 .hero-description {
-    font-size: 1.05rem;
+    font-size: 0.8rem;
     color: rgba(255,255,255,0.65);
-    line-height: 1.6;
-    max-width: 480px;
-    margin-bottom: 40px;
+    line-height: 1.5;
+    max-width: 350px;
+    margin-bottom: 15px;
 }
 
 .hero-features {
@@ -211,7 +211,7 @@ html, body {
 
 /* === Hero Stats === */
 .hero-stats {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 28px;
     margin-bottom: 40px;
@@ -254,16 +254,16 @@ html, body {
 .hero-feature-card {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 24px 28px;
+    gap: 8px;
+    padding: 12px 14px;
     background: rgba(255,255,255,0.08);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: var(--radius-lg);
     color: rgba(255,255,255,0.85);
-    font-size: 0.88rem;
+    font-size: 0.7rem;
     font-weight: 500;
-    min-width: 150px;
+    min-width: 100px;
     transition: var(--transition);
 }
 
@@ -301,9 +301,10 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 60px 50px;
+    padding: 25px 35px;
     background: linear-gradient(180deg, #ffffff 0%, #fafcff 50%, #f8f9fc 100%);
     position: relative;
+    overflow-y: auto;
 }
 
 .login-form-wrapper {
@@ -313,17 +314,17 @@ html, body {
 
 .form-title {
     font-family: var(--font-display);
-    font-size: 1.85rem;
+    font-size: 1.35rem;
     font-weight: 700;
     color: var(--gray-900);
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 .form-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.75rem;
     color: var(--gray-500);
-    margin-bottom: 32px;
-    line-height: 1.5;
+    margin-bottom: 16px;
+    line-height: 1.4;
 }
 
 /* Role Toggle */
@@ -333,17 +334,17 @@ html, body {
     background: linear-gradient(135deg, #f1f3f8 0%, #e2e6ef 100%);
     border-radius: var(--radius-md);
     padding: 4px;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
     border: 1.5px solid #c8cdd9;
 }
 
 .role-btn {
     flex: 1;
-    padding: 12px 20px;
+    padding: 9px 16px;
     background: transparent;
     border: none;
     font-family: var(--font-primary);
-    font-size: 0.88rem;
+    font-size: 0.75rem;
     font-weight: 500;
     color: #6b7490;
     cursor: pointer;
@@ -377,16 +378,16 @@ html, body {
 
 /* Form Fields */
 .form-group {
-    margin-bottom: 22px;
+    margin-bottom: 12px;
 }
 
 .form-label {
     display: block;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 1.5px;
     color: var(--gray-600);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .label-row {
@@ -418,12 +419,12 @@ html, body {
 
 .form-input {
     width: 100%;
-    padding: 14px 48px 14px 18px;
+    padding: 10px 40px 10px 14px;
     background: #ffffff;
     border: 2px solid #e2e6ef;
     border-radius: var(--radius-md);
     font-family: var(--font-primary);
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     color: var(--gray-800);
     transition: var(--transition);
     outline: none;
@@ -453,12 +454,12 @@ html, body {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 28px;
+    margin-bottom: 12px;
 }
 
 .check-input {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     accent-color: var(--accent);
     cursor: pointer;
     border: 2px solid var(--gray-300);
@@ -466,7 +467,7 @@ html, body {
 }
 
 .check-label {
-    font-size: 0.88rem;
+    font-size: 0.75rem;
     color: var(--gray-600);
     cursor: pointer;
 }
@@ -478,13 +479,13 @@ html, body {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 16px;
+    padding: 12px;
     background: linear-gradient(135deg, #1a7fd4 0%, #0066cc 50%, #003d99 100%);
     color: var(--white);
     border: none;
     border-radius: var(--radius-md);
     font-family: var(--font-primary);
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
@@ -529,7 +530,7 @@ html, body {
 .sso-divider {
     display: flex;
     align-items: center;
-    margin: 32px 0;
+    margin: 14px 0 12px 0;
 }
 
 .sso-divider::before,
@@ -541,17 +542,17 @@ html, body {
 }
 
 .sso-divider span {
-    padding: 0 16px;
-    font-size: 0.65rem;
+    padding: 0 12px;
+    font-size: 0.6rem;
     font-weight: 600;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     color: var(--gray-400);
 }
 
 .sso-buttons {
     display: flex;
-    gap: 12px;
-    margin-bottom: 32px;
+    gap: 10px;
+    margin-bottom: 12px;
 }
 
 .sso-btn {
@@ -559,13 +560,13 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 14px;
+    gap: 8px;
+    padding: 9px 12px;
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
-    border: 2px solid #e2e6ef;
+    border: 1.5px solid #e2e6ef;
     border-radius: var(--radius-md);
     font-family: var(--font-primary);
-    font-size: 0.88rem;
+    font-size: 0.65rem;
     font-weight: 600;
     color: #0066cc;
     cursor: pointer;
@@ -593,8 +594,9 @@ html, body {
 /* Signup Prompt */
 .signup-prompt {
     text-align: center;
-    font-size: 0.88rem;
+    font-size: 0.7rem;
     color: var(--gray-500);
+    margin-top: 8px;
 }
 
 .signup-link {
@@ -609,10 +611,11 @@ html, body {
 
 /* Copyright */
 .copyright {
+    display: none;
     position: absolute;
     bottom: 30px;
-    font-size: 0.65rem;
-    letter-spacing: 1.5px;
+    font-size: 0.55rem;
+    letter-spacing: 1px;
     color: var(--gray-400);
     font-weight: 500;
 }
@@ -777,7 +780,7 @@ html, body {
 
 /* === Trust Bar === */
 .trust-bar {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     gap: 24px;
@@ -808,15 +811,15 @@ html, body {
 /* === Responsive === */
 @media (max-width: 1024px) {
     .login-hero {
-        flex: 0 0 45%;
-        padding: 40px;
+        flex: 0 0 40%;
+        padding: 25px;
     }
-    .hero-title { font-size: 3rem; }
-    .hero-brand { left: 40px; }
-    .hero-stats { gap: 20px; padding: 16px 20px; }
-    .hero-stat-value { font-size: 1.3rem; }
-    .hero-features { gap: 10px; }
-    .hero-feature-card { min-width: 130px; padding: 20px 22px; }
+    .hero-title { font-size: 1.8rem; }
+    .hero-brand { left: 25px; display: none; }
+    .hero-stats { gap: 12px; padding: 10px 12px; display: none; }
+    .hero-stat-value { font-size: 0.9rem; }
+    .hero-features { gap: 8px; display: none; }
+    .hero-feature-card { min-width: 100px; padding: 12px 15px; }
 }
 
 @media (max-width: 768px) {
@@ -825,24 +828,27 @@ html, body {
     }
     .login-hero {
         flex: none;
-        padding: 40px 30px;
-        min-height: 300px;
+        padding: 25px 20px;
+        min-height: 200px;
+        display: none;
     }
-    .hero-title { font-size: 2.5rem; }
+    .hero-title { font-size: 1.6rem; }
     .hero-stats { display: none; }
     .hero-features { display: none; }
     .hero-float-elements { display: none; }
     .login-form-panel {
-        padding: 40px 24px;
+        padding: 25px 20px;
     }
     .trust-bar {
-        gap: 16px;
+        gap: 12px;
         flex-wrap: wrap;
+        display: none;
     }
     .copyright {
         position: static;
         text-align: center;
-        margin-top: 24px;
+        margin-top: 8px;
+        display: none;
     }
     .toast-container {
         right: 12px;

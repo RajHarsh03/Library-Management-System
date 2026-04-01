@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The Digital Archivist - Modern library management system. Access thousands of volumes, manage your collection, and explore with precision.">
+    <meta name="description"
+        content="The Digital Archivist - Modern library management system. Access thousands of volumes, manage your collection, and explore with precision.">
     <meta name="theme-color" content="#0066cc">
 
     <!-- Open Graph -->
     <meta property="og:title" content="The Digital Archivist | Library Management System">
-    <meta property="og:description" content="Precision-engineered for the modern collection. Archive, track, and manage with architectural clarity.">
+    <meta property="og:description"
+        content="Precision-engineered for the modern collection. Archive, track, and manage with architectural clarity.">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="The Digital Archivist">
 
     <!-- Favicon (inline SVG data URI) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230066cc'/%3E%3Cpath d='M8 8h5v16H8a1 1 0 01-1-1V9a1 1 0 011-1zm11 0h5a1 1 0 011 1v14a1 1 0 01-1 1h-5V8zm-2 0h-1v16h1a1 1 0 001-1V9a1 1 0 00-1-1z' fill='%23fff'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230066cc'/%3E%3Cpath d='M8 8h5v16H8a1 1 0 01-1-1V9a1 1 0 011-1zm11 0h5a1 1 0 011 1v14a1 1 0 01-1 1h-5V8zm-2 0h-1v16h1a1 1 0 001-1V9a1 1 0 00-1-1z' fill='%23fff'/%3E%3C/svg%3E">
 
     <title>The Digital Archivist | Login</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="login.css">
 
@@ -34,6 +40,7 @@
     }
     </script>
 </head>
+
 <body>
     <!-- Toast Notification -->
     <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
@@ -57,7 +64,8 @@
             <div class="hero-content">
                 <span class="hero-badge">SYSTEM PORTAL</span>
                 <h1 class="hero-title">The Digital<br>Archivist.</h1>
-                <p class="hero-description">Precision-engineered for the modern collection. Archive, track, and manage with architectural clarity.</p>
+                <p class="hero-description">Precision-engineered for the modern collection. Archive, track, and manage
+                    with architectural clarity.</p>
 
                 <div class="hero-stats" aria-label="Platform statistics">
                     <div class="hero-stat">
@@ -111,8 +119,10 @@
 
                 <!-- Role Toggle -->
                 <div class="role-toggle" id="roleToggle" role="tablist" aria-label="Login role selection">
-                    <button class="role-btn active" role="tab" aria-selected="true" data-role="student" id="studentRoleBtn">Student Access</button>
-                    <button class="role-btn" role="tab" aria-selected="false" data-role="admin" id="adminRoleBtn">Administrator</button>
+                    <button class="role-btn active" role="tab" aria-selected="true" data-role="student"
+                        id="studentRoleBtn">Student Access</button>
+                    <button class="role-btn" role="tab" aria-selected="false" data-role="admin"
+                        id="adminRoleBtn">Administrator</button>
                     <div class="role-indicator" id="roleIndicator" aria-hidden="true"></div>
                 </div>
 
@@ -120,7 +130,8 @@
                     <div class="form-group">
                         <label class="form-label" for="emailInput">IDENTIFICATION EMAIL</label>
                         <div class="input-wrapper">
-                            <input type="email" id="emailInput" class="form-input" placeholder="name@university.edu" required aria-required="true">
+                            <input type="email" id="emailInput" class="form-input" placeholder="name@university.edu"
+                                required aria-required="true">
                             <span class="material-icons-outlined input-icon" aria-hidden="true">mail</span>
                         </div>
                         <span class="form-error" id="emailError" role="alert" aria-live="assertive"></span>
@@ -132,8 +143,10 @@
                             <a href="#" class="forgot-link" tabindex="0">FORGOT?</a>
                         </div>
                         <div class="input-wrapper">
-                            <input type="password" id="passwordInput" class="form-input" placeholder="••••••••" required aria-required="true">
-                            <button type="button" class="password-toggle" id="passwordToggle" aria-label="Toggle password visibility">
+                            <input type="password" id="passwordInput" class="form-input" placeholder="••••••••" required
+                                aria-required="true">
+                            <button type="button" class="password-toggle" id="passwordToggle"
+                                aria-label="Toggle password visibility">
                                 <span class="material-icons-outlined" id="passwordToggleIcon">visibility_off</span>
                             </button>
                         </div>
@@ -146,8 +159,7 @@
                     </div>
 
                     <button type="submit" class="btn-login" id="loginBtn">
-                        <span>Access Archive</span>
-                        <span class="material-icons-outlined">arrow_forward</span>
+                        <span>Authenticate</span>
                     </button>
                 </form>
 
@@ -166,7 +178,8 @@
                     </button>
                 </div>
 
-                <p class="signup-prompt">New to the collection? <a href="signup.html" class="signup-link">Apply for membership</a></p>
+                <p class="signup-prompt">New to the collection? <a href="signup.html" class="signup-link">
+                        Sign Up </a></p>
             </div>
 
             <!-- Trust Indicators -->
@@ -191,4 +204,5 @@
 
     <script src="login.js"></script>
 </body>
+
 </html>
