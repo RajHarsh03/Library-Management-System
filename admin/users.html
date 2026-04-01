@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="User Directory - Oversee library memberships, permissions, and institutional access.">
+    <title>User Directory | The Archivist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="sidebar-brand-icon">
+                    <span class="material-icons-outlined">auto_stories</span>
+                </div>
+                <div class="sidebar-brand-text">
+                    <h2>The Archivist</h2>
+                    <span>Management Portal</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item" data-page="dashboard">
+                    <span class="material-icons-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="books.html" class="nav-item" data-page="books">
+                    <span class="material-icons-outlined">auto_stories</span>
+                    <span>Books</span>
+                </a>
+                <a href="users.html" class="nav-item active" data-page="users">
+                    <span class="material-icons-outlined">group</span>
+                    <span>Users</span>
+                </a>
+                <a href="transactions.html" class="nav-item" data-page="transactions">
+                    <span class="material-icons-outlined">swap_horiz</span>
+                    <span>Transactions</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <span class="material-icons-outlined">settings</span>
+                    <span>Settings</span>
+                </a>
+                <a href="../index.html" class="nav-item logout-btn">
+                    <span class="material-icons-outlined">logout</span>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="topbar-search">
+                    <span class="material-icons-outlined">search</span>
+                    <input type="text" placeholder="Search user directory..." id="topbarSearch">
+                </div>
+                <div class="topbar-right">
+                    <button class="topbar-icon-btn" id="notificationBtn">
+                        <span class="material-icons-outlined">notifications</span>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <button class="topbar-icon-btn" id="helpBtn">
+                        <span class="material-icons-outlined">help_outline</span>
+                    </button>
+                    <div class="topbar-profile">
+                        <div class="topbar-profile-info">
+                            <div class="name">Admin Curator</div>
+                            <div class="role">Super Admin</div>
+                        </div>
+                        <div class="topbar-avatar">AC</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="page-header-left">
+                        <div class="breadcrumb">DIRECTORY <span>› MANAGE USERS</span></div>
+                        <h1>User Directory</h1>
+                        <p>Oversee library memberships, permissions, and institutional access.</p>
+                    </div>
+                    <button class="btn-primary" id="addUserBtn">
+                        <span class="material-icons-outlined">person_add</span>
+                        Add New User
+                    </button>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div></div>
+                            <span class="stat-card-change positive">+12%</span>
+                        </div>
+                        <div class="stat-card-icon blue" style="margin-bottom:14px;">
+                            <span class="material-icons-outlined">group</span>
+                        </div>
+                        <div class="stat-card-value">2,548</div>
+                        <span class="stat-card-label">TOTAL USERS</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div></div>
+                            <span class="stat-card-change neutral">Stable</span>
+                        </div>
+                        <div class="stat-card-icon green" style="margin-bottom:14px;">
+                            <span class="material-icons-outlined">school</span>
+                        </div>
+                        <div class="stat-card-value">1,820</div>
+                        <span class="stat-card-label">ACTIVE STUDENTS</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div></div>
+                            <span class="stat-card-change positive">+2%</span>
+                        </div>
+                        <div class="stat-card-icon red" style="margin-bottom:14px;">
+                            <span class="material-icons-outlined">badge</span>
+                        </div>
+                        <div class="stat-card-value">412</div>
+                        <span class="stat-card-label">FACULTY MEMBERS</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div></div>
+                            <span class="stat-card-change positive">+240</span>
+                        </div>
+                        <div class="stat-card-icon orange" style="margin-bottom:14px;">
+                            <span class="material-icons-outlined">bolt</span>
+                        </div>
+                        <div class="stat-card-value">84</div>
+                        <span class="stat-card-label">NEW THIS MONTH</span>
+                    </div>
+                </div>
+
+                <!-- Tabs and Filters -->
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+                    <div class="tabs" id="userTabs" style="margin-bottom:0;border:none;">
+                        <button class="tab-btn active" data-tab="all" style="border:1.5px solid var(--gray-200);border-radius:var(--radius-md);margin-right:6px;">All Users</button>
+                        <button class="tab-btn" data-tab="students" style="border:1.5px solid var(--gray-200);border-radius:var(--radius-md);margin-right:6px;">Students</button>
+                        <button class="tab-btn" data-tab="faculty" style="border:1.5px solid var(--gray-200);border-radius:var(--radius-md);">Faculty</button>
+                    </div>
+                    <div class="table-filters">
+                        <button class="btn-outline">
+                            <span class="material-icons-outlined">tune</span>
+                            Filters
+                        </button>
+                        <button class="btn-outline">
+                            <span class="material-icons-outlined">download</span>
+                            Export
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Users Table -->
+                <div class="table-container">
+                    <table class="data-table" id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>User Identity</th>
+                                <th>System Role</th>
+                                <th>Enrolled Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="cell-user">
+                                        <div class="cell-user-avatar">ER</div>
+                                        <div class="cell-user-info">
+                                            <div class="name">Elena Rodriguez</div>
+                                            <div class="email">elena.rod@university.edu</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="role-badge student">STUDENT</span></td>
+                                <td>Sept 12, 2023</td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td>
+                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
+                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="cell-user">
+                                        <div class="cell-user-avatar">MT</div>
+                                        <div class="cell-user-info">
+                                            <div class="name">Marcus Thorne</div>
+                                            <div class="email">m.thorne@archivist.sys</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="role-badge admin">ADMIN</span></td>
+                                <td>Jan 05, 2022</td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td>
+                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
+                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="cell-user">
+                                        <div class="cell-user-avatar" style="background:linear-gradient(135deg,#f3e8ff,#e2e6ef);color:#7c3aed;">JS</div>
+                                        <div class="cell-user-info">
+                                            <div class="name">Julian Sterling</div>
+                                            <div class="email">julian.s@university.edu</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="role-badge faculty">FACULTY</span></td>
+                                <td>Mar 22, 2023</td>
+                                <td><span class="status-badge suspended">Suspended</span></td>
+                                <td>
+                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
+                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="cell-user">
+                                        <div class="cell-user-avatar">AO</div>
+                                        <div class="cell-user-info">
+                                            <div class="name">Amara Okafor</div>
+                                            <div class="email">amara.ok@research.inst</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="role-badge student">STUDENT</span></td>
+                                <td>Nov 01, 2023</td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td>
+                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
+                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination -->
+                    <div class="table-footer">
+                        <span class="table-footer-info">Showing <strong>1 - 4</strong> of <strong>2,548</strong> results</span>
+                        <div class="pagination">
+                            <button class="page-btn" data-page="prev"><span class="material-icons-outlined">chevron_left</span></button>
+                            <button class="page-btn active" data-page="1">1</button>
+                            <button class="page-btn" data-page="2">2</button>
+                            <button class="page-btn" data-page="3">3</button>
+                            <button class="page-btn" style="pointer-events:none;color:var(--gray-300);">...</button>
+                            <button class="page-btn" data-page="637">637</button>
+                            <button class="page-btn" data-page="next"><span class="material-icons-outlined">chevron_right</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="app-footer">
+                <span>&copy; 2024 Digital Archivist Library Systems. All rights reserved.</span>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <div class="footer-status">
+                        System Status: <span class="dot"></span> <span style="color:var(--success);font-weight:600;">Operational</span>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

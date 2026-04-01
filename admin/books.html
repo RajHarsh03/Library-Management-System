@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Book Inventory - Curation of the archive's physical and digital collection.">
+    <title>Book Inventory | The Archivist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="sidebar-brand-icon">
+                    <span class="material-icons-outlined">auto_stories</span>
+                </div>
+                <div class="sidebar-brand-text">
+                    <h2>The Archivist</h2>
+                    <span>Management Portal</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item" data-page="dashboard">
+                    <span class="material-icons-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="books.html" class="nav-item active" data-page="books">
+                    <span class="material-icons-outlined">auto_stories</span>
+                    <span>Books</span>
+                </a>
+                <a href="users.html" class="nav-item" data-page="users">
+                    <span class="material-icons-outlined">group</span>
+                    <span>Users</span>
+                </a>
+                <a href="transactions.html" class="nav-item" data-page="transactions">
+                    <span class="material-icons-outlined">swap_horiz</span>
+                    <span>Transactions</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <span class="material-icons-outlined">settings</span>
+                    <span>Settings</span>
+                </a>
+                <a href="../index.html" class="nav-item logout-btn">
+                    <span class="material-icons-outlined">logout</span>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="topbar-search">
+                    <span class="material-icons-outlined">search</span>
+                    <input type="text" placeholder="Search archives, users, or records..." id="topbarSearch">
+                </div>
+                <div class="topbar-right">
+                    <button class="topbar-icon-btn" id="notificationBtn">
+                        <span class="material-icons-outlined">notifications</span>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <button class="topbar-icon-btn" id="helpBtn">
+                        <span class="material-icons-outlined">help_outline</span>
+                    </button>
+                    <div class="topbar-profile">
+                        <div class="topbar-profile-info">
+                            <div class="name">Alex Mercer</div>
+                            <div class="role">Chief Archivist</div>
+                        </div>
+                        <div class="topbar-avatar">AM</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="page-header-left">
+                        <h1>Book Inventory</h1>
+                        <p>Curation of the archive's physical and digital collection.</p>
+                    </div>
+                    <button class="btn-primary" id="addBookBtn">
+                        <span class="material-icons-outlined">add</span>
+                        Add Book
+                    </button>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="stats-grid" style="grid-template-columns: 1fr 1fr 1fr; margin-bottom: 28px;">
+                    <div class="stat-card">
+                        <span class="stat-card-label">Total Volume</span>
+                        <div style="display:flex;align-items:baseline;gap:10px;margin-top:10px;">
+                            <span class="stat-card-value" style="margin-bottom:0;">12,482</span>
+                            <span class="stat-card-change positive">+12%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-card-label">Currently Issued</span>
+                        <div style="display:flex;align-items:baseline;gap:10px;margin-top:10px;">
+                            <span class="stat-card-value" style="margin-bottom:0;">3,105</span>
+                            <span class="stat-card-change positive">Active</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-card-label">Quick Filter</span>
+                        <div class="filter-pills" style="margin-top:14px;">
+                            <button class="pill active" data-filter="all">All Books</button>
+                            <button class="pill" data-filter="available">Available Only</button>
+                            <button class="pill" data-filter="reserved">Reserved</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book Table -->
+                <div class="table-container">
+                    <div class="table-toolbar">
+                        <div class="table-search">
+                            <span class="material-icons-outlined">search</span>
+                            <input type="text" placeholder="Search archive by title, author, or ISBN..." id="bookSearch">
+                        </div>
+                        <div class="table-filters">
+                            <button class="btn-outline">
+                                <span class="material-icons-outlined">tune</span>
+                                Last Modified
+                            </button>
+                            <button class="btn-outline">
+                                <span class="material-icons-outlined">filter_list</span>
+                                More Filters
+                            </button>
+                        </div>
+                    </div>
+                    <table class="data-table" id="booksTable">
+                        <thead>
+                            <tr>
+                                <th>Book Details</th>
+                                <th>Author</th>
+                                <th>ISBN / SKU</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="cell-book">
+                                        <div class="cell-book-cover">
+                                            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=100&h=140&fit=crop" alt="Book">
+                                        </div>
+                                        <div class="cell-book-info">
+                                            <div class="title">The Architecture of Silence</div>
+                                            <div class="subtitle">History & Arts</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Julianne Frost</td>
+                                <td><span class="isbn-badge">978-3-16-148410-0</span></td>
+                                <td><span class="status-badge available">Available</span></td>
+                                <td>
+                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
+                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="cell-book">
+                                        <div class="cell-book-cover">
+                                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=100&h=140&fit=crop" alt="Book">
+                                        </div>
+                                        <div class="cell-book-info">
+                                            <div class="title">Digital Forensics</div>
+                                            <div class="subtitle">Technology & Security</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Dr. Elias Vance</td>
+                                <td><span class="isbn-badge">978-0-12-385059-1</span></td>
+                                <td><span class="status-badge issued">Issued</span></td>
+                                <td>
+                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
+                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="cell-book">
+                                        <div class="cell-book-cover">
+                                            <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=100&h=140&fit=crop" alt="Book">
+                                        </div>
+                                        <div class="cell-book-info">
+                                            <div class="title">Urban Narratives</div>
+                                            <div class="subtitle">Sociology</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Markus Aurelio</td>
+                                <td><span class="isbn-badge">978-1-56-118410-4</span></td>
+                                <td><span class="status-badge available">Available</span></td>
+                                <td>
+                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
+                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="cell-book">
+                                        <div class="cell-book-cover">
+                                            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=100&h=140&fit=crop" alt="Book">
+                                        </div>
+                                        <div class="cell-book-info">
+                                            <div class="title">Cognitive Design</div>
+                                            <div class="subtitle">Psychology</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Sarah Ben-Gera</td>
+                                <td><span class="isbn-badge">978-4-02-148410-0</span></td>
+                                <td><span class="status-badge issued">Issued</span></td>
+                                <td>
+                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
+                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination -->
+                    <div class="table-footer">
+                        <span class="table-footer-info">Showing 1 to 4 of 12,482 volumes</span>
+                        <div class="pagination">
+                            <button class="page-btn" data-page="prev"><span class="material-icons-outlined">chevron_left</span></button>
+                            <button class="page-btn active" data-page="1">1</button>
+                            <button class="page-btn" data-page="2">2</button>
+                            <button class="page-btn" data-page="3">3</button>
+                            <button class="page-btn" data-page="next"><span class="material-icons-outlined">chevron_right</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
