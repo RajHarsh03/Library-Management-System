@@ -876,11 +876,11 @@ html, body {
         padding: 20px 18px;
         min-height: auto;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
     }
     .login-hero .hero-content {
-        text-align: center;
+        text-align: left;
         width: 100%;
     }
     .login-hero .hero-badge {
@@ -904,10 +904,10 @@ html, body {
         color: rgba(255, 255, 255, 0.85);
     }
     .hero-stats { 
-        display: flex;
+        display: none;
         gap: 10px;
         padding: 6px 0;
-        justify-content: center;
+        justify-content: flex-start;
         margin: 8px 0;
     }
     .hero-stat {
@@ -927,10 +927,10 @@ html, body {
         display: none;
     }
     .hero-features { 
-        display: flex;
+        display: none;
         gap: 8px;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: flex-start;
         margin-top: 8px;
         width: 100%;
     }
