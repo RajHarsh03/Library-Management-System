@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student dashboard — your loans, due dates, and library activity.">
+    <title>Student Dashboard | The Archivist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="../admin/admin.css">
+    <link rel="stylesheet" href="student.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="sidebar-brand-icon">
+                    <span class="material-icons-outlined">auto_stories</span>
+                </div>
+                <div class="sidebar-brand-text">
+                    <h2>The Archivist</h2>
+                    <span class="student-brand-sub">Student Portal</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active" data-page="dashboard">
+                    <span class="material-icons-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="my-books.html" class="nav-item" data-page="my-books">
+                    <span class="material-icons-outlined">menu_book</span>
+                    <span>My Books</span>
+                </a>
+                <a href="browse.html" class="nav-item" data-page="browse">
+                    <span class="material-icons-outlined">travel_explore</span>
+                    <span>Browse</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <span class="material-icons-outlined">person</span>
+                    <span>Profile</span>
+                </a>
+                <a href="../index.html" class="nav-item logout-btn">
+                    <span class="material-icons-outlined">logout</span>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-search">
+                    <span class="material-icons-outlined">search</span>
+                    <input type="text" placeholder="Search the catalog..." id="topbarSearch" aria-label="Search catalog">
+                </div>
+                <div class="topbar-right">
+                    <button type="button" class="topbar-icon-btn" id="notificationBtn" aria-label="Notifications">
+                        <span class="material-icons-outlined">notifications</span>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <button type="button" class="topbar-icon-btn" id="helpBtn" aria-label="Help">
+                        <span class="material-icons-outlined">help_outline</span>
+                    </button>
+                    <div class="topbar-profile">
+                        <div class="topbar-profile-info">
+                            <div class="name">Jordan Lee</div>
+                            <div class="role">Student</div>
+                        </div>
+                        <div class="topbar-avatar">JL</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="student-welcome">
+                    <h2>Welcome back, Jordan</h2>
+                    <p>You have 2 titles on loan and 1 reservation ready for pickup. Keep an eye on due dates to stay in good standing.</p>
+                    <div class="student-welcome-meta">
+                        <span class="meta-item">
+                            <span class="material-icons-outlined">school</span>
+                            Faculty of Arts &amp; Letters
+                        </span>
+                        <span class="meta-item">
+                            <span class="material-icons-outlined">badge</span>
+                            ID STU-20491
+                        </span>
+                    </div>
+                    <div class="student-quick-actions">
+                        <a class="btn-primary" href="browse.html">
+                            <span class="material-icons-outlined">add</span>
+                            Find a book
+                        </a>
+                        <a class="btn-outline" href="my-books.html">View my loans</a>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-label">Books on loan</span>
+                            <div class="stat-card-icon blue">
+                                <span class="material-icons-outlined">menu_book</span>
+                            </div>
+                        </div>
+                        <div class="stat-card-value">2</div>
+                        <span class="stat-card-change neutral">Standard loan period: 14 days</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-label">Due this week</span>
+                            <div class="stat-card-icon orange">
+                                <span class="material-icons-outlined">event</span>
+                            </div>
+                        </div>
+                        <div class="stat-card-value">1</div>
+                        <span class="stat-card-change positive">Renew online if eligible</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-label">Holds ready</span>
+                            <div class="stat-card-icon green">
+                                <span class="material-icons-outlined">inventory_2</span>
+                            </div>
+                        </div>
+                        <div class="stat-card-value">1</div>
+                        <span class="stat-card-change neutral">Pickup desk · Main library</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-label">Reading list</span>
+                            <div class="stat-card-icon blue">
+                                <span class="material-icons-outlined">bookmark</span>
+                            </div>
+                        </div>
+                        <div class="stat-card-value">5</div>
+                        <span class="stat-card-change neutral">Saved for this term</span>
+                    </div>
+                </div>
+
+                <div class="student-grid-main">
+                    <div>
+                        <div class="section-header">
+                            <h2>Currently borrowed</h2>
+                            <a href="my-books.html">See all</a>
+                        </div>
+                        <div class="table-container" style="margin-bottom: 24px;">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Due date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="cell-book">
+                                                <div class="cell-book-cover">
+                                                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=120&h=160&fit=crop" alt="">
+                                                </div>
+                                                <div class="cell-book-info">
+                                                    <div class="title">The Digital Frontier</div>
+                                                    <div class="subtitle">Julian Thorne</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Apr 8, 2026</td>
+                                        <td><span class="due-pill ok">On track</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="cell-book">
+                                                <div class="cell-book-cover">
+                                                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=120&h=160&fit=crop" alt="">
+                                                </div>
+                                                <div class="cell-book-info">
+                                                    <div class="title">Modern Criticism</div>
+                                                    <div class="subtitle">Elena Marsh</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Apr 4, 2026</td>
+                                        <td><span class="due-pill soon">Due soon</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="section-header">
+                            <h2>Suggested for you</h2>
+                            <a href="browse.html">Browse catalog</a>
+                        </div>
+                        <div class="book-cards-row">
+                            <div class="book-card">
+                                <div class="book-card-cover">
+                                    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&h=280&fit=crop" alt="Quiet Continents">
+                                </div>
+                                <div class="book-card-info">
+                                    <span class="category-tag history">History</span>
+                                    <h3>Quiet Continents</h3>
+                                    <p class="author">by Amira Okonkwo</p>
+                                    <span class="status-badge available">Available</span>
+                                </div>
+                            </div>
+                            <div class="book-card">
+                                <div class="book-card-cover">
+                                    <img src="https://images.unsplash.com/photo-1519682337052-a94d519337bc?w=200&h=280&fit=crop" alt="Signals &amp; Noise">
+                                </div>
+                                <div class="book-card-info">
+                                    <span class="category-tag tech">Technology</span>
+                                    <h3>Signals &amp; Noise</h3>
+                                    <p class="author">by Noah Weiss</p>
+                                    <span class="status-badge reserved">On order</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="section-header">
+                            <h2>Announcements</h2>
+                        </div>
+                        <div class="info-card" style="padding: 0; overflow: hidden;">
+                            <div class="announcement-card" style="border: none; border-radius: 0; border-bottom: 1px solid var(--gray-100);">
+                                <div class="tag">Hours</div>
+                                <h3>Extended hours during exams</h3>
+                                <p>Main reading room open until midnight Apr 15–26. Group study rooms require booking.</p>
+                            </div>
+                            <div class="announcement-card" style="border: none; border-radius: 0;">
+                                <div class="tag">Workshops</div>
+                                <h3>Citation management drop-in</h3>
+                                <p>Wednesdays 2–4pm, digital scholarship lab. Bring your laptop.</p>
+                            </div>
+                        </div>
+
+                        <div class="section-header" style="margin-top: 24px;">
+                            <h2>Hold ready</h2>
+                        </div>
+                        <div class="info-card highlight-blue">
+                            <h3>Neuromancer — G. Gibson</h3>
+                            <p>Held under your account until Apr 6. Check out at the main desk with your student ID.</p>
+                            <button type="button" class="btn-dark">
+                                <span class="material-icons-outlined" style="font-size: 1rem;">place</span>
+                                Directions
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="student.js"></script>
+</body>
+</html>

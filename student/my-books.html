@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My borrowed books — renewals and due dates.">
+    <title>My Books | The Archivist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="../admin/admin.css">
+    <link rel="stylesheet" href="student.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="sidebar-brand-icon">
+                    <span class="material-icons-outlined">auto_stories</span>
+                </div>
+                <div class="sidebar-brand-text">
+                    <h2>The Archivist</h2>
+                    <span class="student-brand-sub">Student Portal</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item" data-page="dashboard">
+                    <span class="material-icons-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="my-books.html" class="nav-item active" data-page="my-books">
+                    <span class="material-icons-outlined">menu_book</span>
+                    <span>My Books</span>
+                </a>
+                <a href="browse.html" class="nav-item" data-page="browse">
+                    <span class="material-icons-outlined">travel_explore</span>
+                    <span>Browse</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <span class="material-icons-outlined">person</span>
+                    <span>Profile</span>
+                </a>
+                <a href="../index.html" class="nav-item logout-btn">
+                    <span class="material-icons-outlined">logout</span>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-search">
+                    <span class="material-icons-outlined">search</span>
+                    <input type="text" placeholder="Search the catalog..." id="topbarSearch" aria-label="Search catalog">
+                </div>
+                <div class="topbar-right">
+                    <button type="button" class="topbar-icon-btn" id="notificationBtn" aria-label="Notifications">
+                        <span class="material-icons-outlined">notifications</span>
+                    </button>
+                    <button type="button" class="topbar-icon-btn" id="helpBtn" aria-label="Help">
+                        <span class="material-icons-outlined">help_outline</span>
+                    </button>
+                    <div class="topbar-profile">
+                        <div class="topbar-profile-info">
+                            <div class="name">Jordan Lee</div>
+                            <div class="role">Student</div>
+                        </div>
+                        <div class="topbar-avatar">JL</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <div class="page-header-left">
+                        <div class="breadcrumb">MY LIBRARY <span>› LOANS</span></div>
+                        <h1>My books</h1>
+                        <p>Renew eligible items before the due date. Late returns may accrue fines.</p>
+                    </div>
+                    <a class="btn-primary" href="browse.html" style="text-decoration: none;">
+                        <span class="material-icons-outlined">add</span>
+                        Borrow another
+                    </a>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-toolbar">
+                        <div class="table-search">
+                            <span class="material-icons-outlined">search</span>
+                            <input type="text" id="myBooksSearch" placeholder="Filter by title or author..." aria-label="Filter loans">
+                        </div>
+                        <div class="table-filters">
+                            <button type="button" class="btn-outline" id="exportListBtn">
+                                <span class="material-icons-outlined" style="font-size: 1rem;">download</span>
+                                Export list
+                            </button>
+                        </div>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Book</th>
+                                <th>Checked out</th>
+                                <th>Due</th>
+                                <th>Renewals left</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="myBooksBody">
+                            <tr data-title="The Digital Frontier" data-author="Julian Thorne">
+                                <td>
+                                    <div class="cell-book">
+                                        <div class="cell-book-cover">
+                                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=120&h=160&fit=crop" alt="">
+                                        </div>
+                                        <div class="cell-book-info">
+                                            <div class="title">The Digital Frontier</div>
+                                            <div class="subtitle">Julian Thorne · ISBN 942-11-094</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Mar 25, 2026</td>
+                                <td><span class="due-pill ok">Apr 8, 2026</span></td>
+                                <td>1</td>
+                                <td>
+                                    <button type="button" class="action-btn renew-btn" title="Renew" aria-label="Renew The Digital Frontier">
+                                        <span class="material-icons-outlined">autorenew</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr data-title="Modern Criticism" data-author="Elena Marsh">
+                                <td>
+                                    <div class="cell-book">
+                                        <div class="cell-book-cover">
+                                            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=120&h=160&fit=crop" alt="">
+                                        </div>
+                                        <div class="cell-book-info">
+                                            <div class="title">Modern Criticism</div>
+                                            <div class="subtitle">Elena Marsh · ISBN 301-88-112</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Mar 21, 2026</td>
+                                <td><span class="due-pill soon">Apr 4, 2026</span></td>
+                                <td>0</td>
+                                <td>
+                                    <button type="button" class="action-btn" disabled title="No renewals left" aria-label="Cannot renew">
+                                        <span class="material-icons-outlined">block</span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="table-footer">
+                        <span class="table-footer-info">Showing <strong>2</strong> active loans</span>
+                        <div class="pagination">
+                            <button type="button" class="page-btn" aria-label="Previous page"><span class="material-icons-outlined">chevron_left</span></button>
+                            <button type="button" class="page-btn active" data-page="1">1</button>
+                            <button type="button" class="page-btn" aria-label="Next page"><span class="material-icons-outlined">chevron_right</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="student.js"></script>
+    <script>
+        document.querySelectorAll('.renew-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                alert('Renewal request sent. You will receive a confirmation email if the item is renewed.');
+            });
+        });
+        document.getElementById('exportListBtn').addEventListener('click', function () {
+            alert('A plain-text list of your loans would download here in a full integration.');
+        });
+    </script>
+</body>
+</html>

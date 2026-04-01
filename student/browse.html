@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse the catalog — discover and request books.">
+    <title>Browse Catalog | The Archivist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="../admin/admin.css">
+    <link rel="stylesheet" href="student.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="sidebar-brand-icon">
+                    <span class="material-icons-outlined">auto_stories</span>
+                </div>
+                <div class="sidebar-brand-text">
+                    <h2>The Archivist</h2>
+                    <span class="student-brand-sub">Student Portal</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item" data-page="dashboard">
+                    <span class="material-icons-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="my-books.html" class="nav-item" data-page="my-books">
+                    <span class="material-icons-outlined">menu_book</span>
+                    <span>My Books</span>
+                </a>
+                <a href="browse.html" class="nav-item active" data-page="browse">
+                    <span class="material-icons-outlined">travel_explore</span>
+                    <span>Browse</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <span class="material-icons-outlined">person</span>
+                    <span>Profile</span>
+                </a>
+                <a href="../index.html" class="nav-item logout-btn">
+                    <span class="material-icons-outlined">logout</span>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-search">
+                    <span class="material-icons-outlined">search</span>
+                    <input type="text" placeholder="Search title, author, subject..." id="browseSearch" aria-label="Search catalog">
+                </div>
+                <div class="topbar-right">
+                    <button type="button" class="topbar-icon-btn" aria-label="Notifications">
+                        <span class="material-icons-outlined">notifications</span>
+                    </button>
+                    <div class="topbar-profile">
+                        <div class="topbar-profile-info">
+                            <div class="name">Jordan Lee</div>
+                            <div class="role">Student</div>
+                        </div>
+                        <div class="topbar-avatar">JL</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <div class="page-header-left">
+                        <div class="breadcrumb">DISCOVER <span>› CATALOG</span></div>
+                        <h1>Browse the collection</h1>
+                        <p>Request or place a hold on physical items. E-books open in your institutional reader when available.</p>
+                    </div>
+                </div>
+
+                <div class="tabs" role="tablist">
+                    <button type="button" class="tab-btn active" data-tab="all" role="tab" aria-selected="true">All</button>
+                    <button type="button" class="tab-btn" data-tab="fiction" role="tab">Fiction</button>
+                    <button type="button" class="tab-btn" data-tab="nonfiction" role="tab">Nonfiction</button>
+                    <button type="button" class="tab-btn" data-tab="etext" role="tab">E-text</button>
+                </div>
+
+                <div class="browse-grid" id="browseGrid">
+                    <article class="browse-card" data-title="Quiet Continents" data-author="Amira Okonkwo" data-cat="fiction">
+                        <div class="browse-card-cover">
+                            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=240&fit=crop" alt="">
+                        </div>
+                        <div class="browse-card-body">
+                            <h3>Quiet Continents</h3>
+                            <p class="author">Amira Okonkwo</p>
+                            <div class="browse-card-actions">
+                                <span class="availability-dot">3 copies</span>
+                                <button type="button" class="btn-primary hold-btn" style="padding: 8px 14px; font-size: 0.8rem;">Hold</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="browse-card" data-title="Signals and Noise" data-author="Noah Weiss" data-cat="nonfiction">
+                        <div class="browse-card-cover">
+                            <img src="https://images.unsplash.com/photo-1519682337052-a94d519337bc?w=400&h=240&fit=crop" alt="">
+                        </div>
+                        <div class="browse-card-body">
+                            <h3>Signals &amp; Noise</h3>
+                            <p class="author">Noah Weiss</p>
+                            <div class="browse-card-actions">
+                                <span class="availability-dot unavailable">Checked out</span>
+                                <button type="button" class="btn-outline hold-btn" style="padding: 8px 14px; font-size: 0.8rem;">Join queue</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="browse-card" data-title="The Digital Frontier" data-author="Julian Thorne" data-cat="fiction">
+                        <div class="browse-card-cover">
+                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=240&fit=crop" alt="">
+                        </div>
+                        <div class="browse-card-body">
+                            <h3>The Digital Frontier</h3>
+                            <p class="author">Julian Thorne</p>
+                            <div class="browse-card-actions">
+                                <span class="availability-dot">1 copy</span>
+                                <button type="button" class="btn-primary hold-btn" style="padding: 8px 14px; font-size: 0.8rem;">Hold</button>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="browse-card" data-title="Archive Protocols" data-author="Institutional Press" data-cat="etext">
+                        <div class="browse-card-cover">
+                            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=240&fit=crop" alt="">
+                        </div>
+                        <div class="browse-card-body">
+                            <h3>Archive Protocols</h3>
+                            <p class="author">Institutional Press</p>
+                            <div class="browse-card-actions">
+                                <span class="availability-dot">E-book</span>
+                                <button type="button" class="btn-primary hold-btn" style="padding: 8px 14px; font-size: 0.8rem;">Read</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="student.js"></script>
+    <script>
+        document.querySelectorAll('.hold-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var title = btn.closest('.browse-card').querySelector('h3').textContent;
+                alert('Request recorded for: ' + title);
+            });
+        });
+
+        var tabBtns = document.querySelectorAll('.tab-btn');
+        var cards = document.querySelectorAll('.browse-card[data-cat]');
+        var browseInput = document.getElementById('browseSearch');
+
+        function applyBrowseFilters() {
+            var activeTab = document.querySelector('.tab-btn.active');
+            var tab = activeTab ? activeTab.getAttribute('data-tab') : 'all';
+            var q = browseInput ? browseInput.value.trim().toLowerCase() : '';
+            cards.forEach(function (card) {
+                var cat = card.getAttribute('data-cat');
+                var showTab = tab === 'all' || tab === cat || (tab === 'etext' && cat === 'etext');
+                var title = (card.getAttribute('data-title') || '').toLowerCase();
+                var author = (card.getAttribute('data-author') || '').toLowerCase();
+                var showSearch = !q || title.includes(q) || author.includes(q);
+                card.style.display = showTab && showSearch ? '' : 'none';
+            });
+        }
+
+        tabBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                tabBtns.forEach(function (b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                applyBrowseFilters();
+            });
+        });
+
+        if (browseInput) {
+            browseInput.addEventListener('input', applyBrowseFilters);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var params = new URLSearchParams(window.location.search);
+            var q = params.get('q');
+            if (browseInput && q) {
+                browseInput.value = q;
+            }
+            applyBrowseFilters();
+        });
+    </script>
+</body>
+</html>
