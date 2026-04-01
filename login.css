@@ -8,12 +8,12 @@
 }
 
 :root {
-    --primary: #1a3a8f;
-    --primary-dark: #0f2566;
-    --primary-light: #3366cc;
-    --accent: #2563eb;
-    --accent-vivid: #3b82f6;
-    --accent-soft: rgba(37, 99, 235, 0.08);
+    --primary: #0066cc;
+    --primary-dark: #003d99;
+    --primary-light: #3385ff;
+    --accent: #1a7fd4;
+    --accent-vivid: #00a8ff;
+    --accent-soft: rgba(26, 127, 212, 0.08);
     --white: #ffffff;
     --gray-50: #f8f9fc;
     --gray-100: #f1f3f8;
@@ -27,9 +27,9 @@
     --gray-900: #0f1219;
     --success: #22c55e;
     --success-deep: #16a34a;
-    --danger: #ef4444;
-    --danger-deep: #dc2626;
-    --warning: #f59e0b;
+    --danger: #ff2e63;
+    --danger-deep: #e81828;
+    --warning: #ffa500;
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-display: 'Space Grotesk', 'Inter', sans-serif;
     --radius-sm: 6px;
@@ -59,7 +59,7 @@ html, body {
 .login-hero {
     position: relative;
     flex: 0 0 55%;
-    background: linear-gradient(135deg, #070d1a 0%, #0f2566 30%, #1a3a8f 55%, #1e40af 80%, #1a3a8f 100%);
+    background: linear-gradient(135deg, #001a4d 0%, #003d99 25%, #0066cc 50%, #1a7fd4 80%, #0066cc 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -80,9 +80,9 @@ html, body {
     position: absolute;
     inset: 0;
     background: 
-        radial-gradient(ellipse at 25% 40%, rgba(37, 99, 235, 0.2) 0%, transparent 65%),
-        radial-gradient(ellipse at 75% 15%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 60% 80%, rgba(96, 165, 250, 0.08) 0%, transparent 40%);
+        radial-gradient(ellipse at 25% 40%, rgba(26, 127, 212, 0.25) 0%, transparent 65%),
+        radial-gradient(ellipse at 75% 15%, rgba(0, 168, 255, 0.18) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 80%, rgba(0, 168, 255, 0.1) 0%, transparent 40%);
 }
 
 .hero-content {
@@ -330,11 +330,11 @@ html, body {
 .role-toggle {
     position: relative;
     display: flex;
-    background: var(--gray-100);
+    background: linear-gradient(135deg, #f1f3f8 0%, #e2e6ef 100%);
     border-radius: var(--radius-md);
     padding: 4px;
     margin-bottom: 32px;
-    border: 1px solid var(--gray-200);
+    border: 1.5px solid #c8cdd9;
 }
 
 .role-btn {
@@ -345,7 +345,7 @@ html, body {
     font-family: var(--font-primary);
     font-size: 0.88rem;
     font-weight: 500;
-    color: var(--gray-500);
+    color: #6b7490;
     cursor: pointer;
     position: relative;
     z-index: 2;
@@ -354,7 +354,7 @@ html, body {
 }
 
 .role-btn.active {
-    color: var(--gray-800);
+    color: #0066cc;
     font-weight: 600;
 }
 
@@ -364,10 +364,11 @@ html, body {
     left: 4px;
     width: calc(50% - 4px);
     height: calc(100% - 8px);
-    background: var(--white);
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafe 100%);
     border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 3px 10px rgba(0, 102, 204, 0.15);
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 102, 204, 0.1);
 }
 
 .role-toggle[data-active="admin"] .role-indicator {
@@ -418,8 +419,8 @@ html, body {
 .form-input {
     width: 100%;
     padding: 14px 48px 14px 18px;
-    background: var(--gray-50);
-    border: 1.5px solid var(--gray-200);
+    background: #ffffff;
+    border: 2px solid #e2e6ef;
     border-radius: var(--radius-md);
     font-family: var(--font-primary);
     font-size: 0.95rem;
@@ -433,9 +434,9 @@ html, body {
 }
 
 .form-input:focus {
-    border-color: var(--accent);
-    background: var(--white);
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+    border-color: #1a7fd4;
+    background: #f8f9fc;
+    box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1), 0 0 0 8px rgba(26, 127, 212, 0.05);
 }
 
 .input-icon {
@@ -478,7 +479,7 @@ html, body {
     justify-content: center;
     gap: 10px;
     padding: 16px;
-    background: linear-gradient(180deg, var(--accent) 0%, var(--primary) 100%);
+    background: linear-gradient(135deg, #1a7fd4 0%, #0066cc 50%, #003d99 100%);
     color: var(--white);
     border: none;
     border-radius: var(--radius-md);
@@ -489,22 +490,22 @@ html, body {
     transition: var(--transition);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 102, 204, 0.35), 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn-login::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
 .btn-login:hover {
-    background: linear-gradient(180deg, var(--accent-vivid) 0%, var(--accent) 100%);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
+    background: linear-gradient(135deg, #00a8ff 0%, #1a7fd4 50%, #0066cc 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 102, 204, 0.45), 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .btn-login:hover::before {
@@ -560,31 +561,33 @@ html, body {
     justify-content: center;
     gap: 10px;
     padding: 14px;
-    background: var(--white);
-    border: 1.5px solid var(--gray-200);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
+    border: 2px solid #e2e6ef;
     border-radius: var(--radius-md);
     font-family: var(--font-primary);
     font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--gray-700);
+    font-weight: 600;
+    color: #0066cc;
     cursor: pointer;
     transition: var(--transition);
+    position: relative;
 }
 
 .sso-btn:hover {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.06);
+    border-color: #1a7fd4;
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
+    box-shadow: 0 6px 16px rgba(0, 102, 204, 0.15);
+    transform: translateY(-1px);
 }
 
 .sso-btn .material-icons-outlined {
     font-size: 1.2rem;
-    color: var(--gray-500);
+    color: #1a7fd4;
     transition: color 0.2s ease;
 }
 
 .sso-btn:hover .material-icons-outlined {
-    color: var(--accent);
+    color: #0066cc;
 }
 
 /* Signup Prompt */

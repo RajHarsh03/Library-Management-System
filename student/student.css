@@ -1,12 +1,12 @@
 /* ===== Student portal — extends ../admin/admin.css ===== */
 
-/* Scoped tokens (student-facing: richer teal with warm depth) */
+/* Scoped tokens (student-facing: vibrant turquoise with modern depth) */
 body.student-app {
-    --student-accent: #0d9488;
-    --student-accent-vivid: #14b8a6;
-    --student-accent-soft: rgba(13, 148, 136, 0.1);
-    --student-accent-deep: #0f766e;
-    --student-accent-glow: rgba(13, 148, 136, 0.25);
+    --student-accent: #00b4a0;
+    --student-accent-vivid: #14d8c8;
+    --student-accent-soft: rgba(0, 180, 160, 0.08);
+    --student-accent-deep: #008b7a;
+    --student-accent-glow: rgba(0, 180, 160, 0.30);
     --student-ink: #0f172a;
     --student-ink-softer: #1e293b;
     --student-muted: #64748b;
@@ -18,9 +18,9 @@ body.student-app {
     --student-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
     --student-shadow-md: 0 8px 24px rgba(15, 23, 42, 0.07);
     --student-shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.1);
-    --student-shadow-glow: 0 4px 16px rgba(13, 148, 136, 0.2);
-    --student-ring: 0 0 0 3px rgba(13, 148, 136, 0.2);
-    background: linear-gradient(165deg, #ecfdf5 0%, #f0fdfa 20%, #f8fafc 50%, #f1f5f9 100%);
+    --student-shadow-glow: 0 4px 16px rgba(0, 180, 160, 0.25);
+    --student-ring: 0 0 0 3px rgba(0, 180, 160, 0.2);
+    background: linear-gradient(165deg, #ecfdf9 0%, #f0fdfb 20%, #f8fafc 50%, #f1f5f9 100%);
     background-attachment: fixed;
     min-height: 100vh;
 }
@@ -32,9 +32,9 @@ body.student-app .page-content {
 
 /* ----- Sidebar ----- */
 body.student-app .sidebar {
-    background: linear-gradient(180deg, #ffffff 0%, #f8fffe 40%, #f0fdfa 70%, #ecfdf5 100%);
-    border-right: 1px solid rgba(13, 148, 136, 0.12);
-    box-shadow: 6px 0 32px rgba(15, 23, 42, 0.05);
+    background: linear-gradient(180deg, #ffffff 0%, #f8fffd 40%, #f0fdfa 70%, #ecfdf9 100%);
+    border-right: 1px solid rgba(0, 180, 160, 0.12);
+    box-shadow: 6px 0 32px rgba(0, 0, 0, 0.04);
 }
 
 body.student-app .sidebar-top {
@@ -229,27 +229,29 @@ body.student-app .breadcrumb {
 body.student-app .btn-primary {
     padding: 13px 26px;
     border-radius: 12px;
-    background: linear-gradient(180deg, var(--student-accent-vivid) 0%, var(--student-accent-deep) 100%);
-    box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
+    background: linear-gradient(135deg, #14d8c8 0%, #00b4a0 50%, #008b7a 100%);
+    box-shadow: 0 6px 16px rgba(0, 180, 160, 0.35);
 }
 
 body.student-app .btn-primary:hover {
-    background: linear-gradient(180deg, #2dd4bf 0%, var(--student-accent) 100%);
-    box-shadow: 0 8px 24px rgba(13, 148, 136, 0.45);
+    background: linear-gradient(135deg, #26e8d8 0%, #14d8c8 50%, #00b4a0 100%);
+    box-shadow: 0 10px 28px rgba(0, 180, 160, 0.45);
+    transform: translateY(-2px);
 }
 
 body.student-app .btn-outline {
     border-radius: 12px;
     padding: 11px 22px;
-    border-width: 1.5px;
-    border-color: rgba(203, 213, 225, 0.95);
+    border-width: 2px;
+    border-color: #00b4a0;
+    color: #008b7a;
 }
 
 body.student-app .btn-outline:hover {
-    border-color: var(--student-accent);
-    color: var(--student-accent-deep);
-    background: rgba(13, 148, 136, 0.06);
-    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.08);
+    border-color: #008b7a;
+    color: #006855;
+    background: linear-gradient(135deg, #f0fdfb 0%, #ecfdf9 100%);
+    box-shadow: 0 4px 12px rgba(0, 180, 160, 0.15);
 }
 
 /* ----- Welcome hero ----- */
@@ -890,7 +892,7 @@ body.student-app .tab-btn.active {
 }
 
 body.student-app .browse-card .btn-primary.btn-hold {
-    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+    box-shadow: 0 6px 14px rgba(0, 180, 160, 0.3);
 }
 
 /* ----- Focus (a11y) ----- */

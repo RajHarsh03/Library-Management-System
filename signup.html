@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Register for The Digital Archivist. Join our community and start accessing thousands of volumes today.">
+    <meta name="theme-color" content="#0066cc">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Join The Digital Archivist | Student Membership">
+    <meta property="og:description" content="Create your account and unlock access to our comprehensive library collection.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The Digital Archivist">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230066cc'/%3E%3Cpath d='M8 8h5v16H8a1 1 0 01-1-1V9a1 1 0 011-1zm11 0h5a1 1 0 011 1v14a1 1 0 01-1 1h-5V8zm-2 0h-1v16h1a1 1 0 001-1V9a1 1 0 00-1-1z' fill='%23fff'/%3E%3C/svg%3E">
+
+    <title>The Digital Archivist | Student Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+    <div class="signup-container">
+        <!-- Left Hero Panel -->
+        <div class="signup-hero">
+            <!-- Floating Decorative Elements -->
+            <div class="hero-float-elements" aria-hidden="true">
+                <div class="float-circle float-1"></div>
+                <div class="float-circle float-2"></div>
+                <div class="float-circle float-3"></div>
+                <div class="float-ring float-ring-1"></div>
+                <div class="float-ring float-ring-2"></div>
+            </div>
+
+            <div class="hero-content">
+                <span class="hero-badge">NEW MEMBER</span>
+                <h1 class="hero-title">Join The<br>Digital Archivist.</h1>
+                <p class="hero-description">Access thousands of volumes, manage your reading journey, and discover knowledge at your fingertips.</p>
+
+                <div class="hero-benefits">
+                    <div class="benefit-item">
+                        <span class="material-icons-outlined">check_circle</span>
+                        <span>Unlimited book access</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="material-icons-outlined">check_circle</span>
+                        <span>Personal reading lists</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="material-icons-outlined">check_circle</span>
+                        <span>Smart recommendations</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="material-icons-outlined">check_circle</span>
+                        <span>Track reading progress</span>
+                    </div>
+                </div>
+
+                <div class="hero-stats" aria-label="Community statistics">
+                    <div class="hero-stat">
+                        <span class="hero-stat-value" data-count="12400">0</span>
+                        <span class="hero-stat-label">Books</span>
+                    </div>
+                    <div class="hero-stat-divider" aria-hidden="true"></div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value" data-count="5200">0</span>
+                        <span class="hero-stat-label">Students</span>
+                    </div>
+                    <div class="hero-stat-divider" aria-hidden="true"></div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value" data-count="99">0</span>
+                        <span class="hero-stat-label">% Happy</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-brand">
+                <span class="material-icons-outlined">indeterminate_check_box</span>
+                <span>The Archivist</span>
+            </div>
+        </div>
+
+        <!-- Right Signup Form -->
+        <div class="signup-form-panel">
+            <div class="signup-form-wrapper">
+                <div class="form-header">
+                    <h2 class="form-title">Create Account</h2>
+                    <p class="form-subtitle">Join our learning community in just a few steps.</p>
+                </div>
+
+                <form id="signupForm" autocomplete="off" novalidate>
+                    <!-- Personal Information -->
+                    <div class="form-section">
+                        <h3 class="section-title">Personal Information</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="firstName">FIRST NAME</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="firstName" class="form-input" placeholder="John" required aria-required="true">
+                                    <span class="material-icons-outlined input-icon" aria-hidden="true">person</span>
+                                </div>
+                                <span class="form-error" id="firstNameError" role="alert" aria-live="assertive"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="lastName">LAST NAME</label>
+                                <div class="input-wrapper">
+                                    <input type="text" id="lastName" class="form-input" placeholder="Doe" required aria-required="true">
+                                    <span class="material-icons-outlined input-icon" aria-hidden="true">person</span>
+                                </div>
+                                <span class="form-error" id="lastNameError" role="alert" aria-live="assertive"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Account Information -->
+                    <div class="form-section">
+                        <h3 class="section-title">Account Information</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="email">EMAIL ADDRESS</label>
+                            <div class="input-wrapper">
+                                <input type="email" id="email" class="form-input" placeholder="name@university.edu" required aria-required="true">
+                                <span class="material-icons-outlined input-icon" aria-hidden="true">mail</span>
+                            </div>
+                            <span class="form-error" id="emailError" role="alert" aria-live="assertive"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="studentId">STUDENT ID</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="studentId" class="form-input" placeholder="SID-2024-XXXXX" required aria-required="true">
+                                <span class="material-icons-outlined input-icon" aria-hidden="true">badge</span>
+                            </div>
+                            <span class="form-error" id="studentIdError" role="alert" aria-live="assertive"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="phone">PHONE NUMBER</label>
+                                <div class="input-wrapper">
+                                    <input type="tel" id="phone" class="form-input" placeholder="+1 (555) 123-4567" required aria-required="true">
+                                    <span class="material-icons-outlined input-icon" aria-hidden="true">phone</span>
+                                </div>
+                                <span class="form-error" id="phoneError" role="alert" aria-live="assertive"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="major">MAJOR/FIELD</label>
+                                <div class="input-wrapper">
+                                    <select id="major" class="form-input" required aria-required="true">
+                                        <option value="">Select your major...</option>
+                                        <option value="cs">Computer Science</option>
+                                        <option value="eng">Engineering</option>
+                                        <option value="lib">Liberal Arts</option>
+                                        <option value="bus">Business</option>
+                                        <option value="sci">Natural Sciences</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <span class="material-icons-outlined input-icon" aria-hidden="true">school</span>
+                                </div>
+                                <span class="form-error" id="majorError" role="alert" aria-live="assertive"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Information -->
+                    <div class="form-section">
+                        <h3 class="section-title">Security Information</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="password">PASSWORD</label>
+                            <div class="input-wrapper">
+                                <input type="password" id="password" class="form-input" placeholder="••••••••" required aria-required="true">
+                                <button type="button" class="password-toggle" id="passwordToggle" aria-label="Toggle password visibility">
+                                    <span class="material-icons-outlined" id="passwordToggleIcon">visibility_off</span>
+                                </button>
+                            </div>
+                            <div class="password-requirements">
+                                <p class="requirement-title">Password must contain:</p>
+                                <div class="requirement-list">
+                                    <div class="requirement" id="req-length">
+                                        <span class="icon">✓</span>
+                                        <span>At least 8 characters</span>
+                                    </div>
+                                    <div class="requirement" id="req-upper">
+                                        <span class="icon">✓</span>
+                                        <span>One uppercase letter</span>
+                                    </div>
+                                    <div class="requirement" id="req-lower">
+                                        <span class="icon">✓</span>
+                                        <span>One lowercase letter</span>
+                                    </div>
+                                    <div class="requirement" id="req-number">
+                                        <span class="icon">✓</span>
+                                        <span>One number</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="form-error" id="passwordError" role="alert" aria-live="assertive"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="confirmPassword">CONFIRM PASSWORD</label>
+                            <div class="input-wrapper">
+                                <input type="password" id="confirmPassword" class="form-input" placeholder="••••••••" required aria-required="true">
+                                <span class="material-icons-outlined input-icon" aria-hidden="true">lock</span>
+                            </div>
+                            <span class="form-error" id="confirmPasswordError" role="alert" aria-live="assertive"></span>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="form-section">
+                        <div class="terms-check">
+                            <input type="checkbox" id="agreeTerms" class="check-input" required>
+                            <label for="agreeTerms" class="check-label">
+                                I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a>
+                            </label>
+                            <span class="form-error" id="termsError" role="alert" aria-live="assertive"></span>
+                        </div>
+
+                        <div class="terms-check">
+                            <input type="checkbox" id="agreeNewsletter" class="check-input">
+                            <label for="agreeNewsletter" class="check-label">
+                                Send me updates about new books and library events
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-signup" id="signupBtn">
+                        <span>Create Account</span>
+                        <span class="material-icons-outlined">check_circle</span>
+                    </button>
+                </form>
+
+                <div class="login-prompt">
+                    Already have an account? <a href="index.html" class="login-link">Sign in here</a>
+                </div>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div class="trust-bar" aria-label="Security features">
+                <div class="trust-item">
+                    <span class="material-icons-outlined">shield</span>
+                    <span>Secure Encryption</span>
+                </div>
+                <div class="trust-item">
+                    <span class="material-icons-outlined">verified_user</span>
+                    <span>FERPA Compliant</span>
+                </div>
+                <div class="trust-item">
+                    <span class="material-icons-outlined">lock</span>
+                    <span>No Hidden Fees</span>
+                </div>
+            </div>
+
+            <p class="copyright">&copy; 2026 DIGITAL ARCHIVIST INSTITUTIONAL SUITE</p>
+        </div>
+    </div>
+
+    <script src="signup.js"></script>
+</body>
+</html>

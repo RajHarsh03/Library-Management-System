@@ -10,14 +10,14 @@
 }
 
 :root {
-    --primary: #1a3a8f;
-    --primary-dark: #0f2566;
-    --primary-light: #3366cc;
-    --primary-glow: rgba(26, 58, 143, 0.35);
-    --accent: #2563eb;
-    --accent-vivid: #3b82f6;
-    --accent-light: #dbeafe;
-    --accent-soft: rgba(37, 99, 235, 0.08);
+    --primary: #0066cc;
+    --primary-dark: #003d99;
+    --primary-light: #3385ff;
+    --primary-glow: rgba(0, 102, 204, 0.35);
+    --accent: #1a7fd4;
+    --accent-vivid: #00a8ff;
+    --accent-light: #cce5ff;
+    --accent-soft: rgba(26, 127, 212, 0.08);
     --white: #ffffff;
     --gray-50: #f8f9fc;
     --gray-100: #f1f3f8;
@@ -29,22 +29,22 @@
     --gray-700: #333a4d;
     --gray-800: #1e2433;
     --gray-900: #0f1219;
-    --success: #22c55e;
-    --success-deep: #16a34a;
-    --success-light: #dcfce7;
-    --success-soft: rgba(34, 197, 94, 0.08);
-    --danger: #ef4444;
-    --danger-deep: #dc2626;
-    --danger-light: #fee2e2;
-    --danger-soft: rgba(239, 68, 68, 0.08);
-    --warning: #f59e0b;
-    --warning-deep: #d97706;
-    --warning-light: #fef3c7;
-    --warning-soft: rgba(245, 158, 11, 0.08);
-    --info: #3b82f6;
-    --info-light: #dbeafe;
-    --purple: #7c3aed;
-    --purple-light: #f3e8ff;
+    --success: #1ea971;
+    --success-deep: #0d7a4a;
+    --success-light: #d1fae5;
+    --success-soft: rgba(30, 169, 113, 0.08);
+    --danger: #ff2e63;
+    --danger-deep: #e81828;
+    --danger-light: #ffe0e6;
+    --danger-soft: rgba(255, 46, 99, 0.08);
+    --warning: #ffa500;
+    --warning-deep: #ff8c00;
+    --warning-light: #ffe6cc;
+    --warning-soft: rgba(255, 165, 0, 0.08);
+    --info: #1a7fd4;
+    --info-light: #cce5ff;
+    --purple: #9d38b8;
+    --purple-light: #fae8ff;
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-display: 'Space Grotesk', 'Inter', sans-serif;
     --radius-sm: 6px;
@@ -54,7 +54,7 @@
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
     --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
     --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
-    --shadow-glow: 0 4px 20px rgba(37, 99, 235, 0.15);
+    --shadow-glow: 0 4px 20px rgba(0, 102, 204, 0.15);
     --sidebar-width: 240px;
     --sidebar-width-collapsed: 76px;
     --sidebar-duration: 0.48s;
@@ -269,13 +269,13 @@ a {
 .sidebar-brand-icon {
     width: 38px;
     height: 38px;
-    background: linear-gradient(145deg, var(--accent) 0%, var(--primary) 100%);
+    background: linear-gradient(145deg, #1a7fd4 0%, #0066cc 100%);
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.35);
 }
 
 .sidebar-brand-icon .material-icons-outlined {
@@ -561,7 +561,7 @@ a {
     align-items: center;
     gap: 8px;
     padding: 12px 24px;
-    background: linear-gradient(180deg, var(--accent) 0%, var(--primary) 100%);
+    background: linear-gradient(135deg, #1a7fd4 0%, #0066cc 100%);
     color: var(--white);
     border: none;
     border-radius: var(--radius-md);
@@ -570,13 +570,13 @@ a {
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(180deg, var(--accent-vivid) 0%, var(--accent) 100%);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+    background: linear-gradient(135deg, #00a8ff 0%, #1a7fd4 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 102, 204, 0.35);
 }
 
 .btn-outline {
@@ -585,20 +585,21 @@ a {
     gap: 8px;
     padding: 10px 20px;
     background: var(--white);
-    color: var(--gray-700);
-    border: 1.5px solid var(--gray-200);
+    color: #0066cc;
+    border: 2px solid #1a7fd4;
     border-radius: var(--radius-md);
     font-family: var(--font-primary);
     font-size: 0.85rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
 }
 
 .btn-outline:hover {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-    color: var(--accent);
+    border-color: #0066cc;
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
+    color: #003d99;
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
 }
 
 /* ===== STAT CARDS ===== */
