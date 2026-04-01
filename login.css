@@ -873,7 +873,7 @@ html, body {
     }
     .login-hero {
         flex: none;
-        padding: 24px 20px;
+        padding: 20px 18px;
         min-height: auto;
         display: flex;
         justify-content: center;
@@ -881,29 +881,34 @@ html, body {
     }
     .login-hero .hero-content {
         text-align: center;
+        width: 100%;
     }
     .login-hero .hero-badge {
         font-size: 0.6rem;
         padding: 6px 12px;
+        margin-bottom: 8px;
     }
     .hero-title { 
-        font-size: 1.8rem;
-        margin: 12px 0 8px;
-        line-height: 1.2;
+        font-size: 1.7rem;
+        margin: 8px 0 6px;
+        line-height: 1.1;
+        font-weight: 800;
     }
     .hero-title br {
         display: none;
     }
     .hero-description {
-        font-size: 0.75rem;
-        line-height: 1.4;
-        margin: 8px 0 12px;
+        font-size: 0.72rem;
+        line-height: 1.35;
+        margin: 6px 0 10px;
+        color: rgba(255, 255, 255, 0.85);
     }
     .hero-stats { 
         display: flex;
-        gap: 12px;
-        padding: 8px 0;
+        gap: 10px;
+        padding: 6px 0;
         justify-content: center;
+        margin: 8px 0;
     }
     .hero-stat {
         display: flex;
@@ -911,12 +916,12 @@ html, body {
         align-items: center;
     }
     .hero-stat-value {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         font-weight: 800;
     }
     .hero-stat-label {
-        font-size: 0.65rem;
-        margin-top: 2px;
+        font-size: 0.6rem;
+        margin-top: 1px;
     }
     .hero-stat-divider {
         display: none;
@@ -927,15 +932,21 @@ html, body {
         flex-wrap: wrap;
         justify-content: center;
         margin-top: 8px;
+        width: 100%;
     }
     .hero-feature-card {
         min-width: auto;
         padding: 8px 10px;
         font-size: 0.6rem;
         gap: 4px;
+        flex: 1 1 calc(50% - 4px);
+        min-width: 100px;
     }
     .hero-feature-card .material-icons-outlined {
         font-size: 0.9rem;
+    }
+    .hero-feature-card:nth-child(n+3) {
+        display: none;
     }
     .hero-float-elements { display: none; }
     .login-form-panel {
