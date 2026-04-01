@@ -77,6 +77,7 @@ body.student-app .sidebar-brand-text h2 {
 body.student-app .sidebar-nav {
     padding: 24px 14px;
     gap: 6px;
+    transition: padding var(--sidebar-duration) var(--sidebar-ease);
 }
 
 body.student-app .nav-item {
@@ -84,6 +85,11 @@ body.student-app .nav-item {
     border-radius: 12px;
     font-size: 0.9rem;
     color: var(--student-muted);
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        padding var(--sidebar-duration) var(--sidebar-ease),
+        gap var(--sidebar-duration) var(--sidebar-ease);
 }
 
 body.student-app .nav-item:hover {
@@ -101,15 +107,23 @@ body.student-app .nav-item.active {
 body.student-app .nav-item .material-icons-outlined {
     font-size: 1.28rem;
     opacity: 0.92;
+    flex-shrink: 0;
 }
 
 body.student-app .sidebar-footer {
     border-top-color: rgba(148, 163, 184, 0.25);
     padding: 18px 14px 22px;
+    transition: padding var(--sidebar-duration) var(--sidebar-ease);
 }
 
 /* Collapsed sidebar: match admin icon-only layout (override student nav padding) */
 @media (min-width: 769px) {
+    body.student-app.sidebar-collapsed .sidebar-nav,
+    body.student-app.sidebar-collapsed .sidebar-footer {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
     body.student-app.sidebar-collapsed .nav-item {
         justify-content: center;
         padding: 12px 10px;

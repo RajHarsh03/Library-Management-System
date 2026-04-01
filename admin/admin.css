@@ -44,6 +44,9 @@
     --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
     --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
     --sidebar-width: 240px;
+    --sidebar-width-collapsed: 76px;
+    --sidebar-duration: 0.48s;
+    --sidebar-ease: cubic-bezier(0.22, 1, 0.32, 1);
     --header-height: 64px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -79,7 +82,10 @@ a {
     left: 0;
     bottom: 0;
     z-index: 100;
-    transition: var(--transition);
+    overflow-x: hidden;
+    overflow-y: auto;
+    contain: layout style;
+    transition: width var(--sidebar-duration) var(--sidebar-ease);
 }
 
 /* Sidebar header: brand + collapse control */
@@ -90,6 +96,9 @@ a {
     gap: 10px;
     padding: 24px 16px 0 20px;
     margin-bottom: 8px;
+    transition:
+        padding var(--sidebar-duration) var(--sidebar-ease),
+        gap var(--sidebar-duration) var(--sidebar-ease);
 }
 
 .sidebar-top .sidebar-brand {
@@ -111,7 +120,11 @@ a {
     justify-content: center;
     cursor: pointer;
     color: var(--gray-500);
-    transition: var(--transition);
+    transition:
+        border-color 0.2s ease,
+        color 0.2s ease,
+        background 0.2s ease,
+        transform var(--sidebar-duration) var(--sidebar-ease);
 }
 
 .sidebar-collapse-btn:hover {
@@ -127,16 +140,42 @@ a {
 
 .sidebar-collapse-btn .material-icons-outlined {
     font-size: 1.25rem;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform calc(var(--sidebar-duration) * 0.95) var(--sidebar-ease);
+}
+
+/* Brand title block — animate width/opacity instead of display:none */
+.sidebar-brand-text {
+    min-width: 0;
+    overflow: hidden;
+    transition:
+        max-width var(--sidebar-duration) var(--sidebar-ease),
+        opacity calc(var(--sidebar-duration) * 0.7) ease,
+        transform calc(var(--sidebar-duration) * 0.7) ease;
+    max-width: 200px;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Nav link labels — clip + fade (matches icon rail animation) */
+.sidebar .nav-item > span:not(.material-icons-outlined) {
+    display: inline-block;
+    max-width: 200px;
+    opacity: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: middle;
+    transition:
+        max-width var(--sidebar-duration) var(--sidebar-ease),
+        opacity calc(var(--sidebar-duration) * 0.55) ease;
 }
 
 @media (min-width: 769px) {
-    body.sidebar-collapsed .sidebar-collapse-btn .material-icons-outlined {
-        transform: rotate(180deg);
+    body.sidebar-collapsed {
+        --sidebar-width: var(--sidebar-width-collapsed);
     }
 
-    body.sidebar-collapsed {
-        --sidebar-width: 76px;
+    body.sidebar-collapsed .sidebar-collapse-btn .material-icons-outlined {
+        transform: rotate(180deg);
     }
 
     body.sidebar-collapsed .sidebar-top {
@@ -151,7 +190,10 @@ a {
     }
 
     body.sidebar-collapsed .sidebar-brand-text {
-        display: none;
+        max-width: 0;
+        opacity: 0;
+        transform: translateX(-6px);
+        pointer-events: none;
     }
 
     body.sidebar-collapsed .sidebar-collapse-btn {
@@ -162,14 +204,38 @@ a {
         justify-content: center;
         padding: 12px 10px;
         gap: 0;
+        transition:
+            padding var(--sidebar-duration) var(--sidebar-ease),
+            gap var(--sidebar-duration) var(--sidebar-ease);
     }
 
     body.sidebar-collapsed .nav-item > span:not(.material-icons-outlined) {
-        display: none;
+        max-width: 0;
+        opacity: 0;
     }
 
     body.sidebar-collapsed .sidebar-footer .nav-item {
         justify-content: center;
+    }
+
+    body.sidebar-collapsed .sidebar-nav,
+    body.sidebar-collapsed .sidebar-footer {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    /* Expanding: let rail widen first, then labels fade in */
+    body:not(.sidebar-collapsed) .sidebar-brand-text {
+        transition-delay: 0.07s;
+    }
+
+    body:not(.sidebar-collapsed) .nav-item > span:not(.material-icons-outlined) {
+        transition-delay: 0.1s;
+    }
+
+    body.sidebar-collapsed .sidebar-brand-text,
+    body.sidebar-collapsed .nav-item > span:not(.material-icons-outlined) {
+        transition-delay: 0s;
     }
 }
 
@@ -223,6 +289,7 @@ a {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    transition: padding var(--sidebar-duration) var(--sidebar-ease);
 }
 
 .nav-item {
@@ -234,7 +301,11 @@ a {
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--gray-500);
-    transition: var(--transition);
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        padding var(--sidebar-duration) var(--sidebar-ease),
+        gap var(--sidebar-duration) var(--sidebar-ease);
     cursor: pointer;
     text-decoration: none;
 }
@@ -252,6 +323,7 @@ a {
 
 .nav-item .material-icons-outlined {
     font-size: 1.25rem;
+    flex-shrink: 0;
 }
 
 .sidebar-footer {
@@ -260,6 +332,7 @@ a {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    transition: padding var(--sidebar-duration) var(--sidebar-ease);
 }
 
 .sidebar-footer .nav-item {
@@ -280,7 +353,7 @@ a {
     margin-left: var(--sidebar-width);
     display: flex;
     flex-direction: column;
-    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: margin-left var(--sidebar-duration) var(--sidebar-ease);
 }
 
 /* ===== TOP BAR ===== */
@@ -1405,5 +1478,22 @@ a {
     }
     .bottom-cards {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Sidebar collapse — instant toggle for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+    .sidebar,
+    .main-content,
+    .sidebar-top,
+    .sidebar-nav,
+    .sidebar-footer,
+    .sidebar-brand-text,
+    .sidebar .nav-item > span:not(.material-icons-outlined),
+    .nav-item,
+    .sidebar-collapse-btn,
+    .sidebar-collapse-btn .material-icons-outlined {
+        transition-duration: 0.01ms !important;
+        transition-delay: 0s !important;
     }
 }
