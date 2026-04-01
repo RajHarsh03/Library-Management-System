@@ -120,19 +120,145 @@ html, body {
     gap: 12px;
 }
 
+/* === Hero Canvas === */
+#heroCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* === Floating Decorative Elements === */
+.hero-float-elements {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.float-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.08);
+}
+
+.float-1 {
+    width: 300px;
+    height: 300px;
+    top: -80px;
+    right: -60px;
+    animation: floatSlow 12s ease-in-out infinite;
+}
+
+.float-2 {
+    width: 180px;
+    height: 180px;
+    bottom: 15%;
+    right: 10%;
+    background: rgba(59, 130, 246, 0.06);
+    animation: floatSlow 10s ease-in-out infinite reverse;
+}
+
+.float-3 {
+    width: 100px;
+    height: 100px;
+    top: 35%;
+    right: 25%;
+    background: rgba(255, 255, 255, 0.04);
+    animation: floatSlow 8s ease-in-out infinite 2s;
+}
+
+.float-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.float-ring-1 {
+    width: 220px;
+    height: 220px;
+    top: 20%;
+    right: -40px;
+    animation: floatRotate 20s linear infinite;
+}
+
+.float-ring-2 {
+    width: 140px;
+    height: 140px;
+    bottom: 25%;
+    left: 15%;
+    border-color: rgba(37, 99, 235, 0.1);
+    animation: floatRotate 15s linear infinite reverse;
+}
+
+@keyframes floatSlow {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(15px, -20px); }
+    66% { transform: translate(-10px, 10px); }
+}
+
+@keyframes floatRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* === Hero Stats === */
+.hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-bottom: 40px;
+    padding: 20px 28px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    max-width: 480px;
+}
+
+.hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.hero-stat-value {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+}
+
+.hero-stat-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.hero-stat-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
 .hero-feature-card {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    padding: 24px 32px;
+    padding: 24px 28px;
     background: rgba(255,255,255,0.08);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: var(--radius-lg);
     color: rgba(255,255,255,0.85);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 500;
-    min-width: 180px;
+    min-width: 150px;
     transition: var(--transition);
 }
 
@@ -512,6 +638,152 @@ html, body {
     to { transform: rotate(360deg); }
 }
 
+/* === Password Toggle === */
+.password-toggle {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: var(--gray-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+    border-radius: 4px;
+}
+
+.password-toggle:hover {
+    color: var(--gray-600);
+}
+
+.password-toggle:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.password-toggle .material-icons-outlined {
+    font-size: 1.2rem;
+}
+
+/* === Form Errors === */
+.form-error {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--danger);
+    margin-top: 6px;
+    min-height: 0;
+    overflow: hidden;
+    transition: all 0.25s ease;
+    opacity: 0;
+    max-height: 0;
+}
+
+.form-error.visible {
+    opacity: 1;
+    max-height: 30px;
+    min-height: 18px;
+}
+
+.form-group.has-error .form-input {
+    border-color: var(--danger);
+    background: #fef2f2;
+}
+
+.form-group.has-error .form-input:focus {
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.08);
+}
+
+/* === Toast Notifications === */
+.toast-container {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    border-left: 4px solid var(--accent);
+    font-size: 0.9rem;
+    color: var(--gray-800);
+    pointer-events: auto;
+    animation: toastIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 380px;
+}
+
+.toast.error {
+    border-left-color: var(--danger);
+}
+
+.toast.success {
+    border-left-color: var(--success);
+}
+
+.toast .material-icons-outlined {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.toast.error .material-icons-outlined { color: var(--danger); }
+.toast.success .material-icons-outlined { color: var(--success); }
+
+.toast.removing {
+    animation: toastOut 0.3s ease forwards;
+}
+
+@keyframes toastIn {
+    from { opacity: 0; transform: translateX(40px) scale(0.96); }
+    to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes toastOut {
+    to { opacity: 0; transform: translateX(40px) scale(0.96); }
+}
+
+/* === Trust Bar === */
+.trust-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 16px;
+    padding: 0 20px;
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--gray-400);
+    letter-spacing: 0.5px;
+}
+
+.trust-item .material-icons-outlined {
+    font-size: 1rem;
+    color: var(--gray-300);
+}
+
+/* === Form Header Animation === */
+.form-header {
+    animation: fadeInUp 0.6s ease-out;
+}
+
 /* === Responsive === */
 @media (max-width: 1024px) {
     .login-hero {
@@ -520,6 +792,10 @@ html, body {
     }
     .hero-title { font-size: 3rem; }
     .hero-brand { left: 40px; }
+    .hero-stats { gap: 20px; padding: 16px 20px; }
+    .hero-stat-value { font-size: 1.3rem; }
+    .hero-features { gap: 10px; }
+    .hero-feature-card { min-width: 130px; padding: 20px 22px; }
 }
 
 @media (max-width: 768px) {
@@ -532,13 +808,26 @@ html, body {
         min-height: 300px;
     }
     .hero-title { font-size: 2.5rem; }
+    .hero-stats { display: none; }
     .hero-features { display: none; }
+    .hero-float-elements { display: none; }
     .login-form-panel {
         padding: 40px 24px;
+    }
+    .trust-bar {
+        gap: 16px;
+        flex-wrap: wrap;
     }
     .copyright {
         position: static;
         text-align: center;
         margin-top: 24px;
+    }
+    .toast-container {
+        right: 12px;
+        left: 12px;
+    }
+    .toast {
+        max-width: 100%;
     }
 }
