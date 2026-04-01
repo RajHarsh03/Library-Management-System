@@ -21,7 +21,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: 
+    background-image:
         url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     opacity: 1;
 }
@@ -29,7 +29,7 @@
 .signup-hero .hero-overlay {
     position: absolute;
     inset: 0;
-    background: 
+    background:
         radial-gradient(ellipse at 25% 40%, rgba(26, 127, 212, 0.25) 0%, transparent 65%),
         radial-gradient(ellipse at 75% 15%, rgba(0, 168, 255, 0.18) 0%, transparent 50%),
         radial-gradient(ellipse at 60% 80%, rgba(0, 168, 255, 0.1) 0%, transparent 40%);
@@ -43,10 +43,10 @@
 .signup-hero .hero-badge {
     display: inline-block;
     padding: 8px 16px;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(8px);
     border-radius: var(--radius-sm);
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 2px;
@@ -64,10 +64,41 @@
 
 .signup-hero .hero-description {
     font-size: 0.8rem;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
     line-height: 1.5;
     max-width: 320px;
     margin-bottom: 15px;
+}
+
+.signup-hero .hero-features {
+    display: flex;
+    gap: 12px;
+}
+
+.signup-hero .hero-feature-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-lg);
+    color: rgba(255,255,255,0.85);
+    font-size: 0.7rem;
+    font-weight: 500;
+    min-width: 100px;
+    transition: var(--transition);
+}
+
+.signup-hero .hero-feature-card:hover {
+    background: rgba(255,255,255,0.12);
+    transform: translateY(-2px);
+}
+
+.signup-hero .hero-feature-card .material-icons-outlined {
+    font-size: 1.5rem;
+    color: rgba(255,255,255,0.7);
 }
 
 /* Benefits List */
@@ -89,7 +120,7 @@
     align-items: center;
     gap: 12px;
     font-size: 0.95rem;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255, 255, 255, 0.85);
     font-weight: 500;
 }
 
@@ -146,7 +177,7 @@
     left: 50px;
     align-items: center;
     gap: 10px;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255, 255, 255, 0.5);
     font-weight: 600;
     font-size: 0.95rem;
     z-index: 2;
@@ -257,7 +288,7 @@
     transition: background 0.3s ease;
 }
 
-.step-item.active ~ .step-connector {
+.step-item.active~.step-connector {
     background: #d0d5e0;
 }
 
@@ -327,7 +358,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -557,7 +588,7 @@ select.form-input {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -692,14 +723,16 @@ select.form-input {
     position: absolute;
     width: 18px;
     height: 18px;
-    border: 2.5px solid rgba(255,255,255,0.3);
+    border: 2.5px solid rgba(255, 255, 255, 0.3);
     border-top-color: var(--white);
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Floating Elements */
@@ -767,14 +800,29 @@ select.form-input {
 }
 
 @keyframes floatSlow {
-    0%, 100% { transform: translate(0, 0); }
-    33% { transform: translate(15px, -20px); }
-    66% { transform: translate(-10px, 10px); }
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    33% {
+        transform: translate(15px, -20px);
+    }
+
+    66% {
+        transform: translate(-10px, 10px);
+    }
 }
 
 @keyframes floatRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Responsive Design */
@@ -796,6 +844,10 @@ select.form-input {
     .signup-hero .hero-description {
         max-width: 100%;
         font-size: 0.85rem;
+    }
+
+    .signup-hero .hero-features {
+        display: none;
     }
 
     .signup-form-panel {
@@ -843,12 +895,14 @@ select.form-input {
     .signup-hero .hero-badge {
         font-size: 0.6rem;
         padding: 6px 12px;
+        margin-bottom: 8px;
     }
 
     .signup-hero .hero-title {
-        font-size: 1.6rem;
-        margin: 12px 0 8px;
-        line-height: 1.2;
+        font-size: 1.7rem;
+        margin: 8px 0 6px;
+        line-height: 1.1;
+        font-weight: 800;
     }
 
     .signup-hero .hero-title br {
@@ -856,9 +910,13 @@ select.form-input {
     }
 
     .signup-hero .hero-description {
-        font-size: 0.75rem;
-        line-height: 1.4;
-        margin: 8px 0 12px;
+        font-size: 0.72rem;
+        line-height: 1.35;
+        margin: 6px 0 10px;
+    }
+
+    .signup-hero .hero-features {
+        display: none;
     }
 
     .signup-hero .hero-benefits {
@@ -1034,6 +1092,7 @@ select.form-input {
         opacity: 0;
         transform: translateX(400px) scale(0.95);
     }
+
     to {
         opacity: 1;
         transform: translateX(0) scale(1);
@@ -1045,9 +1104,11 @@ select.form-input {
         transform: scale(0.6) rotate(-10deg);
         opacity: 0;
     }
+
     50% {
         transform: scale(1.15);
     }
+
     100% {
         transform: scale(1) rotate(0deg);
         opacity: 1;
