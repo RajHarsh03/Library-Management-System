@@ -23,7 +23,7 @@ function initStudentSidebar() {
         logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
             if (confirm('Sign out of your student account?')) {
-                window.location.href = '../index';
+                window.location.href = '/public/index.html';
             }
         });
     }

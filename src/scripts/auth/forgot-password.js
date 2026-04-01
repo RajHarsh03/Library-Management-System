@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const codeError = document.getElementById('codeError');
     const verifyCodeBtn = document.getElementById('verifyCodeBtn');
     const resendCodeBtn = document.getElementById('resendCodeBtn');
-    const backStep1Btn = document.getElementById('backStep1Btn');
     
     const newPasswordInput = document.getElementById('newPasswordInput');
     const newPasswordError = document.getElementById('newPasswordError');
@@ -248,14 +247,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1500);
     });
 
-    // ===== Step 2: Go Back =====
-    backStep1Btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        goToStep(1);
-        emailInput.value = '';
-        codeInput.value = '';
-    });
-
     // ===== Step 2: Verify Code =====
     verifyCodeBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -331,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Redirect to login after 2 seconds
             setTimeout(() => {
-                window.location.href = 'index';
+                window.location.href = '/public/index.html';
             }, 2000);
         }, 1500);
     });

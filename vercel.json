@@ -2,47 +2,47 @@
     "rewrites": [
         {
             "source": "/index",
-            "destination": "/index.html"
+            "destination": "/public/index.html"
         },
         {
             "source": "/login",
-            "destination": "/login.html"
+            "destination": "/public/login.html"
         },
         {
             "source": "/signup",
-            "destination": "/signup.html"
+            "destination": "/src/pages/auth/signup.html"
         },
         {
             "source": "/forgot-password",
-            "destination": "/forgot-password.html"
+            "destination": "/src/pages/auth/forgot-password.html"
         },
         {
             "source": "/admin/dashboard",
-            "destination": "/admin/dashboard.html"
+            "destination": "/src/pages/admin/dashboard.html"
         },
         {
             "source": "/admin/books",
-            "destination": "/admin/books.html"
+            "destination": "/src/pages/admin/books.html"
         },
         {
             "source": "/admin/users",
-            "destination": "/admin/users.html"
+            "destination": "/src/pages/admin/users.html"
         },
         {
             "source": "/admin/transactions",
-            "destination": "/admin/transactions.html"
+            "destination": "/src/pages/admin/transactions.html"
         },
         {
             "source": "/student/dashboard",
-            "destination": "/student/dashboard.html"
+            "destination": "/src/pages/student/dashboard.html"
         },
         {
             "source": "/student/browse",
-            "destination": "/student/browse.html"
+            "destination": "/src/pages/student/browse.html"
         },
         {
             "source": "/student/my-books",
-            "destination": "/student/my-books.html"
+            "destination": "/src/pages/student/my-books.html"
         }
     ]
 }

@@ -9,8 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-    <link rel="stylesheet" href="../admin/admin.css">
-    <link rel="stylesheet" href="student.css">
+    <link rel="stylesheet" href="../../styles/admin/admin.css">
+    <link rel="stylesheet" href="../../styles/student/student.css">
 </head>
 <body class="student-app">
     <div class="app-layout">
@@ -30,15 +30,15 @@
             </button>
             </div>
             <nav class="sidebar-nav">
-                <a href="dashboard" class="nav-item" data-page="dashboard">
+                <a href="dashboard.html" class="nav-item" data-page="dashboard">
                     <span class="material-icons-outlined">dashboard</span>
                     <span>Dashboard</span>
                 </a>
-                <a href="my-books" class="nav-item active" data-page="my-books">
+                <a href="my-books.html" class="nav-item active" data-page="my-books">
                     <span class="material-icons-outlined">menu_book</span>
                     <span>My Books</span>
                 </a>
-                <a href="browse" class="nav-item" data-page="browse">
+                <a href="browse.html" class="nav-item" data-page="browse">
                     <span class="material-icons-outlined">travel_explore</span>
                     <span>Browse</span>
                 </a>
@@ -48,7 +48,7 @@
                     <span class="material-icons-outlined">person</span>
                     <span>Profile</span>
                 </a>
-                <a href="../index" class="nav-item logout-btn">
+                <a href="../../../public/index.html" class="nav-item logout-btn">
                     <span class="material-icons-outlined">logout</span>
                     <span>Logout</span>
                 </a>
@@ -85,7 +85,7 @@
                         <h1>My books</h1>
                         <p>Renew eligible items before the due date. Late returns may accrue fines.</p>
                     </div>
-                    <a class="btn-primary student-header-cta" href="browse">
+                    <a class="btn-primary student-header-cta" href="browse.html">
                         <span class="material-icons-outlined">add</span>
                         Borrow another
                     </a>
@@ -172,7 +172,7 @@
         </main>
     </div>
 
-    <script src="student.js"></script>
+    <script src="../../scripts/student/student.js"></script>
     <script>
         document.querySelectorAll('.renew-btn').forEach(function (btn) {
             btn.addEventListener('click', function () {
