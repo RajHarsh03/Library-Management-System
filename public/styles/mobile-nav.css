@@ -70,17 +70,31 @@
         padding: 8px 12px;
     }
 
+    /* Prevent page-level horizontal scroll */
+    .main-content {
+        overflow-x: hidden;
+    }
+
     .page-content {
         padding: 12px 8px;
+        overflow-x: hidden;
     }
 
     .page-header {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         align-items: flex-start;
-        gap: 12px;
+        gap: 10px;
         margin-top: 8px;
         margin-bottom: 16px;
+    }
+
+    .page-header > .btn-primary,
+    .page-header > .btn-outline {
+        flex-shrink: 0;
+        font-size: 0.72rem;
+        padding: 8px 14px;
     }
 
     .page-header-left {
@@ -1805,6 +1819,403 @@
         min-width: 180px;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
         z-index: 100;
+    }
+
+    /* =============================================
+       ADMIN PAGES - MOBILE COMPACT OVERRIDES
+       Books · Transactions · Users
+       ============================================= */
+
+    /* --- Table container: horizontal scroll --- */
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 10px;
+    }
+
+    .table-container .data-table {
+        min-width: 520px;
+    }
+
+    /* --- Compact table cells --- */
+    .data-table th {
+        padding: 8px 10px;
+        font-size: 0.6rem;
+        letter-spacing: 0.8px;
+        white-space: nowrap;
+    }
+
+    .data-table td {
+        padding: 10px 10px;
+        font-size: 0.75rem;
+    }
+
+    /* --- Book cell compact --- */
+    .cell-book {
+        gap: 8px;
+    }
+
+    .cell-book-cover {
+        width: 30px;
+        height: 42px;
+        border-radius: 4px;
+    }
+
+    .cell-book-info .title {
+        font-size: 0.75rem;
+        font-weight: 700;
+        line-height: 1.25;
+    }
+
+    .cell-book-info .subtitle {
+        font-size: 0.6rem;
+    }
+
+    /* --- User cell compact --- */
+    .cell-user {
+        gap: 8px;
+    }
+
+    .cell-user-avatar {
+        width: 30px;
+        height: 30px;
+        font-size: 0.65rem;
+    }
+
+    .cell-user-info .name {
+        font-size: 0.75rem;
+    }
+
+    .cell-user-info .email {
+        font-size: 0.62rem;
+    }
+
+    /* --- Badges compact --- */
+    .status-badge {
+        padding: 3px 8px;
+        font-size: 0.62rem;
+        gap: 4px;
+    }
+
+    .status-badge::before {
+        width: 5px;
+        height: 5px;
+    }
+
+    .role-badge {
+        padding: 3px 7px;
+        font-size: 0.58rem;
+        border-radius: 6px;
+    }
+
+    .isbn-badge {
+        padding: 3px 6px;
+        font-size: 0.62rem;
+        border-radius: 6px;
+    }
+
+    /* --- Action buttons compact --- */
+    .action-btn {
+        width: 26px;
+        height: 26px;
+        border-radius: 5px;
+    }
+
+    .action-btn .material-icons-outlined {
+        font-size: 0.85rem;
+    }
+
+    /* --- Tabs compact (transactions page) --- */
+    .tabs {
+        gap: 0;
+        margin-bottom: 14px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab-btn {
+        padding: 8px 12px;
+        font-size: 0.72rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    /* --- Pagination compact --- */
+    .table-footer {
+        padding: 10px 12px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .table-footer-info {
+        font-size: 0.65rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .pagination {
+        gap: 4px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .page-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.7rem;
+        border-radius: 6px;
+    }
+
+    /* --- Bottom info cards (transactions page) --- */
+    .bottom-cards {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 14px;
+    }
+
+    /* Overdue card spans full width */
+    .bottom-cards .info-card.highlight {
+        grid-column: 1 / -1;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border-left-width: 3px;
+        background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
+    }
+
+    .bottom-cards .info-card.highlight > div:first-child {
+        margin-bottom: 6px !important;
+        gap: 8px !important;
+    }
+
+    .bottom-cards .info-card.highlight h3 {
+        font-size: 0.78rem !important;
+        margin-bottom: 0 !important;
+    }
+
+    .bottom-cards .info-card.highlight .material-icons-outlined {
+        font-size: 1.1rem !important;
+    }
+
+    .bottom-cards .info-card.highlight p {
+        font-size: 0.7rem;
+        margin-bottom: 6px;
+        line-height: 1.45;
+    }
+
+    .bottom-cards .info-card.highlight a {
+        font-size: 0.62rem !important;
+        letter-spacing: 0.8px !important;
+    }
+
+    /* Stat cards — compact side-by-side */
+    .info-card {
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(99, 102, 241, 0.08);
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    }
+
+    .info-card > div:first-child {
+        margin-bottom: 6px !important;
+        gap: 6px !important;
+    }
+
+    .info-card .material-icons-outlined {
+        font-size: 1rem !important;
+    }
+
+    .info-card h3 {
+        font-size: 0.72rem !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Override inline 2.2rem font-size on big numbers */
+    .info-card > div > span[style*="font-size"],
+    .info-card > span[style*="font-size:2"],
+    .info-card span[style*="2.2rem"] {
+        font-size: 1.5rem !important;
+        line-height: 1.2 !important;
+    }
+
+    /* Override inline stat labels */
+    .info-card > span[style*="letter-spacing"] {
+        font-size: 0.55rem !important;
+        letter-spacing: 1px !important;
+    }
+
+    .info-card p {
+        font-size: 0.72rem;
+        margin-bottom: 8px;
+        line-height: 1.4;
+    }
+
+    .stat-card-change {
+        font-size: 0.65rem !important;
+    }
+
+    /* --- Export / outline buttons compact --- */
+    .btn-outline {
+        font-size: 0.68rem;
+        padding: 7px 12px;
+        gap: 4px;
+    }
+
+    .btn-outline .material-icons-outlined {
+        font-size: 0.9rem;
+    }
+
+    /* --- Footer compact --- */
+    .app-footer {
+        padding: 12px 8px;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        font-size: 0.68rem;
+    }
+
+    .footer-links {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+}
+
+/* ===== ADMIN PAGES – EXTRA SMALL SCREENS (≤480px) ===== */
+@media (max-width: 480px) {
+
+    /* Even narrower table min-width */
+    .table-container .data-table {
+        min-width: 480px;
+    }
+
+    .data-table th {
+        padding: 6px 8px;
+        font-size: 0.55rem;
+    }
+
+    .data-table td {
+        padding: 8px;
+        font-size: 0.68rem;
+    }
+
+    .cell-book-cover {
+        width: 26px;
+        height: 36px;
+    }
+
+    .cell-book-info .title {
+        font-size: 0.68rem;
+    }
+
+    .cell-book-info .subtitle {
+        font-size: 0.55rem;
+    }
+
+    .cell-user-avatar {
+        width: 26px;
+        height: 26px;
+        font-size: 0.58rem;
+    }
+
+    .cell-user-info .name {
+        font-size: 0.68rem;
+    }
+
+    .cell-user-info .email {
+        font-size: 0.56rem;
+    }
+
+    .status-badge {
+        padding: 2px 6px;
+        font-size: 0.56rem;
+    }
+
+    .role-badge {
+        padding: 2px 6px;
+        font-size: 0.52rem;
+    }
+
+    .isbn-badge {
+        padding: 2px 5px;
+        font-size: 0.56rem;
+    }
+
+    .action-btn {
+        width: 24px;
+        height: 24px;
+    }
+
+    .action-btn .material-icons-outlined {
+        font-size: 0.78rem;
+    }
+
+    .tab-btn {
+        padding: 6px 10px;
+        font-size: 0.65rem;
+    }
+
+    .page-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 0.62rem;
+    }
+
+    .table-footer-info {
+        font-size: 0.58rem;
+    }
+
+    .bottom-cards {
+        gap: 8px;
+        margin-top: 12px;
+    }
+
+    .info-card {
+        padding: 12px;
+    }
+
+    .info-card h3 {
+        font-size: 0.8rem;
+    }
+
+    .info-card p {
+        font-size: 0.72rem;
+        line-height: 1.45;
+        margin-bottom: 8px;
+    }
+
+    /* Search filter bar tighter */
+    .search-filter-bar {
+        padding: 6px;
+        gap: 6px;
+    }
+
+    .search-bar-container {
+        padding: 5px 8px;
+    }
+
+    .search-input {
+        font-size: 0.68rem;
+    }
+
+    .filter-btn-mobile {
+        padding: 5px 8px;
+        font-size: 0.62rem;
+        gap: 3px;
+    }
+
+    .filter-btn-mobile .material-icons-outlined {
+        font-size: 0.75rem;
+    }
+
+    .btn-outline {
+        font-size: 0.62rem;
+        padding: 6px 10px;
     }
 }
 
