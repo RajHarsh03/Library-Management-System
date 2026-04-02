@@ -95,17 +95,75 @@
                         <h1>Browse the collection</h1>
                         <p>Request or place a hold on physical items. E-books open in your institutional reader when available.</p>
                     </div>
+                    <div class="page-header-right">
+                    </div>
                 </div>
 
-                <div class="tabs" role="tablist">
-                    <button type="button" class="tab-btn active" data-tab="all" role="tab" aria-selected="true">All</button>
-                    <button type="button" class="tab-btn" data-tab="fiction" role="tab">Fiction</button>
-                    <button type="button" class="tab-btn" data-tab="nonfiction" role="tab">Nonfiction</button>
-                    <button type="button" class="tab-btn" data-tab="etext" role="tab">E-text</button>
+                <div class="search-filter-toolbar">
+                    <div class="search-bar" id="searchBar">
+                        <button class="search-icon-btn" id="searchIconBtn" aria-label="Search books">
+                            <span class="material-icons-outlined">search</span>
+                        </button>
+                        <input type="text" id="advancedBrowseSearch" placeholder="Search title, author..." aria-label="Search books" autocomplete="off">
+                        <button class="search-clear-btn" id="searchClearBtn" aria-label="Clear search" style="display:none;">
+                            <span class="material-icons-outlined">close</span>
+                        </button>
+                    </div>
+                    <button class="filter-btn" id="filterToggle" aria-label="Open filters" aria-expanded="false">
+                        <span class="material-icons-outlined">tune</span>
+                        <span>Filter</span>
+                    </button>
+
+                    <div class="search-filter-panel" id="searchFilterPanel">
+                        <div class="search-filter-options">
+                            <div class="filter-section">
+                                <label class="filter-label">Availability</label>
+                                <div class="filter-checkboxes">
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" value="available" class="availability-filter">
+                                        <span>Available</span>
+                                    </label>
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" value="unavailable" class="availability-filter">
+                                        <span>Checked Out</span>
+                                    </label>
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" value="ebook" class="availability-filter">
+                                        <span>E-book</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="filter-section">
+                                <label class="filter-label">Category</label>
+                                <div class="filter-checkboxes">
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" value="all" class="category-filter" checked>
+                                        <span>All</span>
+                                    </label>
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" value="fiction" class="category-filter">
+                                        <span>Fiction</span>
+                                    </label>
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" value="nonfiction" class="category-filter">
+                                        <span>Nonfiction</span>
+                                    </label>
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" value="etext" class="category-filter">
+                                        <span>E-text</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="filter-actions">
+                                <button class="filter-reset-btn" id="filterResetBtn">Reset</button>
+                                <button class="filter-apply-btn" id="filterApplyBtn">Done</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="browse-grid" id="browseGrid">
-                    <article class="browse-card" data-title="Quiet Continents" data-author="Amira Okonkwo" data-cat="fiction">
+                    <article class="browse-card" data-title="Quiet Continents" data-author="Amira Okonkwo" data-cat="fiction" data-availability="available">
                         <div class="browse-card-cover">
                             <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=240&fit=crop" alt="">
                         </div>
@@ -118,7 +176,7 @@
                             </div>
                         </div>
                     </article>
-                    <article class="browse-card" data-title="Signals and Noise" data-author="Noah Weiss" data-cat="nonfiction">
+                    <article class="browse-card" data-title="Signals and Noise" data-author="Noah Weiss" data-cat="nonfiction" data-availability="unavailable">
                         <div class="browse-card-cover">
                             <img src="https://images.unsplash.com/photo-1519682337052-a94d519337bc?w=400&h=240&fit=crop" alt="">
                         </div>
@@ -131,7 +189,7 @@
                             </div>
                         </div>
                     </article>
-                    <article class="browse-card" data-title="The Digital Frontier" data-author="Julian Thorne" data-cat="fiction">
+                    <article class="browse-card" data-title="The Digital Frontier" data-author="Julian Thorne" data-cat="fiction" data-availability="available">
                         <div class="browse-card-cover">
                             <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=240&fit=crop" alt="">
                         </div>
@@ -144,7 +202,7 @@
                             </div>
                         </div>
                     </article>
-                    <article class="browse-card" data-title="Archive Protocols" data-author="Institutional Press" data-cat="etext">
+                    <article class="browse-card" data-title="Archive Protocols" data-author="Institutional Press" data-cat="etext" data-availability="ebook">
                         <div class="browse-card-cover">
                             <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=240&fit=crop" alt="">
                         </div>
@@ -165,6 +223,7 @@
     <script src="../../scripts/student/student.js"></script>
     <script src="../../scripts/mobile-nav.js"></script>
     <script>
+        // ===== HOLD BUTTON HANDLERS =====
         document.querySelectorAll('.hold-btn').forEach(function (btn) {
             btn.addEventListener('click', function () {
                 var title = btn.closest('.browse-card').querySelector('h3').textContent;
@@ -172,44 +231,129 @@
             });
         });
 
-        var tabBtns = document.querySelectorAll('.tab-btn');
-        var cards = document.querySelectorAll('.browse-card[data-cat]');
-        var browseInput = document.getElementById('browseSearch');
+        // ===== SEARCH & FILTER CONTROLS =====
+        const searchIconBtn = document.getElementById('searchIconBtn');
+        const searchBar = document.getElementById('searchBar');
+        const advancedSearchInput = document.getElementById('advancedBrowseSearch');
+        const searchClearBtn = document.getElementById('searchClearBtn');
+        const filterToggle = document.getElementById('filterToggle');
+        const searchFilterPanel = document.getElementById('searchFilterPanel');
+        const filterResetBtn = document.getElementById('filterResetBtn');
+        const filterApplyBtn = document.getElementById('filterApplyBtn');
+        const availabilityFilters = document.querySelectorAll('.availability-filter');
+        const categoryFilters = document.querySelectorAll('.category-filter');
+        const cards = document.querySelectorAll('.browse-card[data-cat]');
 
-        function applyBrowseFilters() {
-            var activeTab = document.querySelector('.tab-btn.active');
-            var tab = activeTab ? activeTab.getAttribute('data-tab') : 'all';
-            var q = browseInput ? browseInput.value.trim().toLowerCase() : '';
-            cards.forEach(function (card) {
-                var cat = card.getAttribute('data-cat');
-                var showTab = tab === 'all' || tab === cat || (tab === 'etext' && cat === 'etext');
-                var title = (card.getAttribute('data-title') || '').toLowerCase();
-                var author = (card.getAttribute('data-author') || '').toLowerCase();
-                var showSearch = !q || title.includes(q) || author.includes(q);
-                card.style.display = showTab && showSearch ? '' : 'none';
-            });
-        }
+        let activeAvailability = [];
+        let activeCategories = ['all'];
 
-        tabBtns.forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                tabBtns.forEach(function (b) { b.classList.remove('active'); });
-                btn.classList.add('active');
-                applyBrowseFilters();
-            });
+        // Toggle search bar focus
+        searchIconBtn.addEventListener('click', function () {
+            advancedSearchInput.focus();
+            advancedSearchInput.classList.add('typing');
+            setTimeout(() => advancedSearchInput.classList.remove('typing'), 400);
         });
 
-        if (browseInput) {
-            browseInput.addEventListener('input', applyBrowseFilters);
-        }
+        // Clear search
+        searchClearBtn.addEventListener('click', function () {
+            advancedSearchInput.value = '';
+            searchClearBtn.style.display = 'none';
+            applyAllFilters();
+            advancedSearchInput.focus();
+        });
 
-        document.addEventListener('DOMContentLoaded', function () {
-            var params = new URLSearchParams(window.location.search);
-            var q = params.get('q');
-            if (browseInput && q) {
-                browseInput.value = q;
+        // Show/hide clear button
+        advancedSearchInput.addEventListener('input', function () {
+            searchClearBtn.style.display = this.value ? 'block' : 'none';
+            applyAllFilters();
+        });
+
+        // Toggle filter panel
+        filterToggle.addEventListener('click', function () {
+            const isActive = searchFilterPanel.classList.toggle('active');
+            filterToggle.setAttribute('aria-expanded', isActive);
+        });
+
+        // Close panel when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.search-filter-toolbar')) {
+                searchFilterPanel.classList.remove('active');
+                filterToggle.setAttribute('aria-expanded', false);
             }
-            applyBrowseFilters();
         });
+
+        // Availability filter change
+        availabilityFilters.forEach(function (filter) {
+            filter.addEventListener('change', updateActiveAvailability);
+        });
+
+        // Category filter change
+        categoryFilters.forEach(function (filter) {
+            filter.addEventListener('change', updateActiveCategories);
+        });
+
+        // Custom filter logic for availability
+        function updateActiveAvailability() {
+            activeAvailability = Array.from(availabilityFilters)
+                .filter(f => f.checked)
+                .map(f => f.value);
+            applyAllFilters();
+        }
+
+        // Custom filter logic for categories
+        function updateActiveCategories() {
+            const selected = Array.from(categoryFilters)
+                .filter(f => f.checked)
+                .map(f => f.value);
+            activeCategories = selected.length > 0 ? selected : ['all'];
+            applyAllFilters();
+        }
+
+        // Reset all filters
+        filterResetBtn.addEventListener('click', function () {
+            advancedSearchInput.value = '';
+            searchClearBtn.style.display = 'none';
+            availabilityFilters.forEach(f => f.checked = false);
+            categoryFilters.forEach(f => f.checked = f.value === 'all');
+            activeAvailability = [];
+            activeCategories = ['all'];
+            applyAllFilters();
+            advancedSearchInput.focus();
+        });
+
+        // Apply and close
+        filterApplyBtn.addEventListener('click', function () {
+            applyAllFilters();
+            searchFilterPanel.classList.remove('active');
+            filterToggle.setAttribute('aria-expanded', false);
+        });
+
+        // Main filter function
+        function applyAllFilters() {
+            const query = advancedSearchInput.value.trim().toLowerCase();
+            
+            cards.forEach(function (card) {
+                const title = (card.getAttribute('data-title') || '').toLowerCase();
+                const author = (card.getAttribute('data-author') || '').toLowerCase();
+                const cat = card.getAttribute('data-cat');
+                const availability = card.getAttribute('data-availability') || 'available';
+                
+                // Check search query
+                const matchesSearch = !query || title.includes(query) || author.includes(query);
+                
+                // Check category filter
+                const matchesCategory = activeCategories.includes('all') || activeCategories.includes(cat);
+                
+                // Check availability filter
+                const matchesAvailability = activeAvailability.length === 0 || activeAvailability.includes(availability);
+                
+                // Show/hide card based on all filters
+                card.style.display = (matchesSearch && matchesCategory && matchesAvailability) ? '' : 'none';
+            });
+        }
+
+        // Initialize filters
+        applyAllFilters();
     </script>
 </body>
 </html>
