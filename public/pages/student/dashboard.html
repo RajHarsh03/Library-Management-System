@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="../../styles/admin/admin.css">
     <link rel="stylesheet" href="../../styles/student/student.css">
+    <link rel="stylesheet" href="../../styles/mobile-nav.css">
 <script>
     // Prevent sidebar flash: apply collapsed state before paint
     (function(){try{if(window.innerWidth>768&&localStorage.getItem('lms-student-sidebar-collapsed')!=='0')document.documentElement.classList.add('sidebar-pre-collapsed')}catch(e){}})();
@@ -30,6 +31,9 @@
                 </div>
             </div>
             <button type="button" class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse navigation" aria-expanded="true" aria-controls="sidebar">
+                <span class="material-icons-outlined" aria-hidden="true">chevron_left</span>
+            </button>
+            <button type="button" class="mobile-close-btn" id="mobileCloseBtn" aria-label="Go back" aria-controls="sidebar">
                 <span class="material-icons-outlined" aria-hidden="true">chevron_left</span>
             </button>
             </div>
@@ -61,6 +65,9 @@
 
         <main class="main-content">
             <header class="topbar">
+                <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span class="material-icons-outlined">menu</span>
+                </button>
                 <div class="topbar-search">
                     <span class="material-icons-outlined">search</span>
                     <input type="text" placeholder="Search the catalog..." id="topbarSearch" aria-label="Search catalog">
@@ -264,5 +271,6 @@
     </div>
 
     <script src="../../scripts/student/student.js"></script>
+    <script src="../../scripts/mobile-nav.js"></script>
 </body>
 </html>

@@ -1,0 +1,120 @@
+/* ===== MOBILE MENU ===== */
+
+.mobile-menu-btn {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    background: var(--white);
+    cursor: pointer;
+    color: var(--gray-600);
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    margin-right: 12px;
+}
+
+.mobile-menu-btn:hover {
+    background: var(--gray-100);
+    color: var(--gray-700);
+}
+
+.mobile-close-btn {
+    display: none;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    background: var(--white);
+    cursor: pointer;
+    color: var(--gray-600);
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    margin-left: auto;
+}
+
+.mobile-close-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-light);
+}
+
+.mobile-close-btn .material-icons-outlined {
+    font-size: 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .topbar-search {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .mobile-close-btn {
+        display: flex;
+    }
+
+    .topbar-profile-info {
+        display: none;
+    }
+
+    .topbar-right {
+        gap: 8px;
+    }
+
+    .page-content {
+        padding: 20px;
+    }
+
+    .sidebar {
+        width: 100%;
+        max-width: 280px;
+        transition: transform 0.3s ease-out;
+        box-shadow: 4px 0 24px rgba(15, 23, 42, 0.1);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .app-layout.sidebar-open::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+    }
+
+    .sidebar-collapse-btn {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .mobile-menu-btn {
+        margin-right: 8px;
+    }
+
+    .page-content {
+        padding: 16px;
+    }
+
+    .topbar {
+        gap: 8px;
+    }
+
+    .topbar-icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .topbar-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 0.7rem;
+    }
+}
