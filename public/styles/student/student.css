@@ -221,12 +221,17 @@ body.student-app .btn-primary {
     border-radius: 12px;
     background: linear-gradient(135deg, #818cf8 0%, #6366f1 50%, #4338ca 100%);
     box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body.student-app .btn-primary:hover {
     background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 50%, #6366f1 100%);
     box-shadow: 0 10px 28px rgba(99, 102, 241, 0.45);
     transform: translateY(-2px);
+}
+
+body.student-app .btn-primary:active {
+    transform: translateY(0);
 }
 
 body.student-app .btn-outline {
@@ -248,8 +253,8 @@ body.student-app .btn-outline:hover {
         radial-gradient(ellipse 90% 80% at 100% 0%, rgba(129, 140, 248, 0.3) 0%, transparent 55%),
         radial-gradient(ellipse 70% 60% at 0% 100%, rgba(167, 139, 250, 0.22) 0%, transparent 50%),
         radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 60%),
-        linear-gradient(135deg, #0f172a 0%, #1e1b4b 35%, #312e81 65%, #4338ca 100%);
-    border-radius: var(--student-radius-xl);
+        linear-gradient(135deg, #1a1f3a 0%, #23224d 35%, #372d5e 65%, #463a7f 100%);
+    border-radius: 20px;
     padding: 36px 40px 34px;
     color: var(--white);
     margin-bottom: 32px;
@@ -257,6 +262,7 @@ body.student-app .btn-outline:hover {
     overflow: hidden;
     box-shadow: var(--student-shadow-lg), 0 0 60px rgba(99, 102, 241, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
 }
 
 .student-welcome::before {
@@ -282,20 +288,22 @@ body.student-app .btn-outline:hover {
     font-family: var(--font-display);
     font-size: clamp(1.45rem, 2.5vw, 1.85rem);
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     position: relative;
     z-index: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+    line-height: 1.2;
 }
 
 .student-welcome p {
     font-size: 0.98rem;
     color: rgba(255, 255, 255, 0.82);
     max-width: 560px;
-    line-height: 1.65;
+    line-height: 1.75;
     position: relative;
     z-index: 1;
+    letter-spacing: 0.3px;
 }
 
 .student-welcome-meta {
@@ -343,18 +351,28 @@ body.student-app .btn-outline:hover {
 
 .student-quick-actions .btn-primary {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.student-quick-actions .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(99, 102, 241, 0.4);
 }
 
 .student-quick-actions .btn-outline {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1.5px solid rgba(255, 255, 255, 0.35);
-    color: var(--white);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1.5px solid rgba(99, 102, 241, 0.8);
+    color: #c7d2fe;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
 }
 
 .student-quick-actions .btn-outline:hover {
-    background: rgba(255, 255, 255, 0.22);
-    border-color: rgba(255, 255, 255, 0.55);
-    color: var(--white);
+    background: rgba(99, 102, 241, 0.25);
+    border-color: rgba(99, 102, 241, 1);
+    color: #e0e7ff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 body.student-app .stats-grid {
     gap: 22px;
@@ -890,9 +908,59 @@ body.student-app .topbar-search input:focus-visible {
 
     .student-welcome {
         padding: 28px 22px;
+        border-radius: 18px;
+    }
+
+    .student-welcome h2 {
+        font-size: 1.35rem;
+    }
+
+    .student-welcome p {
+        font-size: 0.92rem;
+    }
+
+    .student-welcome-meta {
+        gap: 10px;
+        margin-top: 16px;
+    }
+
+    .student-quick-actions {
+        gap: 10px;
+        margin-top: 16px;
+    }
+
+    body.student-app .stat-card {
+        padding: 16px 14px;
     }
 
     body.student-app .stats-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    body.student-app .page-content {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    body.student-app .stat-card {
+        padding: 12px 10px;
+        border-radius: 10px;
+    }
+
+    body.student-app .stat-card-value {
+        font-size: 1.8rem;
+    }
+
+    body.student-app .stat-card-label {
+        font-size: 0.65rem;
+    }
+
+    body.student-app .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 12px;
     }
 }

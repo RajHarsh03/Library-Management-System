@@ -89,6 +89,63 @@
         margin-bottom: 0;
     }
 
+    .student-welcome {
+        padding: 24px 20px;
+        margin-bottom: 20px;
+        border-radius: var(--student-radius-lg);
+    }
+
+    .student-welcome h2 {
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+        line-height: 1.25;
+        letter-spacing: -0.01em;
+    }
+
+    .student-welcome p {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.6;
+        letter-spacing: 0.25px;
+        margin-bottom: 12px;
+    }
+
+    .student-welcome-meta {
+        gap: 8px;
+        margin-top: 12px;
+    }
+
+    .student-welcome-meta .meta-item {
+        font-size: 0.75rem;
+        padding: 8px 12px;
+        gap: 6px;
+    }
+
+    .student-quick-actions {
+        gap: 8px;
+        margin-top: 14px;
+    }
+
+    .student-quick-actions .btn-primary,
+    .student-quick-actions .btn-outline {
+        flex: 1;
+        font-size: 0.8rem;
+        padding: 10px 12px;
+        font-weight: 600;
+    }
+
+    .student-quick-actions .btn-outline {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1.5px solid rgba(99, 102, 241, 0.85);
+        color: #c7d2fe;
+    }
+
+    .student-quick-actions .btn-outline:hover {
+        background: rgba(99, 102, 241, 0.25);
+        border-color: rgba(99, 102, 241, 1);
+        color: #e0e7ff;
+    }
+
     .btn-primary {
         font-size: 0.75rem;
         padding: 10px 16px;
@@ -163,5 +220,99 @@
 
     .topbar {
         gap: 8px;
+    }
+
+    .student-welcome {
+        padding: 16px 12px;
+        margin-bottom: 12px;
+        border-radius: 14px;
+        background:
+            radial-gradient(ellipse 90% 80% at 100% 0%, rgba(129, 140, 248, 0.25) 0%, transparent 55%),
+            radial-gradient(ellipse 70% 60% at 0% 100%, rgba(167, 139, 250, 0.18) 0%, transparent 50%),
+            radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.06) 0%, transparent 60%),
+            linear-gradient(135deg, #1a1a3e 0%, #2a1f52 35%, #3d2e70 65%, #4a3f85 100%);
+    }
+
+    .student-welcome h2 {
+        font-size: 1.05rem;
+        margin-bottom: 7px;
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+    }
+
+    .student-welcome p {
+        font-size: 0.78rem;
+        margin-bottom: 6px;
+        line-height: 1.5;
+        letter-spacing: 0.2px;
+    }
+
+    .student-welcome-meta {
+        gap: 5px;
+        margin-top: 6px;
+    }
+
+    .student-welcome-meta .meta-item {
+        font-size: 0.65rem;
+        padding: 5px 8px;
+        border-radius: 6px;
+    }
+
+    .student-quick-actions {
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    .student-quick-actions .btn-primary,
+    .student-quick-actions .btn-outline {
+        flex: 1;
+        font-size: 0.68rem;
+        padding: 7px 9px;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+
+    .student-quick-actions .btn-outline {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1.5px solid rgba(99, 102, 241, 0.85);
+        color: #c7d2fe;
+    }
+
+    .student-quick-actions .btn-outline:hover {
+        background: rgba(99, 102, 241, 0.25);
+        border-color: rgba(99, 102, 241, 1);
+        color: #e0e7ff;
+    }
+
+    .stats-grid {
+        gap: 8px;
+        margin-bottom: 14px;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .stat-card {
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .stat-card-header {
+        margin-bottom: 4px;
+    }
+
+    .stat-card-label {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .stat-card-value {
+        font-size: 1.4rem;
+        margin: 4px 0;
+    }
+
+    .stat-card-change {
+        font-size: 0.65rem;
+        line-height: 1.2;
     }
 }
