@@ -66,8 +66,32 @@
         gap: 8px;
     }
 
+    .topbar {
+        padding: 8px 12px;
+    }
+
     .page-content {
-        padding: 20px;
+        padding: 12px 8px;
+    }
+
+    .page-header {
+        margin-top: 8px;
+        margin-bottom: 16px;
+    }
+
+    .page-header-left h1 {
+        font-size: 1.3rem;
+        margin-bottom: 4px;
+    }
+
+    .page-header-left p {
+        font-size: 0.85rem;
+        margin-bottom: 0;
+    }
+
+    .btn-primary {
+        font-size: 0.75rem;
+        padding: 10px 16px;
     }
 
     .sidebar {
@@ -99,12 +123,31 @@
         margin-right: 8px;
     }
 
-    .page-content {
-        padding: 16px;
+    .topbar {
+        padding: 6px 8px;
     }
 
-    .topbar {
-        gap: 8px;
+    .page-content {
+        padding: 8px;
+    }
+
+    .page-header {
+        margin-top: 6px;
+        margin-bottom: 14px;
+    }
+
+    .page-header-left h1 {
+        font-size: 1.15rem;
+        margin-bottom: 3px;
+    }
+
+    .page-header-left p {
+        font-size: 0.8rem;
+    }
+
+    .btn-primary {
+        font-size: 0.7rem;
+        padding: 8px 12px;
     }
 
     .topbar-icon-btn {
@@ -116,5 +159,9 @@
         width: 32px;
         height: 32px;
         font-size: 0.7rem;
+    }
+
+    .topbar {
+        gap: 8px;
     }
 }
