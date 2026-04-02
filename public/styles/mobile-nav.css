@@ -1354,18 +1354,18 @@
 
     /* Admin table enhancements */
     .data-table {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
     }
 
     .data-table th {
-        padding: 14px 16px;
-        font-size: 0.75rem;
+        padding: 10px 12px;
+        font-size: 0.7rem;
         background: linear-gradient(90deg, #f8fafc 0%, #fafbfc 100%);
     }
 
     .data-table td {
-        padding: 14px 16px;
-        font-size: 0.9rem;
+        padding: 10px 12px;
+        font-size: 0.8rem;
     }
 
     .data-table tbody tr {
@@ -1377,31 +1377,32 @@
     }
 
     .cell-book-cover {
-        width: 44px;
-        height: 62px;
-        border-radius: 6px;
+        width: 38px;
+        height: 54px;
+        border-radius: 4px;
     }
 
     .cell-book-info .title {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
         font-weight: 700;
     }
 
     .cell-book-info .subtitle {
-        font-size: 0.75rem;
+        font-size: 0.68rem;
         color: #64748b;
     }
 
     .action-btn {
-        width: 36px;
-        height: 36px;
-        padding: 6px;
-        border-radius: 6px;
+        width: 32px;
+        height: 32px;
+        padding: 5px;
+        border-radius: 5px;
         border: 1px solid #e2e8f0;
         background: white;
         color: #6366f1;
         cursor: pointer;
         transition: all 0.2s;
+        font-size: 0.75rem;
     }
 
     .action-btn:hover {
@@ -1722,24 +1723,24 @@
     /* Search and Filter Bar - Mobile */
     .search-filter-bar {
         background: #f8fafc;
-        border-radius: 12px;
-        padding: 12px;
-        margin-bottom: 20px;
+        border-radius: 10px;
+        padding: 8px;
+        margin-bottom: 12px;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        gap: 10px;
+        gap: 8px;
     }
 
     .search-bar-container {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
         flex: 1;
         border: 1.5px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 10px 12px;
+        border-radius: 6px;
+        padding: 6px 10px;
         background: white;
     }
 
@@ -1747,7 +1748,7 @@
         flex: 1;
         border: none;
         outline: none;
-        font-size: 0.85rem;
+        font-size: 0.75rem;
         background: transparent;
     }
 
@@ -1768,13 +1769,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
+        gap: 4px;
         border: 1.5px solid #6366f1;
         color: #6366f1;
-        padding: 10px 16px;
-        font-size: 0.85rem;
+        padding: 6px 12px;
+        font-size: 0.7rem;
         font-weight: 500;
-        border-radius: 8px;
+        border-radius: 6px;
         background: white;
         cursor: pointer;
         transition: all 0.2s ease;
@@ -1807,28 +1808,28 @@
     }
 }
 
-/* Desktop view */
+    /* Desktop view */
 @media (min-width: 769px) {
     .search-filter-bar {
         background: #f8fafc;
-        border-radius: 12px;
-        padding: 16px;
-        margin-bottom: 20px;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 14px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 16px;
+        gap: 10px;
     }
 
     .search-bar-container {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
         flex: 1;
-        max-width: 500px;
+        max-width: 450px;
         border: 1.5px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 10px 14px;
+        border-radius: 6px;
+        padding: 8px 12px;
         background: white;
     }
 
@@ -1836,7 +1837,7 @@
         flex: 1;
         border: none;
         outline: none;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         background: transparent;
     }
 
@@ -1851,13 +1852,13 @@
     .filter-btn-mobile {
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 4px;
         border: 1.5px solid #6366f1;
         color: #6366f1;
-        padding: 10px 18px;
-        font-size: 0.85rem;
+        padding: 8px 14px;
+        font-size: 0.75rem;
         font-weight: 500;
-        border-radius: 8px;
+        border-radius: 6px;
         background: white;
         cursor: pointer;
         transition: all 0.2s ease;
@@ -1875,12 +1876,12 @@
         right: 0;
         background: white;
         border: 1px solid rgba(99, 102, 241, 0.12);
-        border-radius: 8px;
-        padding: 12px;
-        min-width: 200px;
+        border-radius: 6px;
+        padding: 8px;
+        min-width: 160px;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
         z-index: 100;
-        margin-top: 8px;
+        margin-top: 4px;
     }
 
     .role-filter-panel,
@@ -1890,11 +1891,11 @@
         right: 0;
         background: white;
         border: 1px solid rgba(99, 102, 241, 0.12);
-        border-radius: 8px;
-        padding: 12px;
-        min-width: 180px;
+        border-radius: 6px;
+        padding: 8px;
+        min-width: 140px;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
         z-index: 100;
-        margin-top: 8px;
+        margin-top: 4px;
     }
 }

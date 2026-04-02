@@ -113,7 +113,7 @@
                 <div class="search-filter-bar">
                     <!-- Search Bar -->
                     <div class="search-bar-container">
-                        <span class="material-icons-outlined" style="color: #6366f1; font-size: 1.1rem;">search</span>
+                        <span class="material-icons-outlined" style="color: #6366f1; font-size: 1rem;">search</span>
                         <input type="text" id="searchInput" placeholder="Search title, author..." class="search-input">
                         <button id="clearSearchBtn" class="clear-search-btn">
                             <span class="material-icons-outlined">close</span>
@@ -123,24 +123,24 @@
                     <!-- Filter Button -->
                     <div style="position: relative;">
                         <button class="btn-outline filter-btn-mobile" id="filterBtn">
-                            <span class="material-icons-outlined">tune</span>
+                            <span class="material-icons-outlined" style="font-size: 0.9rem;">tune</span>
                             <span>Filter</span>
                         </button>
-                        <div id="filterPanel" style="position: absolute; top: 100%; right: 0; background: white; border: 1px solid rgba(99, 102, 241, 0.12); border-radius: 8px; padding: 12px; min-width: 200px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); z-index: 100; display: none; margin-top: 8px;">
-                            <div style="margin-bottom: 12px; font-weight: 600; font-size: 0.85rem;">Status Filter</div>
-                            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+                        <div id="filterPanel" style="position: absolute; top: 100%; right: 0; background: white; border: 1px solid rgba(99, 102, 241, 0.12); border-radius: 6px; padding: 8px; min-width: 150px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); z-index: 100; display: none; margin-top: 4px;">
+                            <div style="margin-bottom: 8px; font-weight: 600; font-size: 0.75rem;">Status Filter</div>
+                            <label style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px; cursor: pointer; font-size: 0.75rem;">
                                 <input type="checkbox" value="available" class="status-checkbox">
                                 <span>Available</span>
                             </label>
-                            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+                            <label style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px; cursor: pointer; font-size: 0.75rem;">
                                 <input type="checkbox" value="issued" class="status-checkbox">
                                 <span>Issued</span>
                             </label>
-                            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; cursor: pointer;">
+                            <label style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px; cursor: pointer; font-size: 0.75rem;">
                                 <input type="checkbox" value="reserved" class="status-checkbox">
                                 <span>Reserved</span>
                             </label>
-                            <button id="resetFilterBtn" style="width: 100%; padding: 6px; border: 1px solid #e2e8f0; border-radius: 4px; background: white; cursor: pointer; font-size: 0.85rem;">Reset</button>
+                            <button id="resetFilterBtn" style="width: 100%; padding: 4px; border: 1px solid #e2e8f0; border-radius: 4px; background: white; cursor: pointer; font-size: 0.7rem;">Reset</button>
                         </div>
                     </div>
                 </div>
