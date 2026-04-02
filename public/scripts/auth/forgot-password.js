@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Redirect to login after 2 seconds
             setTimeout(() => {
-                window.location.href = '/';
+                window.location.href = 'index.html';
             }, 2000);
         }, 1500);
     });
