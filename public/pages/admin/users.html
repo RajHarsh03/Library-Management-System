@@ -110,7 +110,50 @@
                     </button>
                 </div>
 
+                <!-- User Filters -->
+                <div style="display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
+                    <!-- Role Filter -->
+                    <div style="position: relative;">
+                        <button class="filter-btn-role" style="display: flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1.5px solid #e2e8f0; border-radius: 6px; background: white; cursor: pointer; font-size: 0.85rem; font-weight: 500;">
+                            <span class="material-icons-outlined" style="font-size: 1rem;">people</span>
+                            <span>Role</span>
+                        </button>
+                        <div class="role-filter-panel" style="position: absolute; top: calc(100% + 4px); left: 0; display: none; background: white; border: 1px solid rgba(99, 102, 241, 0.12); border-radius: 8px; padding: 12px; min-width: 150px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); z-index: 100;">
+                            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+                                <input type="checkbox" value="student" class="role-checkbox">
+                                <span>Student</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+                                <input type="checkbox" value="faculty" class="role-checkbox">
+                                <span>Faculty</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; cursor: pointer;">
+                                <input type="checkbox" value="admin" class="role-checkbox">
+                                <span>Admin</span>
+                            </label>
+                            <button class="reset-role-filter" style="width: 100%; padding: 6px; border: 1px solid #e2e8f0; border-radius: 4px; background: white; cursor: pointer; font-size: 0.85rem;">Reset</button>
+                        </div>
+                    </div>
 
+                    <!-- Status Filter -->
+                    <div style="position: relative;">
+                        <button class="filter-btn-status" style="display: flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1.5px solid #e2e8f0; border-radius: 6px; background: white; cursor: pointer; font-size: 0.85rem; font-weight: 500;">
+                            <span class="material-icons-outlined" style="font-size: 1rem;">flag</span>
+                            <span>Status</span>
+                        </button>
+                        <div class="status-filter-panel" style="position: absolute; top: calc(100% + 4px); left: 0; display: none; background: white; border: 1px solid rgba(99, 102, 241, 0.12); border-radius: 8px; padding: 12px; min-width: 150px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); z-index: 100;">
+                            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+                                <input type="checkbox" value="active" class="status-checkbox">
+                                <span>Active</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; cursor: pointer;">
+                                <input type="checkbox" value="suspended" class="status-checkbox">
+                                <span>Suspended</span>
+                            </label>
+                            <button class="reset-status-filter" style="width: 100%; padding: 6px; border: 1px solid #e2e8f0; border-radius: 4px; background: white; cursor: pointer; font-size: 0.85rem;">Reset</button>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Users Table -->
                 <div class="table-container">
@@ -232,4 +275,125 @@
 
     <script src="../../scripts/admin/admin.js"></script>
     <script src="../../scripts/mobile-nav.js"></script>
-</html>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const roleFilterBtn = document.querySelector('.filter-btn-role');
+            const statusFilterBtn = document.querySelector('.filter-btn-status');
+            const roleFilterPanel = document.querySelector('.role-filter-panel');
+            const statusFilterPanel = document.querySelector('.status-filter-panel');
+            const roleCheckboxes = document.querySelectorAll('.role-checkbox');
+            const statusCheckboxes = document.querySelectorAll('.status-checkbox');
+            const resetRoleFilterBtn = document.querySelector('.reset-role-filter');
+            const resetStatusFilterBtn = document.querySelector('.reset-status-filter');
+            const usersTable = document.getElementById('usersTable');
+            const allRows = Array.from(usersTable.querySelectorAll('tbody tr'));
+
+            let selectedRoles = [];
+            let selectedStatuses = [];
+
+            // Toggle Role Filter Panel
+            roleFilterBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                roleFilterPanel.style.display = roleFilterPanel.style.display === 'none' ? 'block' : 'none';
+                statusFilterPanel.style.display = 'none';
+            });
+
+            // Toggle Status Filter Panel
+            statusFilterBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                statusFilterPanel.style.display = statusFilterPanel.style.display === 'none' ? 'block' : 'none';
+                roleFilterPanel.style.display = 'none';
+            });
+
+            // Close filter panels when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.filter-btn-role') && !e.target.closest('.role-filter-panel')) {
+                    roleFilterPanel.style.display = 'none';
+                }
+                if (!e.target.closest('.filter-btn-status') && !e.target.closest('.status-filter-panel')) {
+                    statusFilterPanel.style.display = 'none';
+                }
+            });
+
+            // Role filter checkboxes
+            roleCheckboxes.forEach(function (checkbox) {
+                checkbox.addEventListener('change', function () {
+                    selectedRoles = Array.from(roleCheckboxes)
+                        .filter(cb => cb.checked)
+                        .map(cb => cb.value);
+                    applyAllFilters();
+                });
+            });
+
+            // Status filter checkboxes
+            statusCheckboxes.forEach(function (checkbox) {
+                checkbox.addEventListener('change', function () {
+                    selectedStatuses = Array.from(statusCheckboxes)
+                        .filter(cb => cb.checked)
+                        .map(cb => cb.value);
+                    applyAllFilters();
+                });
+            });
+
+            // Reset role filter
+            resetRoleFilterBtn.addEventListener('click', function () {
+                roleCheckboxes.forEach(cb => cb.checked = false);
+                selectedRoles = [];
+                applyAllFilters();
+            });
+
+            // Reset status filter
+            resetStatusFilterBtn.addEventListener('click', function () {
+                statusCheckboxes.forEach(cb => cb.checked = false);
+                selectedStatuses = [];
+                applyAllFilters();
+            });
+
+            function applyAllFilters() {
+                allRows.forEach(function (row) {
+                    let shouldShow = true;
+
+                    // Check role filter
+                    if (selectedRoles.length > 0) {
+                        const roleBadge = row.querySelector('.role-badge');
+                        let rowRole = null;
+
+                        if (roleBadge) {
+                            if (roleBadge.classList.contains('student')) {
+                                rowRole = 'student';
+                            } else if (roleBadge.classList.contains('faculty')) {
+                                rowRole = 'faculty';
+                            } else if (roleBadge.classList.contains('admin')) {
+                                rowRole = 'admin';
+                            }
+                        }
+
+                        if (!rowRole || !selectedRoles.includes(rowRole)) {
+                            shouldShow = false;
+                        }
+                    }
+
+                    // Check status filter
+                    if (shouldShow && selectedStatuses.length > 0) {
+                        const statusBadge = row.querySelector('.status-badge');
+                        let rowStatus = null;
+
+                        if (statusBadge) {
+                            if (statusBadge.classList.contains('active')) {
+                                rowStatus = 'active';
+                            } else if (statusBadge.classList.contains('suspended')) {
+                                rowStatus = 'suspended';
+                            }
+                        }
+
+                        if (!rowStatus || !selectedStatuses.includes(rowStatus)) {
+                            shouldShow = false;
+                        }
+                    }
+
+                    row.style.display = shouldShow ? '' : 'none';
+                });
+            }
+        });
+    </script>
+</body>

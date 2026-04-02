@@ -109,11 +109,44 @@
                     </button>
                 </div>
 
-            
+                <!-- Search and Filter Bar (Outside Table Container) -->
+                <div style="background: #f8fafc; border-radius: 12px; padding: 16px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+                    <!-- Search Bar -->
+                    <div style="display: flex; align-items: center; gap: 8px; flex: 1; max-width: 500px; border: 1.5px solid #e2e8f0; border-radius: 8px; padding: 10px 14px; background: white;">
+                        <span class="material-icons-outlined" style="color: #6366f1; font-size: 1.1rem;">search</span>
+                        <input type="text" id="searchInput" placeholder="Search title, author..." style="flex: 1; border: none; outline: none; font-size: 0.85rem; background: transparent;">
+                        <button id="clearSearchBtn" style="display: none; background: none; border: none; cursor: pointer; color: #9ca3af; padding: 0;">
+                            <span class="material-icons-outlined" style="font-size: 1rem;">close</span>
+                        </button>
+                    </div>
+
+                    <!-- Filter Button -->
+                    <div style="position: relative;">
+                        <button class="btn-outline" id="filterBtn" style="display: flex; align-items: center; gap: 6px; border: 1.5px solid #6366f1; color: #6366f1; padding: 10px 18px;">
+                            <span class="material-icons-outlined">tune</span>
+                            <span>Filter</span>
+                        </button>
+                        <div id="filterPanel" style="position: absolute; top: 100%; right: 0; background: white; border: 1px solid rgba(99, 102, 241, 0.12); border-radius: 8px; padding: 12px; min-width: 200px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); z-index: 100; display: none; margin-top: 8px;">
+                            <div style="margin-bottom: 12px; font-weight: 600; font-size: 0.85rem;">Status Filter</div>
+                            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+                                <input type="checkbox" value="available" class="status-checkbox">
+                                <span>Available</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer;">
+                                <input type="checkbox" value="issued" class="status-checkbox">
+                                <span>Issued</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; cursor: pointer;">
+                                <input type="checkbox" value="reserved" class="status-checkbox">
+                                <span>Reserved</span>
+                            </label>
+                            <button id="resetFilterBtn" style="width: 100%; padding: 6px; border: 1px solid #e2e8f0; border-radius: 4px; background: white; cursor: pointer; font-size: 0.85rem;">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Book Table -->
                 <div class="table-container">
-
-
 
                     <table class="data-table" id="booksTable">
                         <thead>
@@ -227,5 +260,97 @@
 
     <script src="../../scripts/admin/admin.js"></script>
     <script src="../../scripts/mobile-nav.js"></script>
-</body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterBtn = document.getElementById('filterBtn');
+            const filterPanel = document.getElementById('filterPanel');
+            const statusCheckboxes = document.querySelectorAll('.status-checkbox');
+            const resetFilterBtn = document.getElementById('resetFilterBtn');
+            const booksTable = document.getElementById('booksTable');
+            const searchInput = document.getElementById('searchInput');
+            const clearSearchBtn = document.getElementById('clearSearchBtn');
+
+            // Toggle filter panel
+            filterBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                filterPanel.style.display = filterPanel.style.display === 'none' ? 'block' : 'none';
+            });
+
+            // Close filter panel when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('#filterBtn') && !e.target.closest('#filterPanel')) {
+                    filterPanel.style.display = 'none';
+                }
+            });
+
+            // Search input event
+            searchInput.addEventListener('input', function () {
+                clearSearchBtn.style.display = this.value.trim() ? 'block' : 'none';
+                applyFilter();
+            });
+
+            // Clear search button
+            clearSearchBtn.addEventListener('click', function () {
+                searchInput.value = '';
+                clearSearchBtn.style.display = 'none';
+                applyFilter();
+            });
+
+            // Apply filter when checkbox changes
+            statusCheckboxes.forEach(function (checkbox) {
+                checkbox.addEventListener('change', applyFilter);
+            });
+
+            // Reset filter
+            resetFilterBtn.addEventListener('click', function () {
+                statusCheckboxes.forEach(f => f.checked = false);
+                applyFilter();
+            });
+
+            function applyFilter() {
+                const searchQuery = searchInput.value.trim().toLowerCase();
+                const selectedStatuses = Array.from(statusCheckboxes)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.value);
+
+                const rows = booksTable.querySelectorAll('tbody tr');
+                rows.forEach(function (row) {
+                    let shouldShow = true;
+
+                    // Check search query
+                    if (searchQuery) {
+                        const cells = row.querySelectorAll('td');
+                        let matchesSearch = false;
+                        if (cells.length > 0) {
+                            const title = cells[0]?.textContent.toLowerCase() || '';
+                            const author = cells[1]?.textContent.toLowerCase() || '';
+                            const isbn = cells[2]?.textContent.toLowerCase() || '';
+                            matchesSearch = title.includes(searchQuery) || author.includes(searchQuery) || isbn.includes(searchQuery);
+                        }
+                        shouldShow = matchesSearch;
+                    }
+
+                    // Check status filter
+                    if (shouldShow && selectedStatuses.length > 0) {
+                        const statusBadge = row.querySelector('.status-badge');
+                        let rowStatus = null;
+
+                        if (statusBadge) {
+                            if (statusBadge.classList.contains('available')) {
+                                rowStatus = 'available';
+                            } else if (statusBadge.classList.contains('issued')) {
+                                rowStatus = 'issued';
+                            } else if (statusBadge.classList.contains('reserved')) {
+                                rowStatus = 'reserved';
+                            }
+                        }
+
+                        shouldShow = rowStatus && selectedStatuses.includes(rowStatus);
+                    }
+
+                    row.style.display = shouldShow ? '' : 'none';
+                });
+            }
+        });
+    </script>
 </html>
