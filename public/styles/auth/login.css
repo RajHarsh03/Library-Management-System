@@ -8,15 +8,12 @@
 }
 
 :root {
-    /* Brand Colors - Monochrome Minimalist */
-    --primary: #243b55;     /* zinc-900 */
-    --primary-dark: #18283e; /* zinc-950 */
-    --primary-light: #324e6a; /* zinc-600 */
-    --accent: #2563eb;      /* blue-600 */
-    --accent-vivid: #3b82f6; /* blue-500 */
+    --primary: #243b55;
+    --primary-dark: #18283e;
+    --primary-light: #324e6a;
+    --accent: #2563eb;
+    --accent-vivid: #3b82f6;
     --accent-soft: rgba(37, 99, 235, 0.05);
-    
-    /* Neutral Palette */
     --white: #ffffff;
     --gray-50: #fafafa;
     --gray-100: #f4f4f5;
@@ -28,29 +25,20 @@
     --gray-700: #3f3f46;
     --gray-800: #27272a;
     --gray-900: #18181b;
-    
-    /* Functional */
     --success: #10b981;
     --success-deep: #059669;
     --danger: #ef4444;
     --danger-deep: #dc2626;
     --warning: #f59e0b;
-    
-    /* Typography */
     --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
     --font-display: 'Inter', sans-serif;
-    
-    /* High-end Minimalist Geometry */
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
     --radius-xl: 24px;
-    
-    /* Soft Elegant Shadows */
     --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
     --shadow-md: 0 4px 12px rgba(0,0,0,0.04);
     --shadow-lg: 0 12px 24px rgba(0,0,0,0.06);
-    
     --transition: all 0.25s ease-out;
 }
 
@@ -338,8 +326,6 @@ html, body {
     margin-bottom: 16px;
     line-height: 1.4;
 }
-
-/* Role Toggle */
 .role-toggle {
     position: relative;
     display: flex;
@@ -387,8 +373,6 @@ html, body {
 .role-toggle[data-active="admin"] .role-indicator {
     transform: translateX(100%);
 }
-
-/* Form Fields */
 .form-group {
     margin-bottom: 12px;
 }
@@ -460,8 +444,6 @@ html, body {
     font-size: 1.2rem;
     color: var(--gray-400);
 }
-
-/* Checkbox */
 .form-check {
     display: flex;
     align-items: center;
@@ -483,8 +465,6 @@ html, body {
     color: var(--gray-600);
     cursor: pointer;
 }
-
-/* Login Button */
 .btn-login {
     width: 100%;
     display: flex;
@@ -537,8 +517,6 @@ html, body {
 .btn-login:hover .material-icons-outlined {
     transform: translateX(4px);
 }
-
-/* SSO */
 .sso-divider {
     display: flex;
     align-items: center;
@@ -621,8 +599,6 @@ html, body {
     color: #1a7fd4;
     transform: scale(1.1);
 }
-
-/* Signup Prompt */
 .signup-prompt {
     text-align: center;
     font-size: 0.75rem;
@@ -665,8 +641,6 @@ html, body {
     transform: scaleX(1);
     transform-origin: left;
 }
-
-/* Copyright */
 .copyright {
     display: none;
     position: absolute;
