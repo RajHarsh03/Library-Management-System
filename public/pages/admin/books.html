@@ -110,19 +110,19 @@
                 </div>
 
                 <!-- Search and Filter Bar (Outside Table Container) -->
-                <div style="background: #f8fafc; border-radius: 12px; padding: 16px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+                <div class="search-filter-bar">
                     <!-- Search Bar -->
-                    <div style="display: flex; align-items: center; gap: 8px; flex: 1; max-width: 500px; border: 1.5px solid #e2e8f0; border-radius: 8px; padding: 10px 14px; background: white;">
+                    <div class="search-bar-container">
                         <span class="material-icons-outlined" style="color: #6366f1; font-size: 1.1rem;">search</span>
-                        <input type="text" id="searchInput" placeholder="Search title, author..." style="flex: 1; border: none; outline: none; font-size: 0.85rem; background: transparent;">
-                        <button id="clearSearchBtn" style="display: none; background: none; border: none; cursor: pointer; color: #9ca3af; padding: 0;">
-                            <span class="material-icons-outlined" style="font-size: 1rem;">close</span>
+                        <input type="text" id="searchInput" placeholder="Search title, author..." class="search-input">
+                        <button id="clearSearchBtn" class="clear-search-btn">
+                            <span class="material-icons-outlined">close</span>
                         </button>
                     </div>
 
                     <!-- Filter Button -->
                     <div style="position: relative;">
-                        <button class="btn-outline" id="filterBtn" style="display: flex; align-items: center; gap: 6px; border: 1.5px solid #6366f1; color: #6366f1; padding: 10px 18px;">
+                        <button class="btn-outline filter-btn-mobile" id="filterBtn">
                             <span class="material-icons-outlined">tune</span>
                             <span>Filter</span>
                         </button>

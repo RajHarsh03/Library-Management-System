@@ -1719,5 +1719,182 @@
         position: relative;
     }
 
+    /* Search and Filter Bar - Mobile */
+    .search-filter-bar {
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
 
+    .search-bar-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 10px 12px;
+        background: white;
+    }
+
+    .search-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 0.85rem;
+        background: transparent;
+    }
+
+    .clear-search-btn {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #9ca3af;
+        padding: 0;
+    }
+
+    .clear-search-btn.material-icons-outlined {
+        font-size: 1rem;
+    }
+
+    .filter-btn-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        border: 1.5px solid #6366f1;
+        color: #6366f1;
+        padding: 10px 16px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        border-radius: 8px;
+        background: white;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        width: auto;
+        white-space: nowrap;
+    }
+
+    .filter-btn-mobile:hover {
+        background: #f0f4ff;
+    }
+
+    /* User filter buttons - mobile */
+    .filter-btn-role,
+    .filter-btn-status {
+        width: auto;
+    }
+
+    .role-filter-panel,
+    .status-filter-panel {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        background: white;
+        border: 1px solid rgba(99, 102, 241, 0.12);
+        border-radius: 8px;
+        padding: 12px;
+        min-width: 180px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        z-index: 100;
+    }
+}
+
+/* Desktop view */
+@media (min-width: 769px) {
+    .search-filter-bar {
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .search-bar-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+        max-width: 500px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 10px 14px;
+        background: white;
+    }
+
+    .search-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 0.85rem;
+        background: transparent;
+    }
+
+    .clear-search-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #9ca3af;
+        padding: 0;
+    }
+
+    .filter-btn-mobile {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        border: 1.5px solid #6366f1;
+        color: #6366f1;
+        padding: 10px 18px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        border-radius: 8px;
+        background: white;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        width: auto;
+    }
+
+    .filter-btn-mobile:hover {
+        background: #f0f4ff;
+    }
+
+    /* Filter panel - desktop */
+    #filterPanel {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border: 1px solid rgba(99, 102, 241, 0.12);
+        border-radius: 8px;
+        padding: 12px;
+        min-width: 200px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        z-index: 100;
+        margin-top: 8px;
+    }
+
+    .role-filter-panel,
+    .status-filter-panel {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border: 1px solid rgba(99, 102, 241, 0.12);
+        border-radius: 8px;
+        padding: 12px;
+        min-width: 180px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        z-index: 100;
+        margin-top: 8px;
+    }
 }
