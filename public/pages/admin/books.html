@@ -112,22 +112,66 @@
             
                 <!-- Book Table -->
                 <div class="table-container">
-                    <div class="table-toolbar">
-                        <div class="table-search">
-                            <span class="material-icons-outlined">search</span>
-                            <input type="text" placeholder="Search archive by title, author, or ISBN..." id="bookSearch">
+                    <div class="search-filter-toolbar">
+                        <div class="search-bar" id="searchBar">
+                            <button class="search-icon-btn" id="searchIconBtn" aria-label="Search books">
+                                <span class="material-icons-outlined">search</span>
+                            </button>
+                            <input type="text" id="bookSearchInput" placeholder="Search title, author, ISBN..." aria-label="Search books" autocomplete="off">
+                            <button class="search-clear-btn" id="searchClearBtn" aria-label="Clear search" style="display:none;">
+                                <span class="material-icons-outlined">close</span>
+                            </button>
                         </div>
-                        <div class="table-filters">
-                            <button class="btn-outline">
-                                <span class="material-icons-outlined">tune</span>
-                                Last Modified
-                            </button>
-                            <button class="btn-outline">
-                                <span class="material-icons-outlined">filter_list</span>
-                                More Filters
-                            </button>
+                        <button class="filter-btn" id="filterToggle" aria-label="Open filters" aria-expanded="false">
+                            <span class="material-icons-outlined">tune</span>
+                            <span>Filter</span>
+                        </button>
+                    </div>
+
+                    <div class="search-filter-panel" id="searchFilterPanel">
+                        <div class="search-filter-options">
+                            <div class="filter-section">
+                                <label class="filter-label">Status</label>
+                                <div class="filter-checkboxes">
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" value="available" class="status-filter">
+                                        <span>Available</span>
+                                    </label>
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" value="issued" class="status-filter">
+                                        <span>Issued</span>
+                                    </label>
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" value="reserved" class="status-filter">
+                                        <span>Reserved</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="filter-section">
+                                <label class="filter-label">Sort By</label>
+                                <div class="filter-checkboxes">
+                                    <label class="filter-checkbox">
+                                        <input type="radio" name="sortBy" value="recent" class="sort-filter" checked>
+                                        <span>Recently Modified</span>
+                                    </label>
+                                    <label class="filter-checkbox">
+                                        <input type="radio" name="sortBy" value="title" class="sort-filter">
+                                        <span>Title (A-Z)</span>
+                                    </label>
+                                    <label class="filter-checkbox">
+                                        <input type="radio" name="sortBy" value="author" class="sort-filter">
+                                        <span>Author (A-Z)</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="filter-actions">
+                                <button class="filter-reset-btn" id="filterResetBtn">Reset</button>
+                                <button class="filter-apply-btn" id="filterApplyBtn">Done</button>
+                            </div>
                         </div>
                     </div>
+
+
                     <table class="data-table" id="booksTable">
                         <thead>
                             <tr>
@@ -240,5 +284,122 @@
 
     <script src="../../scripts/admin/admin.js"></script>
     <script src="../../scripts/mobile-nav.js"></script>
+    <script>
+        // ===== ADMIN BOOKS SEARCH & FILTER =====
+        const searchInput = document.getElementById('bookSearchInput');
+        const searchClearBtn = document.getElementById('searchClearBtn');
+        const filterToggle = document.getElementById('filterToggle');
+        const searchFilterPanel = document.getElementById('searchFilterPanel');
+        const filterResetBtn = document.getElementById('filterResetBtn');
+        const filterApplyBtn = document.getElementById('filterApplyBtn');
+        const statusFilters = document.querySelectorAll('.status-filter');
+        const sortFilters = document.querySelectorAll('.sort-filter');
+        const tableRows = document.querySelectorAll('#booksTable tbody tr');
+
+        let activeStatus = [];
+        let activeSort = 'recent';
+
+        // Toggle filter panel
+        filterToggle.addEventListener('click', function () {
+            const isActive = searchFilterPanel.classList.toggle('active');
+            filterToggle.setAttribute('aria-expanded', isActive);
+        });
+
+        // Close panel when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.search-filter-toolbar')) {
+                searchFilterPanel.classList.remove('active');
+                filterToggle.setAttribute('aria-expanded', false);
+            }
+        });
+
+        // Clear search
+        searchClearBtn.addEventListener('click', function () {
+            searchInput.value = '';
+            searchClearBtn.style.display = 'none';
+            applyAllFilters();
+            searchInput.focus();
+        });
+
+        // Show/hide clear button
+        searchInput.addEventListener('input', function () {
+            searchClearBtn.style.display = this.value ? 'block' : 'none';
+            applyAllFilters();
+        });
+
+        // Status filter change
+        statusFilters.forEach(function (filter) {
+            filter.addEventListener('change', updateActiveStatus);
+        });
+
+        // Sort filter change
+        sortFilters.forEach(function (filter) {
+            filter.addEventListener('change', function () {
+                activeSort = this.value;
+                applyAllFilters();
+            });
+        });
+
+        function updateActiveStatus() {
+            activeStatus = Array.from(statusFilters)
+                .filter(f => f.checked)
+                .map(f => f.value);
+            applyAllFilters();
+        }
+
+        // Reset all filters
+        filterResetBtn.addEventListener('click', function () {
+            searchInput.value = '';
+            searchClearBtn.style.display = 'none';
+            statusFilters.forEach(f => f.checked = false);
+            sortFilters.forEach(f => f.checked = f.value === 'recent');
+            activeStatus = [];
+            activeSort = 'recent';
+            applyAllFilters();
+            searchInput.focus();
+        });
+
+        // Apply and close
+        filterApplyBtn.addEventListener('click', function () {
+            applyAllFilters();
+            searchFilterPanel.classList.remove('active');
+            filterToggle.setAttribute('aria-expanded', false);
+        });
+
+        // Main filter function
+        function applyAllFilters() {
+            const query = searchInput.value.trim().toLowerCase();
+            
+            const visibleRows = Array.from(tableRows).filter(function (row) {
+                const titleText = row.querySelector('.title')?.textContent.toLowerCase() || '';
+                const authorText = row.querySelectorAll('td')[1]?.textContent.toLowerCase() || '';
+                const isbnText = row.querySelectorAll('td')[2]?.textContent.toLowerCase() || '';
+                const statusText = row.querySelector('.status-badge')?.textContent.toLowerCase() || '';
+                
+                // Check search query
+                const matchesSearch = !query || titleText.includes(query) || authorText.includes(query) || isbnText.includes(query);
+                
+                // Check status filter
+                const statusClass = row.querySelector('.status-badge')?.className.split(' ').find(c => ['available', 'issued', 'reserved'].includes(c));
+                const matchesStatus = activeStatus.length === 0 || activeStatus.includes(statusClass);
+                
+                // Show/hide row
+                row.style.display = (matchesSearch && matchesStatus) ? '' : 'none';
+                return (matchesSearch && matchesStatus);
+            });
+
+            // Apply sorting
+            if (visibleRows.length > 0) {
+                const tbody = document.querySelector('#booksTable tbody');
+                visibleRows.forEach(row => tbody.appendChild(row));
+            }
+        }
+
+        // Initialize - set first item as active
+        if (filterMenuItems.length > 0) {
+            filterMenuItems[0].classList.add('active');
+        }
+        applyAllFilters();
+    </script>
 </body>
 </html>
