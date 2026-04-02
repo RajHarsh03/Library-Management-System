@@ -9,7 +9,7 @@
 .signup-hero {
     position: relative;
     flex: 0 0 55%;
-    background: linear-gradient(135deg, #001a4d 0%, #003d99 25%, #0066cc 50%, #1a7fd4 80%, #0066cc 100%);
+    background: linear-gradient(135deg, #18283e 0%, #243b55 50%, #324e6a 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -100,6 +100,7 @@
     font-size: 1.5rem;
     color: rgba(255,255,255,0.7);
 }
+
 
 /* Benefits List */
 .hero-benefits {
@@ -195,7 +196,7 @@
     justify-content: center;
     align-items: center;
     padding: 15px 25px;
-    background: linear-gradient(180deg, #ffffff 0%, #fafcff 50%, #f8f9fc 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 50%, #fafafa 100%);
     position: relative;
     overflow-y: auto;
     max-height: 100vh;
@@ -263,7 +264,7 @@
 }
 
 .step-item.active .step-number {
-    background: linear-gradient(135deg, #1a7fd4 0%, #0066cc 50%, #003d99 100%);
+    background: linear-gradient(135deg, #18283e 0%, #243b55 50%, #324e6a 100%);
     border-color: #0066cc;
     color: white;
     box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
@@ -320,7 +321,7 @@
     justify-content: center;
     gap: 8px;
     padding: 10px;
-    background: linear-gradient(135deg, #1a7fd4 0%, #0066cc 50%, #003d99 100%);
+    background: linear-gradient(135deg, #18283e 0%, #243b55 50%, #324e6a 100%);
     color: var(--white);
     border: none;
     border-radius: var(--radius-md);
@@ -336,7 +337,7 @@
 
 .btn-next:hover,
 .btn-submit:hover {
-    background: linear-gradient(135deg, #00a8ff 0%, #1a7fd4 50%, #0066cc 100%);
+    background: linear-gradient(135deg, #18283e 0%, #243b55 50%, #324e6a 100%);
     transform: translateY(-2px);
     box-shadow: 0 12px 28px rgba(0, 102, 204, 0.45), 0 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -569,7 +570,7 @@ select.form-input {
     justify-content: center;
     gap: 8px;
     padding: 10px;
-    background: linear-gradient(135deg, #1a7fd4 0%, #0066cc 50%, #003d99 100%);
+    background: linear-gradient(135deg, #18283e 0%, #243b55 50%, #324e6a 100%);
     color: var(--white);
     border: none;
     border-radius: var(--radius-md);
@@ -594,7 +595,7 @@ select.form-input {
 }
 
 .btn-signup:hover {
-    background: linear-gradient(135deg, #00a8ff 0%, #1a7fd4 50%, #0066cc 100%);
+    background: linear-gradient(135deg, #18283e 0%, #243b55 50%, #324e6a 100%);
     transform: translateY(-2px);
     box-shadow: 0 12px 28px rgba(0, 102, 204, 0.45), 0 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -733,6 +734,25 @@ select.form-input {
     to {
         transform: rotate(360deg);
     }
+}
+
+/* === Hero Canvas & Overlay === */
+#heroCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.signup-hero .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(ellipse at 25% 40%, rgba(26, 127, 212, 0.25) 0%, transparent 65%),
+        radial-gradient(ellipse at 75% 15%, rgba(0, 168, 255, 0.18) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 80%, rgba(0, 168, 255, 0.1) 0%, transparent 40%);
+    z-index: 0;
 }
 
 /* Floating Elements */

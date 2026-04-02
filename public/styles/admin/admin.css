@@ -10,25 +10,25 @@
 }
 
 :root {
-    --primary: #0066cc;
-    --primary-dark: #003d99;
-    --primary-light: #3385ff;
+    --primary: #243b55;
+    --primary-dark: #18283e;
+    --primary-light: #324e6a;
     --primary-glow: rgba(0, 102, 204, 0.35);
-    --accent: #1a7fd4;
-    --accent-vivid: #00a8ff;
+    --accent: #2563eb;
+    --accent-vivid: #3b82f6;
     --accent-light: #cce5ff;
     --accent-soft: rgba(26, 127, 212, 0.08);
     --white: #ffffff;
-    --gray-50: #f8f9fc;
-    --gray-100: #f1f3f8;
-    --gray-200: #e2e6ef;
-    --gray-300: #c8cdd9;
+    --gray-50: #fafafa;
+    --gray-100: #f4f4f5;
+    --gray-200: #e4e4e7;
+    --gray-300: #d4d4d8;
     --gray-400: #9aa2b5;
     --gray-500: #6b7490;
     --gray-600: #4a5268;
     --gray-700: #333a4d;
-    --gray-800: #1e2433;
-    --gray-900: #0f1219;
+    --gray-800: #27272a;
+    --gray-900: #18181b;
     --success: #1ea971;
     --success-deep: #0d7a4a;
     --success-light: #d1fae5;
@@ -47,20 +47,20 @@
     --purple-light: #fae8ff;
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-display: 'Space Grotesk', 'Inter', sans-serif;
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 14px;
-    --radius-xl: 20px;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-    --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.04);
+    --shadow-lg: 0 12px 24px rgba(0,0,0,0.06);
     --shadow-glow: 0 4px 20px rgba(0, 102, 204, 0.15);
     --sidebar-width: 240px;
     --sidebar-width-collapsed: 76px;
     --sidebar-duration: 0.48s;
     --sidebar-ease: cubic-bezier(0.22, 1, 0.32, 1);
     --header-height: 64px;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: all 0.25s ease-out;
 }
 
 html, body {
@@ -85,7 +85,7 @@ a {
 /* ===== SIDEBAR ===== */
 .sidebar {
     width: var(--sidebar-width);
-    background: linear-gradient(180deg, #ffffff 0%, #f8fafe 40%, #f1f4fb 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 50%, #fafafa 100%);
     border-right: 1px solid rgba(203, 213, 225, 0.6);
     display: flex;
     flex-direction: column;
@@ -269,7 +269,7 @@ a {
 .sidebar-brand-icon {
     width: 38px;
     height: 38px;
-    background: linear-gradient(145deg, #1a7fd4 0%, #0066cc 100%);
+    background: linear-gradient(135deg, #18283e 0%, #243b55 50%, #324e6a 100%);
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
@@ -330,7 +330,7 @@ a {
 }
 
 .nav-item.active {
-    background: linear-gradient(135deg, var(--accent-light) 0%, rgba(37, 99, 235, 0.15) 100%);
+    background: linear-gradient(135deg, var(--accent-soft) 0%, rgba(37, 99, 235, 0.05) 100%);
     color: var(--accent);
     font-weight: 600;
     box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.12);
@@ -561,7 +561,7 @@ a {
     align-items: center;
     gap: 8px;
     padding: 12px 24px;
-    background: linear-gradient(135deg, #1a7fd4 0%, #0066cc 100%);
+    background: linear-gradient(135deg, #18283e 0%, #243b55 50%, #324e6a 100%);
     color: var(--white);
     border: none;
     border-radius: var(--radius-md);
@@ -574,7 +574,7 @@ a {
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #00a8ff 0%, #1a7fd4 100%);
+    background: linear-gradient(135deg, #18283e 0%, #243b55 50%, #324e6a 100%);
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(0, 102, 204, 0.35);
 }

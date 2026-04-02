@@ -8,38 +8,50 @@
 }
 
 :root {
-    --primary: #0066cc;
-    --primary-dark: #003d99;
-    --primary-light: #3385ff;
-    --accent: #1a7fd4;
-    --accent-vivid: #00a8ff;
-    --accent-soft: rgba(26, 127, 212, 0.08);
+    /* Brand Colors - Monochrome Minimalist */
+    --primary: #243b55;     /* zinc-900 */
+    --primary-dark: #18283e; /* zinc-950 */
+    --primary-light: #324e6a; /* zinc-600 */
+    --accent: #2563eb;      /* blue-600 */
+    --accent-vivid: #3b82f6; /* blue-500 */
+    --accent-soft: rgba(37, 99, 235, 0.05);
+    
+    /* Neutral Palette */
     --white: #ffffff;
-    --gray-50: #f8f9fc;
-    --gray-100: #f1f3f8;
-    --gray-200: #e2e6ef;
-    --gray-300: #c8cdd9;
-    --gray-400: #9aa2b5;
-    --gray-500: #6b7490;
-    --gray-600: #4a5268;
-    --gray-700: #333a4d;
-    --gray-800: #1e2433;
-    --gray-900: #0f1219;
-    --success: #22c55e;
-    --success-deep: #16a34a;
-    --danger: #ff2e63;
-    --danger-deep: #e81828;
-    --warning: #ffa500;
-    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-display: 'Space Grotesk', 'Inter', sans-serif;
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 14px;
-    --radius-xl: 20px;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-    --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --gray-50: #fafafa;
+    --gray-100: #f4f4f5;
+    --gray-200: #e4e4e7;
+    --gray-300: #d4d4d8;
+    --gray-400: #a1a1aa;
+    --gray-500: #71717a;
+    --gray-600: #52525b;
+    --gray-700: #3f3f46;
+    --gray-800: #27272a;
+    --gray-900: #18181b;
+    
+    /* Functional */
+    --success: #10b981;
+    --success-deep: #059669;
+    --danger: #ef4444;
+    --danger-deep: #dc2626;
+    --warning: #f59e0b;
+    
+    /* Typography */
+    --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-display: 'Inter', sans-serif;
+    
+    /* High-end Minimalist Geometry */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    
+    /* Soft Elegant Shadows */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.04);
+    --shadow-lg: 0 12px 24px rgba(0,0,0,0.06);
+    
+    --transition: all 0.25s ease-out;
 }
 
 html, body {
@@ -59,7 +71,7 @@ html, body {
 .login-hero {
     position: relative;
     flex: 0 0 55%;
-    background: linear-gradient(135deg, #001a4d 0%, #003d99 25%, #0066cc 50%, #1a7fd4 80%, #0066cc 100%);
+    background: linear-gradient(135deg, #18283e 0%, #243b55 50%, #324e6a 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -302,7 +314,7 @@ html, body {
     justify-content: center;
     align-items: center;
     padding: 25px 35px;
-    background: linear-gradient(180deg, #ffffff 0%, #fafcff 50%, #f8f9fc 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 50%, #fafafa 100%);
     position: relative;
     overflow-y: auto;
 }
@@ -331,7 +343,7 @@ html, body {
 .role-toggle {
     position: relative;
     display: flex;
-    background: linear-gradient(135deg, #f1f3f8 0%, #e2e6ef 100%);
+    background: linear-gradient(135deg, #f4f4f5 0%, #e4e4e7 100%);
     border-radius: var(--radius-md);
     padding: 4px;
     margin-bottom: 16px;
@@ -365,7 +377,7 @@ html, body {
     left: 4px;
     width: calc(50% - 4px);
     height: calc(100% - 8px);
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafe 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
     border-radius: var(--radius-sm);
     box-shadow: 0 3px 10px rgba(0, 102, 204, 0.15);
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -480,7 +492,7 @@ html, body {
     justify-content: center;
     gap: 10px;
     padding: 12px;
-    background: linear-gradient(135deg, #1a7fd4 0%, #0066cc 50%, #003d99 100%);
+    background: linear-gradient(135deg, #18283e 0%, #243b55 50%, #324e6a 100%);
     color: var(--white);
     border: none;
     border-radius: var(--radius-md);
@@ -504,7 +516,7 @@ html, body {
 }
 
 .btn-login:hover {
-    background: linear-gradient(135deg, #00a8ff 0%, #1a7fd4 50%, #0066cc 100%);
+    background: linear-gradient(135deg, #18283e 0%, #243b55 50%, #324e6a 100%);
     transform: translateY(-2px);
     box-shadow: 0 12px 28px rgba(0, 102, 204, 0.45), 0 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -563,7 +575,7 @@ html, body {
     justify-content: center;
     gap: 10px;
     padding: 16px 14px;
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #f4f4f5 100%);
     border: 2px solid #e2e6ef;
     border-radius: var(--radius-lg);
     font-family: var(--font-primary);
@@ -987,3 +999,4 @@ html, body {
         max-width: 100%;
     }
 }
+
