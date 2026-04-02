@@ -30,7 +30,7 @@ function initSidebar() {
         logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
             if (confirm('Are you sure you want to logout?')) {
-                window.location.href = '../auth/index.html';
+                window.location.href = '/';
             }
         });
     }
