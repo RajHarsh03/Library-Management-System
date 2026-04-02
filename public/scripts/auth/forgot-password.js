@@ -249,12 +249,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ===== Step 2: Go Back =====
-    backStep1Btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        goToStep(1);
-        emailInput.value = '';
-        codeInput.value = '';
-    });
+    if (backStep1Btn) {
+        backStep1Btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            goToStep(1);
+            emailInput.value = '';
+            codeInput.value = '';
+        });
+    }
 
     // ===== Step 2: Verify Code =====
     verifyCodeBtn.addEventListener('click', (e) => {
@@ -331,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Redirect to login after 2 seconds
             setTimeout(() => {
-                window.location.href = 'index';
+                window.location.href = 'index.html';
             }, 2000);
         }, 1500);
     });

@@ -23,7 +23,7 @@ function initStudentSidebar() {
         logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
             if (confirm('Sign out of your student account?')) {
-                window.location.href = '../index';
+                window.location.href = '../auth/index.html';
             }
         });
     }
@@ -85,7 +85,7 @@ function initStudentTopbar() {
             e.preventDefault();
             const q = searchInput.value.trim();
             if (q) {
-                window.location.href = 'browse?q=' + encodeURIComponent(q);
+                window.location.href = 'browse.html?q=' + encodeURIComponent(q);
             }
         }
     });

@@ -161,9 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
             showToast('Authentication successful. Redirecting...', 'success');
             setTimeout(() => {
                 if (currentRole === 'admin') {
-                    window.location.href = 'admin/dashboard';
+                    window.location.href = '../admin/dashboard.html';
                 } else {
-                    window.location.href = 'student/dashboard';
+                    window.location.href = '../student/dashboard.html';
                 }
             }, 600);
         }, 1200);

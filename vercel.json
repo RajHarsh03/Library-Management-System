@@ -1,48 +1,64 @@
 {
     "rewrites": [
         {
+            "source": "/",
+            "destination": "/public/pages/auth/index.html"
+        },
+        {
             "source": "/index",
-            "destination": "/index.html"
+            "destination": "/public/pages/auth/index.html"
         },
         {
             "source": "/login",
-            "destination": "/login.html"
+            "destination": "/public/pages/auth/index.html"
         },
         {
             "source": "/signup",
-            "destination": "/signup.html"
+            "destination": "/public/pages/auth/signup.html"
         },
         {
             "source": "/forgot-password",
-            "destination": "/forgot-password.html"
+            "destination": "/public/pages/auth/forgot-password.html"
+        },
+        {
+            "source": "/auth/index",
+            "destination": "/public/pages/auth/index.html"
+        },
+        {
+            "source": "/auth/signup",
+            "destination": "/public/pages/auth/signup.html"
+        },
+        {
+            "source": "/auth/forgot-password",
+            "destination": "/public/pages/auth/forgot-password.html"
         },
         {
             "source": "/admin/dashboard",
-            "destination": "/admin/dashboard.html"
+            "destination": "/public/pages/admin/dashboard.html"
         },
         {
             "source": "/admin/books",
-            "destination": "/admin/books.html"
+            "destination": "/public/pages/admin/books.html"
         },
         {
             "source": "/admin/users",
-            "destination": "/admin/users.html"
+            "destination": "/public/pages/admin/users.html"
         },
         {
             "source": "/admin/transactions",
-            "destination": "/admin/transactions.html"
+            "destination": "/public/pages/admin/transactions.html"
         },
         {
             "source": "/student/dashboard",
-            "destination": "/student/dashboard.html"
+            "destination": "/public/pages/student/dashboard.html"
         },
         {
             "source": "/student/browse",
-            "destination": "/student/browse.html"
+            "destination": "/public/pages/student/browse.html"
         },
         {
             "source": "/student/my-books",
-            "destination": "/student/my-books.html"
+            "destination": "/public/pages/student/my-books.html"
         }
     ]
 }
