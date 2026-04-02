@@ -359,4 +359,14 @@ document.addEventListener('DOMContentLoaded', () => {
             animateCounter(counter, target);
         });
     }, 300);
+
+    // ===== Reset on browser back (bfcache) =====
+    window.addEventListener('pageshow', (e) => {
+        if (e.persisted) {
+            signupBtn.classList.remove('loading');
+            signupBtn.disabled = false;
+            signupForm.reset();
+            goToStep(1);
+        }
+    });
 });

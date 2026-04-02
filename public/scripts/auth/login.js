@@ -294,4 +294,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initHeroCanvas();
+
+    // ===== Reset on browser back (bfcache) =====
+    window.addEventListener('pageshow', (e) => {
+        if (e.persisted) {
+            // Page was restored from bfcache — reset everything
+            loginBtn.classList.remove('loading');
+            loginForm.reset();
+            clearError(emailInput, emailError);
+            clearError(passwordInput, passwordError);
+            passwordInput.type = 'password';
+            passwordToggleIcon.textContent = 'visibility_off';
+        }
+    });
 });

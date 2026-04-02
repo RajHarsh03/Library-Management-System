@@ -440,4 +440,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== Initialize =====
     goToStep(1);
+
+    // ===== Reset on browser back (bfcache) =====
+    window.addEventListener('pageshow', (e) => {
+        if (e.persisted) {
+            // Reset all loading buttons
+            [sendCodeBtn, verifyCodeBtn, resetPasswordBtn].forEach(btn => {
+                if (btn) {
+                    btn.classList.remove('loading');
+                    btn.disabled = false;
+                }
+            });
+            // Reset form and go back to step 1
+            const form = document.getElementById('forgotForm');
+            if (form) form.reset();
+            goToStep(1);
+        }
+    });
 });
