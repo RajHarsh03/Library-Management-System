@@ -11,8 +11,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="../../styles/admin/admin.css">
     <link rel="stylesheet" href="../../styles/student/student.css">
+<script>
+    (function(){try{if(window.innerWidth>768&&localStorage.getItem('lms-student-sidebar-collapsed')!=='0')document.documentElement.classList.add('sidebar-pre-collapsed')}catch(e){}})();
+</script>
 </head>
-<body class="student-app">
+<body class="student-app sidebar-collapsed">
     <div class="app-layout">
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-top">

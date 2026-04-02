@@ -54,7 +54,9 @@ function initSidebar() {
     }
 }
 
-/** Collapse / expand sidebar (desktop). Preference stored in localStorage. */
+/** Collapse / expand sidebar (desktop). Preference stored in localStorage.
+ *  Body starts with sidebar-collapsed class in HTML to prevent flash.
+ *  JS only expands if user explicitly chose to expand ('0'). */
 function initSidebarCollapse(storageKey) {
     const btn = document.getElementById('sidebarCollapseBtn');
     const sidebar = document.getElementById('sidebar');
@@ -83,11 +85,19 @@ function initSidebarCollapse(storageKey) {
         } catch (e) { /* ignore */ }
     }
 
+    // Body starts collapsed via HTML class. If user previously chose expanded, un-collapse.
     try {
-        if (localStorage.getItem(storageKey) === '1' && window.innerWidth > 768) {
-            applyCollapsed(true);
+        if (localStorage.getItem(storageKey) === '0' && window.innerWidth > 768) {
+            applyCollapsed(false);
+        } else {
+            // Keep collapsed (already set in HTML), just set titles
+            setNavTitles(true);
+            btn.setAttribute('aria-expanded', 'false');
+            btn.setAttribute('aria-label', 'Expand navigation');
         }
-    } catch (e) { /* ignore */ }
+    } catch (e) {
+        setNavTitles(true);
+    }
 
     btn.addEventListener('click', () => {
         applyCollapsed(!document.body.classList.contains('sidebar-collapsed'));

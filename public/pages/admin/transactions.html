@@ -10,8 +10,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="../../styles/admin/admin.css">
+<script>
+    (function(){try{if(window.innerWidth>768&&localStorage.getItem('lms-admin-sidebar-collapsed')!=='0')document.documentElement.classList.add('sidebar-pre-collapsed')}catch(e){}})();
+</script>
 </head>
-<body>
+<body class="sidebar-collapsed">
     <div class="app-layout">
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
