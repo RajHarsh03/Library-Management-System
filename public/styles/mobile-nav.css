@@ -96,7 +96,7 @@
     }
 
     .student-welcome h2 {
-        font-size: 1.25rem;
+        font-size: 1.5rem;
         margin-bottom: 8px;
         line-height: 1.25;
         letter-spacing: -0.01em;
@@ -234,7 +234,7 @@
     }
 
     .student-welcome h2 {
-        font-size: 1.05rem;
+        font-size: 1.4rem;
         margin-bottom: 7px;
         font-weight: 700;
         line-height: 1.2;
@@ -286,33 +286,76 @@
     }
 
     .stats-grid {
-        gap: 8px;
-        margin-bottom: 14px;
-        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+        margin-bottom: 12px;
+        grid-template-columns: repeat(4, 1fr);
     }
 
     .stat-card {
-        padding: 10px;
+        padding: 8px 6px;
         border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: linear-gradient(135deg, rgba(36, 59, 85, 0.6) 0%, rgba(50, 78, 106, 0.4) 100%);
+        border: 1px solid rgba(99, 102, 241, 0.2);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     }
 
     .stat-card-header {
-        margin-bottom: 4px;
+        margin-bottom: 0;
+        width: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0;
+        flex-shrink: 0;
+        color: #818cf8;
     }
 
     .stat-card-label {
-        font-size: 0.65rem;
+        font-size: 0.55rem;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.2px;
+        display: none;
+    }
+
+    .stat-card-icon {
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .stat-card-icon .material-icons-outlined {
+        font-size: 0.95rem;
+        color: #818cf8;
+        font-weight: 600;
     }
 
     .stat-card-value {
-        font-size: 1.4rem;
-        margin: 4px 0;
+        font-size: 1.1rem;
+        margin: 0;
+        font-weight: 700;
+        flex-shrink: 0;
+        min-width: 20px;
+        text-align: center;
+        color: #e0e7ff;
     }
 
     .stat-card-change {
-        font-size: 0.65rem;
-        line-height: 1.2;
+        font-size: 0.52rem;
+        line-height: 1.1;
+        margin: 0;
+        white-space: nowrap;
+        flex-shrink: 1;
+        min-width: 0;
+        color: #b4bef7;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 }

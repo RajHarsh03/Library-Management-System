@@ -286,7 +286,7 @@ body.student-app .btn-outline:hover {
 
 .student-welcome h2 {
     font-family: var(--font-display);
-    font-size: clamp(1.45rem, 2.5vw, 1.85rem);
+    font-size: clamp(1.6rem, 2.8vw, 2.1rem);
     font-weight: 700;
     margin-bottom: 12px;
     position: relative;
