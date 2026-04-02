@@ -177,24 +177,122 @@
     /* ===== BROWSE PAGE - TABLET ===== */
     .browse-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+        gap: 14px;
+    }
+
+    .browse-card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        border-radius: 14px;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .browse-card:hover {
+        box-shadow: 0 8px 16px rgba(79, 70, 229, 0.15);
+        transform: translateY(-4px);
+        border-color: rgba(99, 102, 241, 0.2);
     }
 
     .browse-card-body {
-        padding: 16px 18px 18px;
+        padding: 15px 16px 17px;
     }
 
     .browse-card-body h3 {
-        font-size: 0.95rem;
+        font-size: 0.93rem;
+        font-weight: 700;
+        margin-bottom: 3px;
+        line-height: 1.3;
+        color: #1e293b;
+        letter-spacing: -0.01em;
     }
 
     .browse-card-body .author {
-        font-size: 0.8rem;
-        margin-bottom: 12px;
+        font-size: 0.76rem;
+        margin-bottom: 10px;
+        color: #64748b;
+        font-weight: 500;
     }
 
     .browse-card-cover {
-        height: 140px;
+        height: 135px;
+        background: linear-gradient(145deg, #e2e8f0 0%, #f1f5f9 100%);
+    }
+
+    .browse-card-actions {
+        gap: 8px;
+        align-items: center;
+    }
+
+    .availability-dot {
+        font-size: 0.71rem;
+        font-weight: 700;
+        white-space: nowrap;
+        padding: 5px 10px;
+        border-radius: 6px;
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.28) 0%, rgba(16, 185, 129, 0.16) 100%);
+        color: #059669;
+        flex-shrink: 0;
+        border: 1px solid rgba(16, 185, 129, 0.45);
+        box-shadow: 0 2px 4px rgba(16, 185, 129, 0.15);
+    }
+
+    .availability-dot::before {
+        display: none;
+    }
+
+    .availability-dot.unavailable {
+        background: linear-gradient(135deg, rgba(148, 163, 184, 0.2) 0%, rgba(148, 163, 184, 0.12) 100%);
+        color: #64748b;
+        border-color: rgba(148, 163, 184, 0.3);
+        box-shadow: 0 1px 3px rgba(148, 163, 184, 0.1);
+    }
+
+    .availability-dot.ebook {
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(59, 130, 246, 0.15) 100%);
+        color: #1d4ed8;
+        border-color: rgba(59, 130, 246, 0.4);
+        box-shadow: 0 2px 4px rgba(59, 130, 246, 0.15);
+    }
+
+    body.student-app .browse-card .btn-primary.btn-hold {
+        font-size: 0.72rem;
+        padding: 8px 13px;
+        font-weight: 700;
+        border-radius: 8px;
+        border: none;
+        background: linear-gradient(180deg, #6366f1 0%, #4f46e5 100%);
+        color: #ffffff;
+        box-shadow: 0 3px 8px rgba(79, 70, 229, 0.28);
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        letter-spacing: 0.3px;
+    }
+
+    body.student-app .browse-card .btn-primary.btn-hold:hover {
+        box-shadow: 0 5px 14px rgba(79, 70, 229, 0.35);
+        transform: translateY(-2px);
+    }
+
+    body.student-app .browse-card .btn-outline.btn-hold {
+        font-size: 0.72rem;
+        padding: 8px 13px;
+        font-weight: 700;
+        border-radius: 8px;
+        border: 1.5px solid rgba(99, 102, 241, 0.8);
+        color: #6366f1;
+        background: rgba(99, 102, 241, 0.05);
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        letter-spacing: 0.3px;
+    }
+
+    body.student-app .browse-card .btn-outline.btn-hold:hover {
+        background: rgba(99, 102, 241, 0.15);
+        border-color: #6366f1;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 6px rgba(99, 102, 241, 0.15);
     }
 
     /* ===== TABLE - TABLET ===== */
@@ -251,17 +349,24 @@
     }
 
     .page-header {
-        margin-top: 6px;
-        margin-bottom: 14px;
+        margin-top: 4px;
+        margin-bottom: 10px;
     }
 
     .page-header-left h1 {
         font-size: 1.15rem;
         margin-bottom: 3px;
+        font-weight: 700;
+        color: #1e293b;
+        letter-spacing: -0.01em;
     }
 
     .page-header-left p {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
+        line-height: 1.4;
+        margin-bottom: 0;
+        color: #64748b;
+        font-weight: 500;
     }
 
     .btn-primary {
@@ -423,39 +528,116 @@
 
     /* ===== BROWSE PAGE ===== */
     .browse-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .browse-card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .browse-card:active {
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        transform: scale(0.98);
     }
 
     .browse-card-body {
-        padding: 12px 14px 14px;
+        padding: 13px 14px 14px;
     }
 
     .browse-card-body h3 {
-        font-size: 0.88rem;
-        margin-bottom: 4px;
+        font-size: 0.9rem;
+        margin-bottom: 2px;
+        font-weight: 700;
+        line-height: 1.25;
+        color: #1e293b;
+        letter-spacing: -0.01em;
     }
 
     .browse-card-body .author {
         font-size: 0.7rem;
-        margin-bottom: 10px;
+        margin-bottom: 9px;
+        color: #64748b;
+        font-weight: 500;
     }
 
     .browse-card-cover {
-        height: 120px;
+        height: 140px;
     }
 
     .browse-card-actions {
-        gap: 8px;
+        gap: 6px;
+        align-items: stretch;
     }
 
     .availability-dot {
-        font-size: 0.7rem;
+        font-size: 0.68rem;
+        font-weight: 700;
+        white-space: nowrap;
+        padding: 6px 10px;
+        border-radius: 6px;
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.32) 0%, rgba(16, 185, 129, 0.18) 100%);
+        color: #059669;
+        flex-shrink: 0;
+        border: 1px solid rgba(16, 185, 129, 0.5);
+        box-shadow: 0 3px 6px rgba(16, 185, 129, 0.18);
     }
 
     body.student-app .browse-card .btn-primary.btn-hold {
-        font-size: 0.65rem;
-        padding: 6px 10px;
+        font-size: 0.68rem;
+        padding: 7px 12px;
+        font-weight: 700;
+        border-radius: 8px;
+        border: none;
+        background: linear-gradient(180deg, #6366f1 0%, #4f46e5 100%);
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.32);
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        letter-spacing: 0.2px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    body.student-app .browse-card .btn-primary.btn-hold::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+    }
+
+    body.student-app .browse-card .btn-primary.btn-hold:active {
+        box-shadow: 0 2px 6px rgba(79, 70, 229, 0.4);
+        transform: scale(0.97);
+    }
+
+    body.student-app .browse-card .btn-outline.btn-hold {
+        font-size: 0.68rem;
+        padding: 7px 12px;
+        font-weight: 700;
+        border-radius: 8px;
+        border: 1.5px solid rgba(99, 102, 241, 0.85);
+        color: #6366f1;
+        background: rgba(99, 102, 241, 0.08);
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        letter-spacing: 0.2px;
+    }
+
+    body.student-app .browse-card .btn-outline.btn-hold:active {
+        background: rgba(99, 102, 241, 0.18);
+        border-color: #6366f1;
+        transform: scale(0.97);
+        box-shadow: 0 2px 6px rgba(99, 102, 241, 0.25);
     }
 
     /* ===== TABLE / MY BOOKS PAGE ===== */
@@ -465,8 +647,8 @@
     }
 
     body.student-app .table-toolbar {
-        padding: 12px 8px;
-        gap: 8px;
+        padding: 8px 6px;
+        gap: 6px;
         flex-wrap: wrap;
     }
 
@@ -487,89 +669,115 @@
     }
 
     body.student-app .data-table {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
 
     body.student-app .data-table th {
-        padding: 10px 12px;
-        font-size: 0.65rem;
-        letter-spacing: 1px;
+        padding: 6px 8px;
+        font-size: 0.6rem;
+        letter-spacing: 0.5px;
     }
 
     body.student-app .data-table td {
-        padding: 12px;
-        font-size: 0.75rem;
+        padding: 8px;
+        font-size: 0.72rem;
     }
 
     body.student-app .cell-book {
-        gap: 8px;
+        gap: 6px;
     }
 
     body.student-app .cell-book-cover {
-        width: 36px;
-        height: 50px;
-        border-radius: 6px;
+        width: 32px;
+        height: 44px;
+        border-radius: 5px;
+        flex-shrink: 0;
     }
 
     body.student-app .cell-book-info .title {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        line-height: 1.2;
     }
 
     body.student-app .cell-book-info .subtitle {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
+        line-height: 1.1;
     }
 
     body.student-app .due-pill {
-        padding: 4px 8px;
-        font-size: 0.65rem;
+        padding: 3px 6px;
+        font-size: 0.6rem;
+        border-radius: 4px;
     }
 
     body.student-app .action-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 0.85rem;
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+        border-radius: 6px;
     }
 
     body.student-app .action-btn .material-icons-outlined {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
     }
 
     body.student-app .page-btn {
-        min-width: 32px;
-        height: 32px;
-        font-size: 0.7rem;
+        min-width: 28px;
+        height: 28px;
+        font-size: 0.65rem;
     }
 
     body.student-app .table-footer {
-        padding: 10px 12px;
-        font-size: 0.75rem;
+        padding: 8px 6px;
+        font-size: 0.7rem;
     }
 
     body.student-app .btn-outline[id="exportListBtn"] {
-        font-size: 0.65rem;
-        padding: 8px 10px;
-        gap: 4px;
+        font-size: 0.6rem;
+        padding: 6px 8px;
+        gap: 3px;
     }
 
     body.student-app .student-header-cta {
-        font-size: 0.75rem;
-        padding: 8px 12px;
-        gap: 4px;
+        font-size: 0.7rem;
+        padding: 6px 10px;
+        gap: 3px;
     }
 
     body.student-app .student-header-cta .material-icons-outlined {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
     }
 
     /* ===== TABS ===== */
     body.student-app .tabs {
-        margin-bottom: 16px;
-        gap: 2px;
+        margin-bottom: 14px;
+        gap: 4px;
+        border-bottom: 1px solid rgba(226, 232, 240, 0.6);
     }
 
     body.student-app .tab-btn {
-        padding: 8px 14px;
-        font-size: 0.75rem;
-        margin-bottom: -1px;
+        padding: 8px 12px;
+        font-size: 0.72rem;
+        margin-bottom: 0;
+        border: none;
+        background: transparent;
+        color: #64748b;
+        font-weight: 600;
+        border-bottom: 2px solid transparent;
+        transition: all 0.25s ease;
+        cursor: pointer;
+    }
+
+    body.student-app .tab-btn:hover {
+        color: #6366f1;
+        background: rgba(99, 102, 241, 0.05);
+    }
+
+    body.student-app .tab-btn.active {
+        color: #6366f1;
+        border-bottom-color: #6366f1;
+        font-weight: 700;
+        background: transparent;
     }
 }
