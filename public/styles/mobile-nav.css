@@ -173,6 +173,68 @@
     .sidebar-collapse-btn {
         display: none;
     }
+
+    /* ===== BROWSE PAGE - TABLET ===== */
+    .browse-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .browse-card-body {
+        padding: 16px 18px 18px;
+    }
+
+    .browse-card-body h3 {
+        font-size: 0.95rem;
+    }
+
+    .browse-card-body .author {
+        font-size: 0.8rem;
+        margin-bottom: 12px;
+    }
+
+    .browse-card-cover {
+        height: 140px;
+    }
+
+    /* ===== TABLE - TABLET ===== */
+    body.student-app .table-toolbar {
+        padding: 16px 18px;
+        gap: 12px;
+    }
+
+    body.student-app .table-search input {
+        padding: 10px 14px 10px 40px;
+        font-size: 0.85rem;
+    }
+
+    body.student-app .data-table th {
+        padding: 12px 16px;
+        font-size: 0.68rem;
+    }
+
+    body.student-app .data-table td {
+        padding: 14px 16px;
+        font-size: 0.85rem;
+    }
+
+    body.student-app .cell-book-cover {
+        width: 40px;
+        height: 56px;
+    }
+
+    body.student-app .cell-book-info .title {
+        font-size: 0.9rem;
+    }
+
+    body.student-app .cell-book-info .subtitle {
+        font-size: 0.7rem;
+    }
+
+    body.student-app .tab-btn {
+        padding: 12px 18px;
+        font-size: 0.85rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -357,5 +419,157 @@
         color: #b4bef7;
         text-overflow: ellipsis;
         overflow: hidden;
+    }
+
+    /* ===== BROWSE PAGE ===== */
+    .browse-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .browse-card-body {
+        padding: 12px 14px 14px;
+    }
+
+    .browse-card-body h3 {
+        font-size: 0.88rem;
+        margin-bottom: 4px;
+    }
+
+    .browse-card-body .author {
+        font-size: 0.7rem;
+        margin-bottom: 10px;
+    }
+
+    .browse-card-cover {
+        height: 120px;
+    }
+
+    .browse-card-actions {
+        gap: 8px;
+    }
+
+    .availability-dot {
+        font-size: 0.7rem;
+    }
+
+    body.student-app .browse-card .btn-primary.btn-hold {
+        font-size: 0.65rem;
+        padding: 6px 10px;
+    }
+
+    /* ===== TABLE / MY BOOKS PAGE ===== */
+    body.student-app .table-container {
+        border-radius: 14px;
+        overflow: auto;
+    }
+
+    body.student-app .table-toolbar {
+        padding: 12px 8px;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    body.student-app .table-search {
+        flex: 1;
+        min-width: 180px;
+    }
+
+    body.student-app .table-search input {
+        padding: 8px 12px 8px 36px;
+        font-size: 0.8rem;
+        border-radius: 8px;
+    }
+
+    body.student-app .table-search .material-icons-outlined {
+        left: 10px;
+        font-size: 0.9rem;
+    }
+
+    body.student-app .data-table {
+        font-size: 0.8rem;
+    }
+
+    body.student-app .data-table th {
+        padding: 10px 12px;
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+    }
+
+    body.student-app .data-table td {
+        padding: 12px;
+        font-size: 0.75rem;
+    }
+
+    body.student-app .cell-book {
+        gap: 8px;
+    }
+
+    body.student-app .cell-book-cover {
+        width: 36px;
+        height: 50px;
+        border-radius: 6px;
+    }
+
+    body.student-app .cell-book-info .title {
+        font-size: 0.8rem;
+    }
+
+    body.student-app .cell-book-info .subtitle {
+        font-size: 0.65rem;
+    }
+
+    body.student-app .due-pill {
+        padding: 4px 8px;
+        font-size: 0.65rem;
+    }
+
+    body.student-app .action-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
+    }
+
+    body.student-app .action-btn .material-icons-outlined {
+        font-size: 0.95rem;
+    }
+
+    body.student-app .page-btn {
+        min-width: 32px;
+        height: 32px;
+        font-size: 0.7rem;
+    }
+
+    body.student-app .table-footer {
+        padding: 10px 12px;
+        font-size: 0.75rem;
+    }
+
+    body.student-app .btn-outline[id="exportListBtn"] {
+        font-size: 0.65rem;
+        padding: 8px 10px;
+        gap: 4px;
+    }
+
+    body.student-app .student-header-cta {
+        font-size: 0.75rem;
+        padding: 8px 12px;
+        gap: 4px;
+    }
+
+    body.student-app .student-header-cta .material-icons-outlined {
+        font-size: 0.95rem;
+    }
+
+    /* ===== TABS ===== */
+    body.student-app .tabs {
+        margin-bottom: 16px;
+        gap: 2px;
+    }
+
+    body.student-app .tab-btn {
+        padding: 8px 14px;
+        font-size: 0.75rem;
+        margin-bottom: -1px;
     }
 }
