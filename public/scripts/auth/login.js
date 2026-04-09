@@ -307,4 +307,76 @@ document.addEventListener('DOMContentLoaded', () => {
             passwordToggleIcon.textContent = 'visibility_off';
         }
     });
+
+    // ===== Enhanced Input Interactions =====
+    // Add ripple effect on focus
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            const wrapper = input.closest('.input-wrapper');
+            if (wrapper) {
+                wrapper.style.transform = 'scale(1.01)';
+            }
+        });
+        
+        input.addEventListener('blur', () => {
+            const wrapper = input.closest('.input-wrapper');
+            if (wrapper) {
+                wrapper.style.transform = 'scale(1)';
+            }
+        });
+    });
+
+    // ===== Hero Stats Animation Enhancement =====
+    function animateHeroStats() {
+        const heroContent = document.querySelector('.hero-content');
+        if (heroContent) {
+            heroContent.style.opacity = '0';
+            heroContent.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                heroContent.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                heroContent.style.opacity = '1';
+                heroContent.style.transform = 'translateY(0)';
+            }, 100);
+        }
+    }
+
+    // Run hero animation on load
+    animateHeroStats();
+
+    // ===== Enhanced Toast Positioning =====
+    // Position toast based on screen size
+    function updateToastPosition() {
+        const container = document.getElementById('toastContainer');
+        if (window.innerWidth <= 768) {
+            container.style.left = '12px';
+            container.style.right = '12px';
+        } else {
+            container.style.left = 'auto';
+            container.style.right = '24px';
+        }
+    }
+
+    window.addEventListener('resize', updateToastPosition);
+    updateToastPosition();
+
+    // ===== Keyboard Navigation Enhancement =====
+    // Allow Enter key to toggle role
+    roleToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            e.preventDefault();
+            if (currentRole === 'student') {
+                adminBtn.click();
+            } else {
+                studentBtn.click();
+            }
+        }
+    });
+
+    // ===== Form Submit with Enhanced Feedback =====
+    loginForm.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey && !e.ctrlKey) {
+            // Allow default form submission which is handled by submit event
+        }
+    });
 });

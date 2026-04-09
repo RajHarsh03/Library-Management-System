@@ -974,3 +974,257 @@ html, body {
     }
 }
 
+/* ===== ENHANCED UI ADDITIONS ===== */
+
+/* Enhanced Form Input Focus */
+.form-input {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-input:focus {
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 
+        0 0 0 4px rgba(37, 99, 235, 0.1),
+        0 0 0 8px rgba(37, 99, 235, 0.05),
+        0 4px 20px rgba(37, 99, 235, 0.15);
+    transform: translateY(-1px);
+}
+
+/* Input Icon Animation */
+.input-wrapper .input-icon {
+    transition: all 0.3s ease;
+}
+
+.form-input:focus ~ .input-icon {
+    color: #2563eb;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Enhanced Button States */
+.btn-login {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255,255,255,0.2), 
+        transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-login:hover::before {
+    left: 100%;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 12px 28px rgba(0, 102, 204, 0.45), 
+        0 4px 8px rgba(0, 0, 0, 0.15),
+        0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.btn-login:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* SSO Button Enhancements */
+.sso-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sso-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sso-btn:hover::after {
+    opacity: 1;
+}
+
+.sso-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+        0 12px 28px rgba(0, 102, 204, 0.2),
+        0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Hero Feature Card Enhancements */
+.hero-feature-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255,255,255,0.1), 
+        transparent);
+    transition: left 0.6s ease;
+}
+
+.hero-feature-card:hover::before {
+    left: 100%;
+}
+
+.hero-feature-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+        0 12px 24px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255,255,255,0.2);
+}
+
+.hero-feature-card .material-icons-outlined {
+    transition: all 0.3s ease;
+}
+
+.hero-feature-card:hover .material-icons-outlined {
+    transform: scale(1.15) rotate(5deg);
+    color: rgba(255,255,255,0.95);
+}
+
+/* Form Error Animation */
+.form-error.visible {
+    animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.form-group.has-error .form-input {
+    animation: pulse-error 0.5s ease-in-out;
+}
+
+@keyframes pulse-error {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.06); }
+    50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.1); }
+}
+
+/* Toast Enhancement */
+.toast:hover {
+    transform: translateX(-4px);
+    box-shadow: 
+        var(--shadow-lg), 
+        0 0 0 1px rgba(0,0,0,0.04),
+        0 8px 30px rgba(0,0,0,0.12);
+}
+
+/* Role Toggle Enhancement */
+.role-btn:hover:not(.active) {
+    color: #4a5568;
+    background: rgba(255,255,255,0.5);
+}
+
+.role-indicator {
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Password Toggle Enhancement */
+.password-toggle {
+    border-radius: 6px;
+}
+
+.password-toggle:hover {
+    background: rgba(37, 99, 235, 0.1);
+    color: #2563eb;
+}
+
+.password-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Form Header Enhancement */
+.form-header::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+    border-radius: 2px;
+    opacity: 0.6;
+}
+
+.form-header {
+    position: relative;
+}
+
+/* Input Label Animation */
+.form-group:focus-within .form-label {
+    color: #2563eb;
+    transform: translateX(2px);
+}
+
+/* Hero Canvas Glow */
+#heroCanvas {
+    filter: drop-shadow(0 0 30px rgba(37, 99, 235, 0.1));
+}
+
+/* Floating Elements Animation Enhancement */
+.float-circle {
+    filter: blur(0.5px);
+}
+
+.float-ring {
+    filter: blur(0.3px);
+}
+
+/* Check Input Enhancement */
+.check-input:checked {
+    transform: scale(1.1);
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+    .hero-feature-card {
+        backdrop-filter: blur(8px);
+    }
+    
+    .form-input:focus {
+        box-shadow: 
+            0 0 0 3px rgba(37, 99, 235, 0.1),
+            0 4px 15px rgba(37, 99, 235, 0.1);
+    }
+    
+    .btn-login:hover {
+        transform: translateY(-1px);
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
