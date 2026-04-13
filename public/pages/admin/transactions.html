@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../../styles/admin/admin.css">
     <link rel="stylesheet" href="../../styles/mobile-nav.css">
     <link rel="stylesheet" href="../../styles/global-enhancements.css">
+    <link rel="stylesheet" href="../../styles/admin/transactions.css">
 <script>
     (function(){try{if(window.innerWidth>768&&localStorage.getItem('lms-admin-sidebar-collapsed')!=='0')document.documentElement.classList.add('sidebar-pre-collapsed')}catch(e){}})();
 </script>
@@ -38,21 +39,21 @@
             </button>
             </div>
             <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-item" data-page="dashboard">
+                <a href="/admin/dashboard" class="nav-item" data-page="dashboard">
                     <span class="material-icons-outlined">dashboard</span>
                     <span>Dashboard</span>
                 </a>
-                <a href="books.html" class="nav-item" data-page="books">
+                <a href="/admin/books" class="nav-item" data-page="books">
                     <span class="material-icons-outlined">auto_stories</span>
                     <span>Books</span>
                 </a>
-                <a href="users.html" class="nav-item" data-page="users">
-                    <span class="material-icons-outlined">group</span>
-                    <span>Users</span>
-                </a>
-                <a href="transactions.html" class="nav-item active" data-page="transactions">
+                <a href="/admin/transactions" class="nav-item active" data-page="transactions">
                     <span class="material-icons-outlined">swap_horiz</span>
                     <span>Transactions</span>
+                </a>
+                <a href="/admin/users" class="nav-item" data-page="users">
+                    <span class="material-icons-outlined">group</span>
+                    <span>Users</span>
                 </a>
             </nav>
             <div class="sidebar-footer">
@@ -60,7 +61,7 @@
                     <span class="material-icons-outlined">settings</span>
                     <span>Settings</span>
                 </a>
-                <a href="../auth/index.html" class="nav-item logout-btn">
+                <a href="/login" class="nav-item logout-btn">
                     <span class="material-icons-outlined">logout</span>
                     <span>Logout</span>
                 </a>
@@ -123,118 +124,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td style="font-weight:600;color:var(--gray-500);">#TX-9042</td>
-                                <td>
-                                    <div class="cell-book">
-                                        <div class="cell-book-cover">
-                                            <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=100&h=140&fit=crop" alt="Book">
-                                        </div>
-                                        <div class="cell-book-info">
-                                            <div class="title">The Elements of Style</div>
-                                            <div class="subtitle" style="color:var(--accent);">REFERENCE · ST-88</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>Eleanor Vance</div>
-                                    <div style="font-size:0.76rem;color:var(--gray-400);">evance@archivist.edu</div>
-                                </td>
-                                <td>Oct 12, 2023</td>
-                                <td style="color:var(--danger);font-weight:600;">Oct 26, 2023</td>
-                                <td><span class="status-badge overdue">OVERDUE</span></td>
-                                <td>
-                                    <button class="action-btn"><span class="material-icons-outlined">mail</span></button>
-                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight:600;color:var(--gray-500);">#TX-9045</td>
-                                <td>
-                                    <div class="cell-book">
-                                        <div class="cell-book-cover">
-                                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=100&h=140&fit=crop" alt="Book">
-                                        </div>
-                                        <div class="cell-book-info">
-                                            <div class="title">Design as Art</div>
-                                            <div class="subtitle" style="color:var(--accent);">NON-FICTION · DA-22</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>Julian Blackwood</div>
-                                    <div style="font-size:0.76rem;color:var(--gray-400);">jblack@institute.org</div>
-                                </td>
-                                <td>Nov 01, 2023</td>
-                                <td>Nov 15, 2023</td>
-                                <td><span class="status-badge loaned">LOANED</span></td>
-                                <td>
-                                    <button class="action-btn"><span class="material-icons-outlined">send</span></button>
-                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight:600;color:var(--gray-500);">#TX-8988</td>
-                                <td>
-                                    <div class="cell-book">
-                                        <div class="cell-book-cover">
-                                            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=100&h=140&fit=crop" alt="Book">
-                                        </div>
-                                        <div class="cell-book-info">
-                                            <div class="title">Bauhaus Manifesto</div>
-                                            <div class="subtitle" style="color:var(--accent);">COLLECTOR · BH-01</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>Theodore Miller</div>
-                                    <div style="font-size:0.76rem;color:var(--gray-400);">tmiller@design.edu</div>
-                                </td>
-                                <td>Oct 28, 2023</td>
-                                <td style="color:var(--gray-400);font-style:italic;">Returned Oct 30</td>
-                                <td><span class="status-badge returned">RETURNED</span></td>
-                                <td>
-                                    <button class="action-btn"><span class="material-icons-outlined">history</span></button>
-                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight:600;color:var(--gray-500);">#TX-9051</td>
-                                <td>
-                                    <div class="cell-book">
-                                        <div class="cell-book-cover">
-                                            <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=100&h=140&fit=crop" alt="Book">
-                                        </div>
-                                        <div class="cell-book-info">
-                                            <div class="title">Visual Grammar</div>
-                                            <div class="subtitle" style="color:var(--accent);">REFERENCE · VG-10</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>Sienna Rossi</div>
-                                    <div style="font-size:0.76rem;color:var(--gray-400);">srossi@academy.com</div>
-                                </td>
-                                <td>Nov 03, 2023</td>
-                                <td>Nov 17, 2023</td>
-                                <td><span class="status-badge loaned">LOANED</span></td>
-                                <td>
-                                    <button class="action-btn"><span class="material-icons-outlined">send</span></button>
-                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
-                                </td>
-                            </tr>
+                            <!-- Populated by transactions-manager.js -->
                         </tbody>
                     </table>
 
                     <!-- Pagination -->
                     <div class="table-footer">
-                        <span class="table-footer-info">SHOWING 1 TO 4 OF 1,284 ENTRIES</span>
+                        <span class="table-footer-info">Loading...</span>
                         <div class="pagination">
-                            <button class="page-btn" data-page="prev"><span class="material-icons-outlined">chevron_left</span></button>
-                            <button class="page-btn active" data-page="1">1</button>
-                            <button class="page-btn" data-page="2">2</button>
-                            <button class="page-btn" data-page="3">3</button>
-                            <button class="page-btn" data-page="next"><span class="material-icons-outlined">chevron_right</span></button>
+                            <!-- Populated by transactions-manager.js -->
                         </div>
                     </div>
                 </div>
@@ -246,7 +144,7 @@
                             <span class="material-icons-outlined" style="color:var(--danger);">event_busy</span>
                             <h3 style="margin-bottom:0;color:var(--danger);">Overdue Notice Protocol</h3>
                         </div>
-                        <p>Systems indicate <strong>12 items</strong> are currently past their return deadline. Automated reminders are scheduled for release at 18:00 UTC.</p>
+                        <p id="overdueCount">Loading overdue data...</p>
                         <a href="#" style="font-size:0.78rem;font-weight:700;letter-spacing:1px;color:var(--accent);text-transform:uppercase;">CONFIGURE AUTOMATIONS</a>
                     </div>
                     <div class="info-card">
@@ -255,10 +153,10 @@
                             <h3 style="margin-bottom:0;">Circulation Velocity</h3>
                         </div>
                         <div style="display:flex;align-items:baseline;gap:10px;">
-                            <span style="font-family:var(--font-display);font-size:2.2rem;font-weight:700;color:var(--gray-900);">142</span>
-                            <span class="stat-card-change positive">+12.4%</span>
+                            <span id="circulationCount" style="font-family:var(--font-display);font-size:2.2rem;font-weight:700;color:var(--gray-900);">--</span>
+                            <span id="circulationChange" class="stat-card-change neutral">Loading...</span>
                         </div>
-                        <span style="font-size:0.68rem;font-weight:700;letter-spacing:1.5px;color:var(--gray-400);text-transform:uppercase;">RETURNS THIS WEEK</span>
+                        <span style="font-size:0.68rem;font-weight:700;letter-spacing:1.5px;color:var(--gray-400);text-transform:uppercase;">ACTIVE LOANS</span>
                     </div>
                     <div class="info-card">
                         <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
@@ -266,7 +164,7 @@
                             <h3 style="margin-bottom:0;">Archival Integrity</h3>
                         </div>
                         <div>
-                            <span style="font-family:var(--font-display);font-size:2.2rem;font-weight:700;color:var(--gray-900);">99.2%</span>
+                            <span id="integrityPercent" style="font-family:var(--font-display);font-size:2.2rem;font-weight:700;color:var(--gray-900);">--</span>
                         </div>
                         <span style="font-size:0.68rem;font-weight:700;letter-spacing:1.5px;color:var(--gray-400);text-transform:uppercase;">INVENTORY MATCHED</span>
                     </div>
@@ -277,6 +175,7 @@
 
     <script src="../../scripts/api/config.js"></script>
     <script src="../../scripts/admin/admin.js"></script>
+    <script src="../../scripts/admin/transactions-manager.js"></script>
     <script src="../../scripts/mobile-nav.js"></script>
 </body>
 </html>

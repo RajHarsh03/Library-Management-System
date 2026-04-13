@@ -162,10 +162,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (data.success) {
                 const user = data.data.user;
+
+                // Validate role matches the selected toggle
+                const isAdmin = user.role === 'admin' || user.role === 'librarian';
+                if (currentRole === 'student' && isAdmin) {
+                    API.clearAuth();
+                    showToast('This is an administrator account. Please select the Administrator tab.', 'error');
+                    loginBtn.classList.remove('loading');
+                    return;
+                }
+                if (currentRole === 'admin' && !isAdmin) {
+                    API.clearAuth();
+                    showToast('This is a student account. Please select the Student Access tab.', 'error');
+                    loginBtn.classList.remove('loading');
+                    return;
+                }
+
                 showToast('Authentication successful. Redirecting...', 'success');
 
                 setTimeout(() => {
-                    if (user.role === 'admin' || user.role === 'librarian') {
+                    if (isAdmin) {
                         window.location.href = '/admin/dashboard';
                     } else {
                         window.location.href = '/student/dashboard';

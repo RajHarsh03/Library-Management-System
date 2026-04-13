@@ -327,12 +327,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await API.register(userData);
 
             if (data.success) {
-                showToast('Account created successfully! Redirecting to login...', 'success');
+                showToast('Account created successfully! Redirecting...', 'success');
 
-                // Redirect to login after 2 seconds
+                // Redirect to student dashboard (user is already authenticated)
                 setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 2000);
+                    window.location.href = '/student/dashboard';
+                }, 1500);
             } else {
                 showToast(data.message || 'Registration failed', 'error');
                 signupBtn.classList.remove('loading');

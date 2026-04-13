@@ -73,8 +73,8 @@ const API = (() => {
                 if (response.status === 401) {
                     clearAuth();
                     // Redirect to login if not already there
-                    if (!window.location.pathname.includes('/auth/')) {
-                        window.location.href = '/pages/auth/index.html';
+                    if (!window.location.pathname.includes('/login') && !window.location.pathname.includes('/auth/')) {
+                        window.location.href = '/login';
                         return;
                     }
                 }

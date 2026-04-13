@@ -392,46 +392,24 @@ document.querySelectorAll('.book-card').forEach(card => {
 
 // Toast notification helper
 function showToast(message, type = 'info') {
-    const container = document.getElementById('toastContainer') || createToastContainer();
-    
     const toast = document.createElement('div');
-    toast.className = `toast ${type} toast-enhanced`;
-    
-    const icons = {
-        success: 'check_circle',
-        error: 'error_outline',
-        info: 'info',
-        warning: 'warning'
+    toast.style.cssText = `
+        position: fixed; top: 24px; right: 24px; z-index: 10001;
+        padding: 14px 24px; border-radius: 12px; font-family: 'Inter', sans-serif;
+        font-size: 0.88rem; font-weight: 500; color: #fff;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18); animation: toastIn 0.35s ease;
+        max-width: 380px;
+    `;
+    const colors = {
+        success: 'linear-gradient(135deg, #059669, #10b981)',
+        error: 'linear-gradient(135deg, #dc2626, #ef4444)',
+        info: 'linear-gradient(135deg, #2563eb, #3b82f6)',
     };
-    
-    toast.innerHTML = `
-        <span class="material-icons-outlined">${icons[type] || icons.info}</span>
-        <span>${message}</span>
-    `;
-    
-    container.appendChild(toast);
-    
-    setTimeout(() => {
-        toast.classList.add('removing');
-        toast.addEventListener('animationend', () => toast.remove());
-    }, 4000);
-}
-
-function createToastContainer() {
-    const container = document.createElement('div');
-    container.id = 'toastContainer';
-    container.className = 'toast-container';
-    container.style.cssText = `
-        position: fixed;
-        top: 24px;
-        right: 24px;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    `;
-    document.body.appendChild(container);
-    return container;
+    toast.style.background = colors[type] || colors.info;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(40px)'; toast.style.transition = 'all 0.3s ease'; }, 2800);
+    setTimeout(() => toast.remove(), 3200);
 }
 
 // Export for use in other scripts
