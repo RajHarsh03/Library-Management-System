@@ -126,57 +126,11 @@
                             </tr>
                         </thead>
                         <tbody id="myBooksBody">
-                            <tr data-title="The Digital Frontier" data-author="Julian Thorne">
-                                <td>
-                                    <div class="cell-book">
-                                        <div class="cell-book-cover">
-                                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=120&h=160&fit=crop" alt="">
-                                        </div>
-                                        <div class="cell-book-info">
-                                            <div class="title">The Digital Frontier</div>
-                                            <div class="subtitle">Julian Thorne · ISBN 942-11-094</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Mar 25, 2026</td>
-                                <td><span class="due-pill ok">Apr 8, 2026</span></td>
-                                <td>1</td>
-                                <td>
-                                    <button type="button" class="action-btn renew-btn" title="Renew" aria-label="Renew The Digital Frontier">
-                                        <span class="material-icons-outlined">autorenew</span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr data-title="Modern Criticism" data-author="Elena Marsh">
-                                <td>
-                                    <div class="cell-book">
-                                        <div class="cell-book-cover">
-                                            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=120&h=160&fit=crop" alt="">
-                                        </div>
-                                        <div class="cell-book-info">
-                                            <div class="title">Modern Criticism</div>
-                                            <div class="subtitle">Elena Marsh · ISBN 301-88-112</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Mar 21, 2026</td>
-                                <td><span class="due-pill soon">Apr 4, 2026</span></td>
-                                <td>0</td>
-                                <td>
-                                    <button type="button" class="action-btn" disabled title="No renewals left" aria-label="Cannot renew">
-                                        <span class="material-icons-outlined">block</span>
-                                    </button>
-                                </td>
-                            </tr>
+                            <tr><td colspan="5" style="text-align:center;padding:40px;color:#94a3b8;">Loading your books...</td></tr>
                         </tbody>
                     </table>
                     <div class="table-footer">
-                        <span class="table-footer-info">Showing <strong>2</strong> active loans</span>
-                        <div class="pagination">
-                            <button type="button" class="page-btn" aria-label="Previous page"><span class="material-icons-outlined">chevron_left</span></button>
-                            <button type="button" class="page-btn active" data-page="1">1</button>
-                            <button type="button" class="page-btn" aria-label="Next page"><span class="material-icons-outlined">chevron_right</span></button>
-                        </div>
+                        <span class="table-footer-info">Loading...</span>
                     </div>
                 </div>
             </div>
@@ -185,16 +139,7 @@
 
     <script src="../../scripts/api/config.js"></script>
     <script src="../../scripts/student/student.js"></script>
+    <script src="../../scripts/student/student-data.js"></script>
     <script src="../../scripts/mobile-nav.js"></script>
-    <script>
-        document.querySelectorAll('.renew-btn').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                alert('Renewal request sent. You will receive a confirmation email if the item is renewed.');
-            });
-        });
-        document.getElementById('exportListBtn').addEventListener('click', function () {
-            alert('A plain-text list of your loans would download here in a full integration.');
-        });
-    </script>
 </body>
 </html>

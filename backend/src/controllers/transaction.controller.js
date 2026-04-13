@@ -9,6 +9,7 @@ const Transaction = require('../models/Transaction');
 const Book = require('../models/Book');
 const User = require('../models/User');
 const Settings = require('../models/Settings');
+const Notification = require('../models/Notification');
 const { success, error, paginated, validationError } = require('../utils/response');
 const logger = require('../utils/logger');
 
@@ -173,6 +174,19 @@ const borrowBook = async (req, res) => {
       processedBy: req.user._id,
     });
 
+    // Notify the student about their due date
+    const dueDateStr = dayjs(dueDate).format('MMM D, YYYY');
+    await Notification.createSystemNotification({
+      title: `Book Borrowed: ${book.title}`,
+      message: `"${book.title}" has been issued to you. Due date: ${dueDateStr}.`,
+      type: 'borrow',
+      audience: 'student',
+      user: userId,
+      icon: 'menu_book',
+      priority: 'normal',
+      meta: { transactionId: transaction._id, bookId },
+    });
+
     success(res, 'Book borrowed successfully', {
       transaction: await Transaction.findById(transaction._id)
         .populate('book', 'title authors')
@@ -232,6 +246,33 @@ const returnBook = async (req, res) => {
       fineAmount: transaction.fineAmount,
       processedBy: req.user._id,
     });
+
+    // Notify the student about the return
+    const returnedBook = await Book.findById(transaction.book);
+    const bookTitle = returnedBook ? returnedBook.title : 'a book';
+    if (transaction.fineAmount > 0) {
+      await Notification.createSystemNotification({
+        title: `Book Returned with Fine`,
+        message: `"${bookTitle}" returned. A fine of ₹${transaction.fineAmount} has been applied for late return.`,
+        type: 'fine',
+        audience: 'student',
+        user: transaction.user,
+        icon: 'payments',
+        priority: 'high',
+        meta: { transactionId, fineAmount: transaction.fineAmount },
+      });
+    } else {
+      await Notification.createSystemNotification({
+        title: `Book Returned: ${bookTitle}`,
+        message: `"${bookTitle}" has been successfully returned. No fines.`,
+        type: 'return',
+        audience: 'student',
+        user: transaction.user,
+        icon: 'check_circle',
+        priority: 'low',
+        meta: { transactionId },
+      });
+    }
 
     success(res, 'Book returned successfully', {
       transaction: await Transaction.findById(transactionId)

@@ -34,7 +34,7 @@ const holdValidation = [
 
 // All routes require student authentication + maintenance check
 router.use(protect);
-router.use(restrictTo('student'));
+router.use(restrictTo('student', 'admin'));
 router.use(maintenanceGuard);
 
 // Dashboard

@@ -147,18 +147,312 @@ function initTopbar() {
                 `<div class="greeting-sub">${dateStr}</div>`;
         }
         updateGreeting();
-        // Update every minute to stay real-time
         setInterval(updateGreeting, 60000);
     }
 
-    // Notification bell
-    const notifBtn = document.querySelector('.topbar-icon-btn');
-    if (notifBtn) {
-        notifBtn.addEventListener('click', () => {
-            const dot = notifBtn.querySelector('.notification-dot');
-            if (dot) dot.style.display = 'none';
+    // ─── Notification Panel ───
+    initNotificationPanel();
+
+    // ─── Help Modal ───
+    initHelpModal();
+}
+
+// ===== NOTIFICATION PANEL =====
+function initNotificationPanel() {
+    const notifBtn = document.getElementById('notificationBtn');
+    if (!notifBtn) return;
+
+    // Inject styles
+    injectNotificationStyles();
+
+    // Create panel
+    const panel = document.createElement('div');
+    panel.id = 'notifPanel';
+    panel.className = 'notif-panel';
+    panel.innerHTML = `
+        <div class="notif-header">
+            <h3>Notifications</h3>
+            <button class="notif-mark-all" id="notifMarkAll" title="Mark all as read">
+                <span class="material-icons-outlined">done_all</span>
+            </button>
+        </div>
+        <div class="notif-body" id="notifBody">
+            <div class="notif-loading">Loading...</div>
+        </div>
+    `;
+    notifBtn.parentElement.style.position = 'relative';
+    notifBtn.parentElement.appendChild(panel);
+
+    let panelOpen = false;
+
+    notifBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        panelOpen = !panelOpen;
+        panel.classList.toggle('open', panelOpen);
+        if (panelOpen) loadNotifications();
+    });
+
+    document.addEventListener('click', (e) => {
+        if (panelOpen && !panel.contains(e.target) && !notifBtn.contains(e.target)) {
+            panelOpen = false;
+            panel.classList.remove('open');
+        }
+    });
+
+    // Mark all read
+    document.getElementById('notifMarkAll').addEventListener('click', async () => {
+        try {
+            const token = localStorage.getItem('lms_token') || (window.API && API.getToken && API.getToken());
+            await fetch('/api/notifications/read-all', {
+                method: 'POST',
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            loadNotifications();
+        } catch (e) { /* ignore */ }
+    });
+
+    // Load unread count on page load
+    loadUnreadCount();
+    // Refresh every 60 seconds
+    setInterval(loadUnreadCount, 60000);
+}
+
+async function loadNotifications() {
+    const body = document.getElementById('notifBody');
+    if (!body) return;
+
+    try {
+        const token = localStorage.getItem('lms_token') || (window.API && API.getToken && API.getToken());
+        const resp = await fetch('/api/notifications?limit=25', {
+            headers: { Authorization: `Bearer ${token}` },
         });
+        const data = await resp.json();
+
+        if (!data.success || !data.data.length) {
+            body.innerHTML = `<div class="notif-empty">
+                <span class="material-icons-outlined" style="font-size:40px;color:#cbd5e1;">notifications_none</span>
+                <p>No notifications yet</p>
+            </div>`;
+            return;
+        }
+
+        body.innerHTML = data.data.map(n => {
+            const timeAgo = getTimeAgo(n.createdAt);
+            const iconColors = {
+                maintenance: '#f59e0b', system: '#3b82f6', overdue: '#ef4444',
+                due_reminder: '#f97316', account: '#8b5cf6', registration: '#10b981',
+                fine: '#ef4444', borrow: '#0ea5e9', return: '#22c55e',
+            };
+            const color = iconColors[n.type] || '#6b7280';
+            const readClass = n.read ? 'read' : '';
+
+            return `<div class="notif-item ${readClass}" data-id="${n._id}" onclick="markNotifRead('${n._id}', this)">
+                <div class="notif-icon" style="background:${color}15;color:${color}">
+                    <span class="material-icons-outlined">${n.icon || 'notifications'}</span>
+                </div>
+                <div class="notif-content">
+                    <div class="notif-title">${n.title}</div>
+                    <div class="notif-msg">${n.message}</div>
+                    <div class="notif-time">${timeAgo}</div>
+                </div>
+                ${!n.read ? '<div class="notif-unread-dot"></div>' : ''}
+            </div>`;
+        }).join('');
+    } catch (e) {
+        body.innerHTML = '<div class="notif-empty"><p>Unable to load notifications</p></div>';
     }
+}
+
+async function loadUnreadCount() {
+    try {
+        const token = localStorage.getItem('lms_token') || (window.API && API.getToken && API.getToken());
+        if (!token) return;
+        const resp = await fetch('/api/notifications/unread-count', {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await resp.json();
+        const dot = document.querySelector('#notificationBtn .notification-dot');
+        if (dot) {
+            dot.style.display = (data.success && data.data.unread > 0) ? 'block' : 'none';
+        }
+    } catch (e) { /* ignore */ }
+}
+
+window.markNotifRead = async function (id, el) {
+    try {
+        const token = localStorage.getItem('lms_token') || (window.API && API.getToken && API.getToken());
+        await fetch(`/api/notifications/${id}/read`, {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        if (el) {
+            el.classList.add('read');
+            const dot = el.querySelector('.notif-unread-dot');
+            if (dot) dot.remove();
+        }
+        loadUnreadCount();
+    } catch (e) { /* ignore */ }
+};
+
+function getTimeAgo(dateStr) {
+    const diff = Date.now() - new Date(dateStr).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 1) return 'Just now';
+    if (mins < 60) return `${mins}m ago`;
+    const hours = Math.floor(mins / 60);
+    if (hours < 24) return `${hours}h ago`;
+    const days = Math.floor(hours / 24);
+    if (days < 7) return `${days}d ago`;
+    return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function injectNotificationStyles() {
+    if (document.getElementById('notif-panel-styles')) return;
+    const style = document.createElement('style');
+    style.id = 'notif-panel-styles';
+    style.textContent = `
+        .notif-panel {
+            position: absolute; top: 52px; right: 0; width: 380px; max-height: 480px;
+            background: #fff; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05);
+            z-index: 1000; opacity: 0; transform: translateY(-8px) scale(0.97); pointer-events: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column;
+            overflow: hidden;
+        }
+        .notif-panel.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+        .notif-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 16px 20px 12px; border-bottom: 1px solid #f1f5f9;
+        }
+        .notif-header h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 700; color: #1e293b; margin: 0; }
+        .notif-mark-all {
+            width: 32px; height: 32px; border-radius: 8px; border: none; background: #f1f5f9;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+        }
+        .notif-mark-all:hover { background: #e2e8f0; }
+        .notif-mark-all .material-icons-outlined { font-size: 1.1rem; color: #64748b; }
+        .notif-body { overflow-y: auto; max-height: 380px; padding: 8px 0; }
+        .notif-item {
+            display: flex; align-items: flex-start; gap: 12px; padding: 12px 20px; cursor: pointer;
+            transition: background 0.15s; position: relative;
+        }
+        .notif-item:hover { background: #f8fafc; }
+        .notif-item.read { opacity: 0.6; }
+        .notif-icon {
+            width: 36px; height: 36px; min-width: 36px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .notif-icon .material-icons-outlined { font-size: 1.15rem; }
+        .notif-content { flex: 1; min-width: 0; }
+        .notif-title { font-size: 0.82rem; font-weight: 600; color: #1e293b; margin-bottom: 2px; }
+        .notif-msg { font-size: 0.75rem; color: #64748b; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .notif-time { font-size: 0.68rem; color: #94a3b8; margin-top: 4px; }
+        .notif-unread-dot {
+            width: 8px; height: 8px; min-width: 8px; border-radius: 50%; background: #3b82f6;
+            margin-top: 6px;
+        }
+        .notif-empty { text-align: center; padding: 40px 20px; color: #94a3b8; font-size: 0.82rem; }
+        .notif-loading { text-align: center; padding: 40px 20px; color: #94a3b8; font-size: 0.82rem; }
+
+        /* Help modal */
+        .help-overlay {
+            position: fixed; inset: 0; background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(4px);
+            z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.25s;
+        }
+        .help-overlay.open { opacity: 1; pointer-events: auto; }
+        .help-modal {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95);
+            width: 520px; max-width: 92vw; max-height: 80vh; background: #fff; border-radius: 20px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.2); z-index: 9999; opacity: 0; pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column;
+            overflow: hidden;
+        }
+        .help-modal.open { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+        .help-modal-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 24px 16px; border-bottom: 1px solid #f1f5f9;
+        }
+        .help-modal-header h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; color: #1e293b; margin: 0; }
+        .help-close {
+            width: 32px; height: 32px; border-radius: 8px; border: none; background: #f1f5f9;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+        }
+        .help-close:hover { background: #e2e8f0; }
+        .help-close .material-icons-outlined { font-size: 1.1rem; color: #64748b; }
+        .help-body { overflow-y: auto; padding: 16px 24px 24px; }
+        .faq-item { margin-bottom: 12px; border: 1px solid #f1f5f9; border-radius: 12px; overflow: hidden; transition: all 0.2s; }
+        .faq-item:hover { border-color: #e2e8f0; }
+        .faq-q {
+            display: flex; justify-content: space-between; align-items: center; padding: 14px 16px;
+            cursor: pointer; font-size: 0.85rem; font-weight: 600; color: #334155; gap: 8px;
+            background: #fafbfc; transition: background 0.15s;
+        }
+        .faq-q:hover { background: #f1f5f9; }
+        .faq-q .material-icons-outlined { font-size: 1.2rem; color: #94a3b8; transition: transform 0.3s; }
+        .faq-item.open .faq-q .material-icons-outlined { transform: rotate(180deg); }
+        .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-item.open .faq-a { max-height: 200px; }
+        .faq-a-inner { padding: 0 16px 14px; font-size: 0.8rem; color: #64748b; line-height: 1.6; }
+    `;
+    document.head.appendChild(style);
+}
+
+// ===== HELP MODAL =====
+function initHelpModal() {
+    const helpBtn = document.getElementById('helpBtn');
+    if (!helpBtn) return;
+
+    const faqs = [
+        { q: 'How do I issue a book to a student?', a: 'Go to Transactions page → Click "Issue Book" → Select the student and book → Confirm. The system will auto-calculate the due date based on your circulation policy settings.' },
+        { q: 'How do I change the loan period or fine rates?', a: 'Navigate to Settings → Circulation Policies section. You can set default loan days, fine per day, maximum fine, grace period, and max renewals.' },
+        { q: 'What happens when I enable maintenance mode?', a: 'Students will see a maintenance banner and cannot access any library services. Admin access remains fully functional. A notification is auto-generated for all users.' },
+        { q: 'How are overdue fines calculated?', a: 'Fines = (Days overdue − Grace period) × Fine per day, capped at the Maximum fine amount. All values come from your Circulation Policies in Settings.' },
+        { q: 'Can I disable student self-registration?', a: 'Yes. Go to Settings → System → Toggle "Allow Student Registration" OFF and save. The signup page will show a disabled message. You can still create students from the Users page.' },
+        { q: 'How do I add a new book to the library?', a: 'Go to the Books page → Click the "+ Add Book" button → Fill in the title, author, ISBN, and other details → Upload a cover image → Click Save.' },
+        { q: 'How do I export data?', a: 'On Books, Users, and Transactions pages, look for the Export button in the top actions area. You can export to CSV format.' },
+        { q: 'What do the dashboard statistics show?', a: 'The dashboard shows: Total books, Active members, Active loans, Overdue books, Today\'s transactions, and fine summaries — all in real-time.' },
+    ];
+
+    // Create overlay + modal
+    const overlay = document.createElement('div');
+    overlay.className = 'help-overlay';
+    overlay.id = 'helpOverlay';
+
+    const modal = document.createElement('div');
+    modal.className = 'help-modal';
+    modal.id = 'helpModal';
+    modal.innerHTML = `
+        <div class="help-modal-header">
+            <h3><span class="material-icons-outlined" style="vertical-align:middle;margin-right:8px;color:#3b82f6;">help_outline</span>Help & FAQ</h3>
+            <button class="help-close" id="helpClose"><span class="material-icons-outlined">close</span></button>
+        </div>
+        <div class="help-body">
+            ${faqs.map((f, i) => `
+                <div class="faq-item" data-faq="${i}">
+                    <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+                        <span>${f.q}</span>
+                        <span class="material-icons-outlined">expand_more</span>
+                    </div>
+                    <div class="faq-a"><div class="faq-a-inner">${f.a}</div></div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    document.body.appendChild(overlay);
+    document.body.appendChild(modal);
+
+    helpBtn.addEventListener('click', () => {
+        overlay.classList.add('open');
+        modal.classList.add('open');
+    });
+
+    const closeHelp = () => {
+        overlay.classList.remove('open');
+        modal.classList.remove('open');
+    };
+
+    document.getElementById('helpClose').addEventListener('click', closeHelp);
+    overlay.addEventListener('click', closeHelp);
 }
 
 // ===== Tabs =====

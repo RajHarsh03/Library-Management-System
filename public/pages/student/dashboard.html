@@ -93,16 +93,16 @@
 
             <div class="page-content">
                 <div class="student-welcome">
-                    <h2>Welcome back, Jordan</h2>
-                    <p>You have 2 titles on loan and 1 reservation ready for pickup. Keep an eye on due dates to stay in good standing.</p>
+                    <h2>Welcome back</h2>
+                    <p>Loading your library summary...</p>
                     <div class="student-welcome-meta">
                         <span class="meta-item">
                             <span class="material-icons-outlined">school</span>
-                            Faculty of Arts &amp; Letters
+                            Student
                         </span>
                         <span class="meta-item">
                             <span class="material-icons-outlined">badge</span>
-                            ID STU-20491
+                            ID —
                         </span>
                     </div>
                     <div class="student-quick-actions">
@@ -118,28 +118,8 @@
                 </div>
 
                 <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-card-header">
-                            <span class="stat-card-label">Books on loan</span>
-                            <div class="stat-card-icon blue">
-                                <span class="material-icons-outlined">menu_book</span>
-                            </div>
-                        </div>
-                        <div class="stat-card-value">2</div>
-                        <span class="stat-card-change neutral">Standard loan period: 14 days</span>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-header">
-                            <span class="stat-card-label">Due this week</span>
-                            <div class="stat-card-icon orange">
-                                <span class="material-icons-outlined">event</span>
-                            </div>
-                        </div>
-                        <div class="stat-card-value">1</div>
-                        <span class="stat-card-change positive">Renew online if eligible</span>
-                    </div>
-
-                    
+                    <div class="stat-card"><div class="stat-card-header"><span class="stat-card-label">Books on loan</span><div class="stat-card-icon blue"><span class="material-icons-outlined">menu_book</span></div></div><div class="stat-card-value">—</div><span class="stat-card-change neutral">Loading...</span></div>
+                    <div class="stat-card"><div class="stat-card-header"><span class="stat-card-label">Overdue</span><div class="stat-card-icon green"><span class="material-icons-outlined">check_circle</span></div></div><div class="stat-card-value">—</div><span class="stat-card-change neutral">Loading...</span></div>
                 </div>
 
                 <div class="student-grid-main">
@@ -158,36 +138,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="cell-book">
-                                                <div class="cell-book-cover">
-                                                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=120&h=160&fit=crop" alt="">
-                                                </div>
-                                                <div class="cell-book-info">
-                                                    <div class="title">The Digital Frontier</div>
-                                                    <div class="subtitle">Julian Thorne</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Apr 8, 2026</td>
-                                        <td><span class="due-pill ok">On track</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="cell-book">
-                                                <div class="cell-book-cover">
-                                                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=120&h=160&fit=crop" alt="">
-                                                </div>
-                                                <div class="cell-book-info">
-                                                    <div class="title">Modern Criticism</div>
-                                                    <div class="subtitle">Elena Marsh</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Apr 4, 2026</td>
-                                        <td><span class="due-pill soon">Due soon</span></td>
-                                    </tr>
+                                    <tr><td colspan="3" style="text-align:center;padding:32px;color:#94a3b8;">Loading...</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -197,28 +148,7 @@
                             <a href="/student/browse">Browse catalog</a>
                         </div>
                         <div class="book-cards-row">
-                            <div class="book-card">
-                                <div class="book-card-cover">
-                                    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&h=280&fit=crop" alt="Quiet Continents">
-                                </div>
-                                <div class="book-card-info">
-                                    <span class="category-tag history">History</span>
-                                    <h3>Quiet Continents</h3>
-                                    <p class="author">by Amira Okonkwo</p>
-                                    <span class="status-badge available">Available</span>
-                                </div>
-                            </div>
-                            <div class="book-card">
-                                <div class="book-card-cover">
-                                    <img src="https://images.unsplash.com/photo-1519682337052-a94d519337bc?w=200&h=280&fit=crop" alt="Signals &amp; Noise">
-                                </div>
-                                <div class="book-card-info">
-                                    <span class="category-tag tech">Technology</span>
-                                    <h3>Signals &amp; Noise</h3>
-                                    <p class="author">by Noah Weiss</p>
-                                    <span class="status-badge reserved">On order</span>
-                                </div>
-                            </div>
+                            <p style="color:#94a3b8;padding:16px;">Loading recommendations...</p>
                         </div>
                     </div>
 
@@ -243,12 +173,7 @@
                             <h2>Hold ready</h2>
                         </div>
                         <div class="info-card highlight-blue">
-                            <h3>Neuromancer — G. Gibson</h3>
-                            <p>Held under your account until Apr 6. Check out at the main desk with your student ID.</p>
-                            <button type="button" class="btn-dark">
-                                <span class="material-icons-outlined">place</span>
-                                Directions
-                            </button>
+                            <p style="color:#6b7280;">Loading holds...</p>
                         </div>
                     </div>
                 </div>
@@ -258,6 +183,7 @@
 
     <script src="../../scripts/api/config.js"></script>
     <script src="../../scripts/student/student.js"></script>
+    <script src="../../scripts/student/student-data.js"></script>
     <script src="../../scripts/mobile-nav.js"></script>
 </body>
 </html>

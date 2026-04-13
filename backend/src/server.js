@@ -22,6 +22,7 @@ const userRoutes = require('./routes/user.routes');
 const transactionRoutes = require('./routes/transaction.routes');
 const studentRoutes = require('./routes/student.routes');
 const settingsRoutes = require('./routes/settings.routes');
+const notificationRoutes = require('./routes/notification.routes');
 
 // Create Express app
 const app = express();
@@ -97,6 +98,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/settings', settingsRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, '../../public')));

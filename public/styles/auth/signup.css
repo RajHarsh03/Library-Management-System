@@ -192,7 +192,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 15px 25px;
+    padding: 12px 25px;
     background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 50%, #fafafa 100%);
     position: relative;
     overflow-y: auto;
@@ -205,15 +205,15 @@
 }
 
 .signup-form-panel .form-header {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 .signup-form-panel .form-title {
     font-family: var(--font-display);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--gray-900);
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 .signup-form-panel .form-subtitle {
@@ -225,8 +225,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 24px;
-    margin-bottom: 24px;
+    gap: 16px;
+    margin-bottom: 12px;
     padding: 0 16px;
 }
 
@@ -234,7 +234,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     opacity: 0.5;
     transition: opacity 0.3s ease;
 }
@@ -244,14 +244,14 @@
 }
 
 .step-number {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background: #e2e6ef;
     border: 2px solid #d0d5e0;
     color: #6b7280;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -299,8 +299,8 @@
 }
 .form-actions {
     display: flex;
-    gap: 12px;
-    margin-top: 20px;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .btn-next,
@@ -371,26 +371,26 @@
     font-size: 1.1rem;
 }
 .form-section {
-    margin-bottom: 14px;
+    margin-bottom: 8px;
 }
 
 .section-title {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: #0066cc;
-    margin-bottom: 10px;
-    padding-bottom: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
     border-bottom: 1px solid #e2e6ef;
 }
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 10px;
 }
 .signup-form-panel .form-group {
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
 
 .signup-form-panel .form-label {
@@ -412,7 +412,7 @@
 .signup-form-panel .form-input,
 select.form-input {
     width: 100%;
-    padding: 8px 14px;
+    padding: 7px 12px;
     background: #ffffff;
     border: 1.5px solid #e2e6ef;
     border-radius: var(--radius-md);
@@ -502,8 +502,8 @@ select.form-input {
     display: flex;
     align-items: flex-start;
     gap: 8px;
-    margin-bottom: 10px;
-    padding: 8px;
+    margin-bottom: 6px;
+    padding: 6px 8px;
     background: #f8f9fc;
     border-radius: var(--radius-md);
     border: 1px solid #e2e6ef;
@@ -619,8 +619,8 @@ select.form-input {
     text-align: center;
     font-size: 0.75rem;
     color: var(--gray-600);
-    margin-top: 16px;
-    padding: 12px 16px;
+    margin-top: 10px;
+    padding: 8px 12px;
     background: linear-gradient(135deg, rgba(30, 169, 113, 0.04) 0%, rgba(26, 200, 150, 0.02) 100%);
     border-radius: var(--radius-md);
     border: 1px solid rgba(30, 169, 113, 0.08);

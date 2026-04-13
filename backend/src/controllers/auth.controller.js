@@ -6,6 +6,7 @@
 const { validationResult } = require('express-validator');
 const User = require('../models/User');
 const Settings = require('../models/Settings');
+const Notification = require('../models/Notification');
 const { success, error, validationError } = require('../utils/response');
 const { generateToken, setTokenCookie } = require('../middleware/auth');
 const logger = require('../utils/logger');
@@ -73,7 +74,29 @@ const register = async (req, res) => {
       role: user.role,
     });
 
-    // Return success (without password)
+    // Welcome notification for the new student
+    if (user.role === 'student') {
+      await Notification.createSystemNotification({
+        title: 'Welcome to The Archivist!',
+        message: `Hi ${user.firstName}, your student account has been created. Browse the catalog and start borrowing books today!`,
+        type: 'account',
+        audience: 'student',
+        user: user._id,
+        icon: 'waving_hand',
+        priority: 'normal',
+      });
+
+      // Notify admin about new signup
+      await Notification.createSystemNotification({
+        title: 'New Student Registered',
+        message: `${user.firstName} ${user.lastName} (${user.email}) has registered as a student.`,
+        type: 'account',
+        audience: 'admin',
+        icon: 'person_add',
+        priority: 'normal',
+        meta: { userId: user._id },
+      });
+    }
     success(res, 'Registration successful', {
       token,
       user: {
