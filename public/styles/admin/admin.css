@@ -485,15 +485,23 @@ a {
     color: var(--accent);
 }
 
-.topbar-icon-btn .notification-dot {
+.topbar-icon-btn .notification-badge {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 8px;
-    height: 8px;
-    background: var(--danger);
-    border-radius: 50%;
+    top: 4px;
+    right: 4px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 9px;
     border: 2px solid var(--white);
+    display: none;
+    font-family: var(--font-body);
 }
 
 .topbar-profile {
@@ -1843,13 +1851,13 @@ a {
     transform: translateY(0) scale(0.95);
 }
 
-.notification-dot {
-    animation: pulse-dot 2s ease-in-out infinite;
+.notification-badge {
+    animation: pulse-badge 2s ease-in-out infinite;
 }
 
-@keyframes pulse-dot {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 46, 99, 0.4); }
-    50% { box-shadow: 0 0 0 6px rgba(255, 46, 99, 0); }
+@keyframes pulse-badge {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    50% { box-shadow: 0 0 0 4px rgba(239, 68, 68, 0); }
 }
 
 /* Enhanced Avatar */

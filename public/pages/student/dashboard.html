@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="../../styles/mobile-nav.css">
     <link rel="stylesheet" href="../../styles/global-enhancements.css">
 <script>
-    // Prevent sidebar flash: apply collapsed state before paint
     (function(){try{if(window.innerWidth>768&&localStorage.getItem('lms-student-sidebar-collapsed')!=='0')document.documentElement.classList.add('sidebar-pre-collapsed')}catch(e){}})();
 </script>
 </head>
@@ -53,9 +52,9 @@
                 </a>
             </nav>
             <div class="sidebar-footer">
-                <a href="#" class="nav-item">
+                <a href="/student/account" class="nav-item">
                     <span class="material-icons-outlined">person</span>
-                    <span>Profile</span>
+                    <span>Account</span>
                 </a>
                 <a href="/login" class="nav-item logout-btn">
                     <span class="material-icons-outlined">logout</span>
@@ -69,112 +68,140 @@
                 <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span class="material-icons-outlined">menu</span>
                 </button>
-                <div class="topbar-search">
-                    <span class="material-icons-outlined">search</span>
-                    <input type="text" placeholder="Search the catalog..." id="topbarSearch" aria-label="Search catalog">
-                </div>
+                
                 <div class="topbar-right">
                     <button type="button" class="topbar-icon-btn" id="notificationBtn" aria-label="Notifications">
                         <span class="material-icons-outlined">notifications</span>
-                        <span class="notification-dot"></span>
+                        <span class="notification-badge" id="notifBadge"></span>
                     </button>
                     <button type="button" class="topbar-icon-btn" id="helpBtn" aria-label="Help">
                         <span class="material-icons-outlined">help_outline</span>
                     </button>
                     <div class="topbar-profile">
                         <div class="topbar-profile-info">
-                            <div class="name">Jordan Lee</div>
+                            <div class="name">Student</div>
                             <div class="role">Student</div>
                         </div>
-                        <div class="topbar-avatar">JL</div>
+                        <div class="topbar-avatar">S</div>
                     </div>
                 </div>
             </header>
 
             <div class="page-content">
-                <div class="student-welcome">
-                    <h2>Welcome back</h2>
-                    <p>Loading your library summary...</p>
-                    <div class="student-welcome-meta">
-                        <span class="meta-item">
-                            <span class="material-icons-outlined">school</span>
-                            Student
-                        </span>
-                        <span class="meta-item">
-                            <span class="material-icons-outlined">badge</span>
-                            ID —
-                        </span>
-                    </div>
-                    <div class="student-quick-actions">
-                        <a class="btn-primary" href="/student/browse">
-                            <span class="material-icons-outlined">add</span>
-                            Find a book
-                        </a>
-                        <a class="btn-outline" href="/student/my-books">
-                            <span class="material-icons-outlined">library_books</span>
-                            View my loans
-                        </a>
-                    </div>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="stat-card"><div class="stat-card-header"><span class="stat-card-label">Books on loan</span><div class="stat-card-icon blue"><span class="material-icons-outlined">menu_book</span></div></div><div class="stat-card-value">—</div><span class="stat-card-change neutral">Loading...</span></div>
-                    <div class="stat-card"><div class="stat-card-header"><span class="stat-card-label">Overdue</span><div class="stat-card-icon green"><span class="material-icons-outlined">check_circle</span></div></div><div class="stat-card-value">—</div><span class="stat-card-change neutral">Loading...</span></div>
-                </div>
-
-                <div class="student-grid-main">
+                <!-- Minimal greeting -->
+                <div class="dash-greeting">
                     <div>
-                        <div class="section-header">
-                            <h2>Currently borrowed</h2>
-                            <a href="/student/my-books">See all</a>
+                        <h1 id="dashGreeting">Good morning, <span id="dashUserName">Student</span></h1>
+                        <p class="dash-subtitle" id="dashSubtitle">Here's your library overview</p>
+                    </div>
+                    <div class="dash-date" id="dashDate"></div>
+                </div>
+
+                <!-- Compact stat cards -->
+                <div class="dash-stats" id="dashStats">
+                    <div class="dash-stat-card">
+                        <div class="dash-stat-icon blue">
+                            <span class="material-icons-outlined">menu_book</span>
                         </div>
-                        <div class="table-container student-loans-table-wrap">
-                            <table class="data-table">
+                        <div class="dash-stat-info">
+                            <span class="dash-stat-value" id="statLoans">—</span>
+                            <span class="dash-stat-label">On Loan</span>
+                        </div>
+                    </div>
+                    <div class="dash-stat-card">
+                        <div class="dash-stat-icon orange">
+                            <span class="material-icons-outlined">schedule</span>
+                        </div>
+                        <div class="dash-stat-info">
+                            <span class="dash-stat-value" id="statOverdue">—</span>
+                            <span class="dash-stat-label">Overdue</span>
+                        </div>
+                    </div>
+                    <div class="dash-stat-card">
+                        <div class="dash-stat-icon purple">
+                            <span class="material-icons-outlined">bookmark</span>
+                        </div>
+                        <div class="dash-stat-info">
+                            <span class="dash-stat-value" id="statHolds">—</span>
+                            <span class="dash-stat-label">Holds</span>
+                        </div>
+                    </div>
+                    <div class="dash-stat-card">
+                        <div class="dash-stat-icon green">
+                            <span class="material-icons-outlined">check_circle</span>
+                        </div>
+                        <div class="dash-stat-info">
+                            <span class="dash-stat-value" id="statReturned">—</span>
+                            <span class="dash-stat-label">Returned</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main content grid -->
+                <div class="dash-grid">
+                    <!-- Left: Currently borrowed -->
+                    <div class="dash-section">
+                        <div class="dash-section-header">
+                            <h2 id="dashBorrowedTitle">Currently Borrowed</h2>
+                            <a href="/student/my-books" class="dash-link">View all →</a>
+                        </div>
+                        <div class="dash-card">
+                            <table class="data-table" id="dashLoansTable">
                                 <thead>
                                     <tr>
-                                        <th>Title</th>
-                                        <th>Due date</th>
+                                        <th>Book</th>
+                                        <th>Due Date</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr><td colspan="3" style="text-align:center;padding:32px;color:#94a3b8;">Loading...</td></tr>
+                                <tbody id="dashLoansBody">
+                                    <tr><td colspan="3" class="dash-empty-cell">Loading...</td></tr>
                                 </tbody>
                             </table>
                         </div>
-
-                        <div class="section-header">
-                            <h2>Suggested for you</h2>
-                            <a href="/student/browse">Browse catalog</a>
-                        </div>
-                        <div class="book-cards-row">
-                            <p style="color:#94a3b8;padding:16px;">Loading recommendations...</p>
-                        </div>
                     </div>
 
-                    <div>
-                        <div class="section-header">
-                            <h2>Announcements</h2>
-                        </div>
-                        <div class="info-card announcement-stack">
-                            <div class="announcement-item">
-                                <div class="tag">Hours</div>
-                                <h3>Extended hours during exams</h3>
-                                <p>Main reading room open until midnight Apr 15–26. Group study rooms require booking.</p>
+                    <!-- Right: Activity + Quick links -->
+                    <div class="dash-sidebar-right">
+                        <div class="dash-section">
+                            <div class="dash-section-header">
+                                <h2>Quick Links</h2>
                             </div>
-                            <div class="announcement-item">
-                                <div class="tag">Workshops</div>
-                                <h3>Citation management drop-in</h3>
-                                <p>Wednesdays 2–4pm, digital scholarship lab. Bring your laptop.</p>
+                            <div class="dash-quick-links">
+                                <a href="/student/browse" class="dash-quick-link">
+                                    <span class="material-icons-outlined">search</span>
+                                    <span>Browse Catalog</span>
+                                </a>
+                                <a href="/student/my-books" class="dash-quick-link">
+                                    <span class="material-icons-outlined">library_books</span>
+                                    <span>My Books</span>
+                                </a>
+                                <a href="/student/account" class="dash-quick-link">
+                                    <span class="material-icons-outlined">person</span>
+                                    <span>My Account</span>
+                                </a>
                             </div>
                         </div>
 
-                        <div class="section-header spaced-top">
-                            <h2>Hold ready</h2>
+                        <div class="dash-section">
+                            <div class="dash-section-header">
+                                <h2>Notices</h2>
+                            </div>
+                            <div class="dash-card dash-notif-list" id="dashNotifList">
+                                <p class="dash-empty-text">No new notice</p>
+                            </div>
                         </div>
-                        <div class="info-card highlight-blue">
-                            <p style="color:#6b7280;">Loading holds...</p>
-                        </div>
+                    </div>
+                </div>
+
+                <!-- Suggested books -->
+                <div class="dash-section" style="margin-top: 8px;">
+                    <div class="dash-section-header">
+                        <h2>Recommended for You</h2>
+                        <a href="/student/browse" class="dash-link">Browse catalog →</a>
+                    </div>
+                    <div class="book-cards-row" id="dashRecommended">
+                        <p class="dash-empty-text">Loading recommendations...</p>
                     </div>
                 </div>
             </div>

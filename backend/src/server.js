@@ -23,6 +23,7 @@ const transactionRoutes = require('./routes/transaction.routes');
 const studentRoutes = require('./routes/student.routes');
 const settingsRoutes = require('./routes/settings.routes');
 const notificationRoutes = require('./routes/notification.routes');
+const noticeRoutes = require('./routes/notice.routes');
 
 // Create Express app
 const app = express();
@@ -99,6 +100,7 @@ app.use('/api/transactions', transactionRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/notices', noticeRoutes);
 
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, '../../public')));
@@ -125,6 +127,7 @@ app.get('/admin/settings', servePage('pages/admin/settings.html'));
 app.get('/student/dashboard', servePage('pages/student/dashboard.html'));
 app.get('/student/browse', servePage('pages/student/browse.html'));
 app.get('/student/my-books', servePage('pages/student/my-books.html'));
+app.get('/student/account', servePage('pages/student/account.html'));
 
 // 404 handler for API routes
 app.use('/api/*', (req, res) => {

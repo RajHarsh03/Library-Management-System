@@ -8,10 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (page === 'dashboard') loadDashboard();
     else if (page === 'browse') loadBrowse();
     else if (page === 'my-books') loadMyBooks();
+    else if (page === 'account') loadAccount();
 });
 
 function detectPage() {
     const path = window.location.pathname;
+    if (path.includes('account')) return 'account';
     if (path.includes('dashboard')) return 'dashboard';
     if (path.includes('browse')) return 'browse';
     if (path.includes('my-books')) return 'my-books';
@@ -48,73 +50,71 @@ async function loadDashboard() {
         const { stats, activeLoans, recentActivity, recommendedBooks } = data.data;
         const user = window.API && API.getUser ? API.getUser() : null;
 
-        // ── Welcome section
-        const welcome = document.querySelector('.student-welcome');
-        if (welcome) {
-            const firstName = user ? (user.firstName || user.name || 'Student') : 'Student';
-            const loansCount = stats.activeLoans || 0;
-            const holdsCount = stats.holds || 0;
-            let summary = `You have ${loansCount} title${loansCount !== 1 ? 's' : ''} on loan`;
-            if (holdsCount > 0) summary += ` and ${holdsCount} hold${holdsCount !== 1 ? 's' : ''} active`;
-            summary += '. Keep an eye on due dates to stay in good standing.';
+        // ── Topbar profile
+        updateTopbar(user);
 
-            const h2 = welcome.querySelector('h2');
-            if (h2) h2.textContent = `Welcome back, ${firstName}`;
-            const p = welcome.querySelector('p');
-            if (p) p.textContent = summary;
+        // ── Greeting
+        const hour = new Date().getHours();
+        let greet = 'Good evening';
+        if (hour < 12) greet = 'Good morning';
+        else if (hour < 17) greet = 'Good afternoon';
 
-            // Update meta
-            const metas = welcome.querySelectorAll('.meta-item');
-            if (metas.length >= 1 && user) {
-                metas[0].innerHTML = `<span class="material-icons-outlined">school</span>${user.department || 'Student'}`;
-            }
-            if (metas.length >= 2 && user) {
-                metas[1].innerHTML = `<span class="material-icons-outlined">badge</span>ID ${user.studentId || user.id?.substring(0, 8) || '—'}`;
-            }
+        const greetEl = document.getElementById('dashGreeting');
+        const nameSpan = document.getElementById('dashUserName');
+        if (greetEl && nameSpan && user) {
+            const firstName = user.firstName || user.name || 'Student';
+            nameSpan.textContent = firstName;
+            greetEl.innerHTML = `${greet}, <span>${firstName}</span>`;
         }
 
-        // ── Profile in topbar
-        const nameEl = document.querySelector('.topbar-profile .name');
-        const avatarEl = document.querySelector('.topbar-avatar');
-        if (nameEl && user) nameEl.textContent = `${user.firstName || ''} ${user.lastName || ''}`.trim();
-        if (avatarEl && user) {
-            const initials = `${(user.firstName || 'S')[0]}${(user.lastName || '')[0] || ''}`.toUpperCase();
-            avatarEl.textContent = initials;
+        // ── Date
+        const dateEl = document.getElementById('dashDate');
+        if (dateEl) {
+            dateEl.textContent = new Date().toLocaleDateString('en-US', {
+                weekday: 'long', month: 'short', day: 'numeric', year: 'numeric'
+            });
         }
 
         // ── Stat cards
-        const statsGrid = document.querySelector('.stats-grid');
-        if (statsGrid) {
-            statsGrid.innerHTML = `
-                <div class="stat-card">
-                    <div class="stat-card-header">
-                        <span class="stat-card-label">Books on loan</span>
-                        <div class="stat-card-icon blue"><span class="material-icons-outlined">menu_book</span></div>
-                    </div>
-                    <div class="stat-card-value">${stats.activeLoans}</div>
-                    <span class="stat-card-change neutral">Max allowed: ${stats.maxAllowed}</span>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-card-header">
-                        <span class="stat-card-label">Overdue</span>
-                        <div class="stat-card-icon ${stats.overdueLoans > 0 ? 'red' : 'green'}"><span class="material-icons-outlined">${stats.overdueLoans > 0 ? 'warning' : 'check_circle'}</span></div>
-                    </div>
-                    <div class="stat-card-value">${stats.overdueLoans}</div>
-                    <span class="stat-card-change ${stats.overdueLoans > 0 ? 'negative' : 'positive'}">${stats.overdueLoans > 0 ? 'Return ASAP to avoid fines' : 'All books on track!'}</span>
-                </div>
-            `;
-        }
+        setText('statLoans', stats.activeLoans ?? 0);
+        setText('statOverdue', stats.overdueLoans ?? 0);
+        setText('statHolds', stats.holds ?? 0);
+        setText('statReturned', stats.returned ?? 0);
 
-        // ── Currently borrowed table
-        const tbody = document.querySelector('.student-loans-table-wrap tbody');
+        // ── Currently borrowed table (or latest borrows if none active)
+        const tbody = document.getElementById('dashLoansBody');
+        const titleEl = document.getElementById('dashBorrowedTitle');
         if (tbody) {
-            if (activeLoans.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:32px;color:#94a3b8;">No books currently on loan. <a href="/student/browse" style="color:#6366f1;">Browse the catalog</a></td></tr>`;
+            // Determine which dataset to show
+            let displayLoans = activeLoans;
+            let showingRecent = false;
+
+            if ((!activeLoans || activeLoans.length === 0) && data.data.recentBorrows && data.data.recentBorrows.length > 0) {
+                displayLoans = data.data.recentBorrows;
+                showingRecent = true;
+            }
+
+            if (titleEl) titleEl.textContent = showingRecent ? 'Latest Borrows' : 'Currently Borrowed';
+
+            if (!displayLoans || displayLoans.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" class="dash-empty-cell">No books on loan. <a href="/student/browse" style="color:#6366f1;">Browse the catalog</a></td></tr>`;
             } else {
-                tbody.innerHTML = activeLoans.map(loan => {
+                tbody.innerHTML = displayLoans.slice(0, 5).map(loan => {
                     const book = loan.book || {};
-                    const duePill = loan.isOverdue ? 'overdue' : loan.daysRemaining <= 3 ? 'soon' : 'ok';
-                    const duePillText = loan.isOverdue ? `${loan.daysOverdue}d overdue` : loan.daysRemaining <= 3 ? 'Due soon' : 'On track';
+                    let duePill, duePillText;
+                    if (loan.isReturned || loan.status === 'returned') {
+                        duePill = 'returned';
+                        duePillText = 'Returned';
+                    } else if (loan.isOverdue) {
+                        duePill = 'overdue';
+                        duePillText = `${loan.daysOverdue}d overdue`;
+                    } else if (loan.daysRemaining <= 3) {
+                        duePill = 'soon';
+                        duePillText = 'Due soon';
+                    } else {
+                        duePill = 'ok';
+                        duePillText = 'On track';
+                    }
                     return `<tr>
                         <td>
                             <div class="cell-book">
@@ -132,11 +132,11 @@ async function loadDashboard() {
             }
         }
 
-        // ── Suggested books
-        const booksRow = document.querySelector('.book-cards-row');
+        // ── Recommended books
+        const booksRow = document.getElementById('dashRecommended');
         if (booksRow) {
-            if (recommendedBooks.length === 0) {
-                booksRow.innerHTML = '<p style="color:#94a3b8;padding:16px;">No recommendations available yet.</p>';
+            if (!recommendedBooks || recommendedBooks.length === 0) {
+                booksRow.innerHTML = '<p class="dash-empty-text">No recommendations yet. Start borrowing to get suggestions.</p>';
             } else {
                 booksRow.innerHTML = recommendedBooks.map(book => {
                     const cat = (book.categories && book.categories[0]) || 'General';
@@ -153,18 +153,66 @@ async function loadDashboard() {
             }
         }
 
-        // ── Holds section
-        const holdSection = document.querySelector('.highlight-blue');
-        if (holdSection) {
-            if (stats.holds === 0) {
-                holdSection.innerHTML = '<p style="color:#6b7280;">You have no active holds. Browse the catalog to place one.</p>';
-            }
-            // If there are holds, we'd need a separate call, keep as-is for now with count
-        }
+        // ── Notices
+        loadStudentNotices();
 
     } catch (e) {
         console.error('Dashboard load error:', e);
     }
+}
+
+// ── Load student notices from /api/notices
+async function loadStudentNotices() {
+    const container = document.getElementById('dashNotifList');
+    if (!container) return;
+
+    try {
+        const resp = await fetch('/api/notices?limit=5', { headers: authHeaders() });
+        const data = await resp.json();
+
+        if (!data.success || !data.data || data.data.length === 0) {
+            container.innerHTML = '<p class="dash-empty-text">No new notices</p>';
+            return;
+        }
+
+        container.innerHTML = data.data.map(n => {
+            const timeAgo = studentTimeAgo(n.createdAt);
+            const priorityIcons = { urgent: 'error', important: 'warning_amber', normal: 'campaign' };
+            const icon = priorityIcons[n.priority] || 'campaign';
+            const priorityLabel = n.priority !== 'normal'
+                ? `<span class="notice-priority ${n.priority}">${n.priority}</span>` : '';
+
+            return `<div class="notice-item ${n.priority}">
+                <div class="notice-icon">
+                    <span class="material-icons-outlined">${icon}</span>
+                </div>
+                <div class="notice-body">
+                    <div class="notice-title">${n.title}${priorityLabel}</div>
+                    <div class="notice-msg">${n.message}</div>
+                    <div class="notice-meta">${timeAgo}${n.publishedBy ? ' · ' + n.publishedBy : ''}</div>
+                </div>
+            </div>`;
+        }).join('');
+    } catch (e) {
+        console.error('Failed to load notices:', e);
+    }
+}
+
+// ── Helper: update topbar profile
+function updateTopbar(user) {
+    const nameEl = document.querySelector('.topbar-profile .name');
+    const avatarEl = document.querySelector('.topbar-avatar');
+    if (nameEl && user) nameEl.textContent = `${user.firstName || ''} ${user.lastName || ''}`.trim();
+    if (avatarEl && user) {
+        const initials = `${(user.firstName || 'S')[0]}${(user.lastName || '')[0] || ''}`.toUpperCase();
+        avatarEl.textContent = initials;
+    }
+}
+
+// ── Helper: set text by ID
+function setText(id, text) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
 }
 
 // ─── BROWSE CATALOG ──────────────────────────────────────
@@ -176,14 +224,7 @@ async function loadBrowse(page = 1) {
     if (!grid) return;
 
     // Update topbar profile
-    const user = window.API && API.getUser ? API.getUser() : null;
-    const nameEl = document.querySelector('.topbar-profile .name');
-    const avatarEl = document.querySelector('.topbar-avatar');
-    if (nameEl && user) nameEl.textContent = `${user.firstName || ''} ${user.lastName || ''}`.trim();
-    if (avatarEl && user) {
-        const initials = `${(user.firstName || 'S')[0]}${(user.lastName || '')[0] || ''}`.toUpperCase();
-        avatarEl.textContent = initials;
-    }
+    updateTopbar(window.API && API.getUser ? API.getUser() : null);
 
     // Show loading
     grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:#94a3b8;"><span class="material-icons-outlined" style="font-size:40px;display:block;margin-bottom:12px;">hourglass_top</span>Loading books...</div>';
@@ -206,16 +247,30 @@ async function loadBrowse(page = 1) {
             if (searchInput) searchInput.value = urlQ;
         }
 
-        // Availability filter
-        const availFilter = document.querySelector('.availability-filter:checked');
-        if (availFilter && availFilter.value === 'available') {
-            params.set('availability', 'available');
+        // Sort
+        const sortSelect = document.getElementById('sortBySelect');
+        if (sortSelect && sortSelect.value) {
+            params.set('sortBy', sortSelect.value);
         }
 
-        // Category filter
-        const catFilter = document.querySelector('.category-filter:checked:not([value="all"])');
-        if (catFilter) {
-            params.set('category', catFilter.value);
+        // Availability filter — collect all checked
+        const availChecked = document.querySelectorAll('.availability-filter:checked');
+        if (availChecked.length > 0) {
+            const vals = Array.from(availChecked).map(cb => cb.value);
+            // If only 'available' is checked, filter to available
+            if (vals.includes('available') && !vals.includes('unavailable')) {
+                params.set('availability', 'available');
+            } else if (vals.includes('unavailable') && !vals.includes('available')) {
+                params.set('availability', 'unavailable');
+            }
+            // If both checked, no filter needed (show all)
+        }
+
+        // Category filter — collect all checked (skip 'all')
+        const catChecked = document.querySelectorAll('.category-filter:checked:not([value="all"])');
+        if (catChecked.length > 0) {
+            const categories = Array.from(catChecked).map(cb => cb.value).join(',');
+            params.set('category', categories);
         }
 
         const resp = await fetch(`/api/student/browse?${params}`, { headers: authHeaders() });
@@ -356,7 +411,31 @@ document.addEventListener('DOMContentLoaded', () => {
         filterToggle.addEventListener('click', () => {
             filterPanel.classList.toggle('open');
         });
+        // Close on click outside
+        document.addEventListener('click', (e) => {
+            if (!filterPanel.contains(e.target) && !filterToggle.contains(e.target)) {
+                filterPanel.classList.remove('open');
+            }
+        });
     }
+
+    // Category "All" toggle logic
+    document.querySelectorAll('.category-filter').forEach(cb => {
+        cb.addEventListener('change', () => {
+            if (cb.value === 'all' && cb.checked) {
+                // Uncheck all specific categories
+                document.querySelectorAll('.category-filter:not([value="all"])').forEach(c => c.checked = false);
+            } else if (cb.value !== 'all') {
+                // Uncheck "All" when a specific category is checked
+                const allCb = document.querySelector('.category-filter[value="all"]');
+                if (allCb) allCb.checked = false;
+                // If nothing is checked, re-check "All"
+                const anyChecked = document.querySelector('.category-filter:checked');
+                if (!anyChecked && allCb) allCb.checked = true;
+            }
+        });
+    });
+
     if (filterApply) {
         filterApply.addEventListener('click', () => {
             if (filterPanel) filterPanel.classList.remove('open');
@@ -368,6 +447,9 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.availability-filter, .category-filter').forEach(cb => cb.checked = false);
             const allCat = document.querySelector('.category-filter[value="all"]');
             if (allCat) allCat.checked = true;
+            const sortSelect = document.getElementById('sortBySelect');
+            if (sortSelect) sortSelect.value = 'popularity';
+            if (filterPanel) filterPanel.classList.remove('open');
             loadBrowse(1);
         });
     }
@@ -483,5 +565,190 @@ async function renewBook(transactionId, btn) {
     } catch (e) {
         btn.disabled = false;
         if (window.showStudentToast) showStudentToast('Network error', 'error');
+    }
+}
+
+// ─── ACCOUNT PAGE ────────────────────────────────────────
+let accountUserData = null; // store for edit/cancel
+
+async function loadAccount() {
+    // Fetch fresh profile data from server instead of localStorage
+    let user = null;
+    try {
+        const profileResp = await fetch('/api/auth/me', { headers: authHeaders() });
+        const profileData = await profileResp.json();
+        if (profileData.success && profileData.data && profileData.data.user) {
+            user = profileData.data.user;
+        }
+    } catch (e) {
+        console.warn('Could not fetch fresh profile, using cached data');
+    }
+    // Fallback to localStorage
+    if (!user) user = window.API && API.getUser ? API.getUser() : null;
+    if (!user) return;
+
+    accountUserData = { ...user };
+    updateTopbar(user);
+
+    // Profile card
+    const fullName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Student';
+    const initials = `${(user.firstName || 'S')[0]}${(user.lastName || '')[0] || ''}`.toUpperCase();
+
+    const avatarEl = document.getElementById('accountAvatar');
+    if (avatarEl) avatarEl.textContent = initials;
+
+    setText('accountName', fullName);
+
+    const roleEl = document.getElementById('accountRole');
+    if (roleEl) roleEl.textContent = (user.role || 'student').toUpperCase();
+
+    const joinedEl = document.getElementById('accountJoined');
+    if (joinedEl && user.createdAt) {
+        const joinDate = new Date(user.createdAt).toLocaleDateString('en-US', {
+            month: 'long', year: 'numeric'
+        });
+        joinedEl.innerHTML = `<span class="material-icons-outlined">calendar_today</span>Member since ${joinDate}`;
+    }
+
+    // Personal information
+    setText('fieldFirstName', user.firstName || '—');
+    setText('fieldLastName', user.lastName || '—');
+    setText('fieldEmail', user.email || '—');
+    setText('fieldPhone', user.phone || 'Not provided');
+
+    // Library information — 'course' is the backend field for department
+    setText('fieldStudentId', user.studentId || user.id?.substring(0, 10) || '—');
+    setText('fieldDepartment', user.course || user.department || 'General');
+
+    const statusEl = document.getElementById('fieldStatus');
+    if (statusEl) {
+        const isActive = user.status !== 'inactive' && user.status !== 'suspended';
+        statusEl.innerHTML = `<span class="status-dot ${isActive ? 'active' : 'inactive'}"></span> ${isActive ? 'Active' : 'Suspended'}`;
+    }
+
+    setText('fieldLimit', user.maxBooksAllowed || '10');
+
+    // Fetch stats from dashboard API
+    try {
+        const resp = await fetch('/api/student/dashboard', { headers: authHeaders() });
+        const data = await resp.json();
+        if (data.success) {
+            const { stats } = data.data;
+            setText('acctStatLoans', stats.activeLoans ?? 0);
+            setText('acctStatReturned', stats.returned ?? 0);
+            setText('acctStatHolds', stats.holds ?? 0);
+            setText('acctStatOverdue', stats.overdueLoans ?? 0);
+        }
+    } catch (e) {
+        console.error('Account stats error:', e);
+    }
+}
+
+// ── Toggle Edit Mode
+function toggleEditMode() {
+    document.getElementById('editProfileBtn').style.display = 'none';
+    document.getElementById('editActions').style.display = 'flex';
+
+    // Populate inputs from current values and show them
+    const fieldMap = {
+        inputFirstName: 'fieldFirstName',
+        inputLastName: 'fieldLastName',
+        inputPhone: 'fieldPhone',
+        inputDepartment: 'fieldDepartment',
+    };
+
+    for (const [inputId, valueId] of Object.entries(fieldMap)) {
+        const input = document.getElementById(inputId);
+        const display = document.getElementById(valueId);
+        if (input && display) {
+            const val = display.textContent.trim();
+            input.value = (val === '—' || val === 'Not provided') ? '' : val;
+            display.style.display = 'none';
+            input.style.display = 'block';
+            input.closest('.account-field')?.classList.add('editing');
+        }
+    }
+}
+
+// ── Cancel Edit
+function cancelEdit() {
+    document.getElementById('editProfileBtn').style.display = 'inline-flex';
+    document.getElementById('editActions').style.display = 'none';
+
+    // Hide inputs, show values
+    document.querySelectorAll('.account-field-input').forEach(input => {
+        input.style.display = 'none';
+        input.closest('.account-field')?.classList.remove('editing');
+    });
+    document.querySelectorAll('.account-field-value').forEach(el => {
+        el.style.display = 'flex';
+    });
+}
+
+// ── Save Profile
+async function saveProfile() {
+    const firstName = document.getElementById('inputFirstName')?.value.trim();
+    const lastName = document.getElementById('inputLastName')?.value.trim();
+    const phone = document.getElementById('inputPhone')?.value.trim();
+    const department = document.getElementById('inputDepartment')?.value.trim();
+
+    if (!firstName || !lastName) {
+        if (window.showStudentToast) showStudentToast('First name and last name are required', 'error');
+        return;
+    }
+
+    const saveBtn = document.getElementById('saveProfileBtn');
+    saveBtn.disabled = true;
+    saveBtn.innerHTML = '<span class="material-icons-outlined">hourglass_top</span> Saving...';
+
+    try {
+        const resp = await fetch('/api/student/profile', {
+            method: 'PUT',
+            headers: {
+                ...authHeaders(),
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ firstName, lastName, phone, department }),
+        });
+
+        const data = await resp.json();
+
+        if (data.success) {
+            // Update localStorage with new data
+            const currentUser = window.API && API.getUser ? API.getUser() : {};
+            const updatedUser = {
+                ...currentUser,
+                firstName: data.data.user.firstName,
+                lastName: data.data.user.lastName,
+                phone: data.data.user.phone,
+                course: data.data.user.department,
+            };
+            localStorage.setItem('auth_user', JSON.stringify(updatedUser));
+
+            // Update display values
+            setText('fieldFirstName', data.data.user.firstName || '—');
+            setText('fieldLastName', data.data.user.lastName || '—');
+            setText('fieldPhone', data.data.user.phone || 'Not provided');
+            setText('fieldDepartment', data.data.user.department || 'General');
+
+            // Update profile card & topbar
+            const fullName = `${data.data.user.firstName} ${data.data.user.lastName}`.trim();
+            setText('accountName', fullName);
+            const initials = `${data.data.user.firstName[0]}${data.data.user.lastName[0] || ''}`.toUpperCase();
+            const avatarEl = document.getElementById('accountAvatar');
+            if (avatarEl) avatarEl.textContent = initials;
+            updateTopbar(updatedUser);
+
+            cancelEdit();
+            if (window.showStudentToast) showStudentToast('Profile updated successfully!', 'success');
+        } else {
+            if (window.showStudentToast) showStudentToast(data.message || 'Failed to update', 'error');
+        }
+    } catch (e) {
+        console.error('Save profile error:', e);
+        if (window.showStudentToast) showStudentToast('Network error — could not save', 'error');
+    } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerHTML = '<span class="material-icons-outlined">check</span> Save';
     }
 }

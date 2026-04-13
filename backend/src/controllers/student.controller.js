@@ -38,12 +38,19 @@ const browseBooks = async (req, res) => {
       ];
     }
 
-    // Category filter
-    if (category) query.categories = { $in: [category] };
+    // Category filter (supports comma-separated)
+    if (category) {
+      const cats = category.split(',').map(c => c.trim()).filter(Boolean);
+      if (cats.length > 0) {
+        query.categories = { $in: cats };
+      }
+    }
 
     // Availability filter
     if (availability === 'available') {
       query.availableCopies = { $gt: 0 };
+    } else if (availability === 'unavailable') {
+      query.availableCopies = 0;
     }
 
     // Sorting
@@ -52,8 +59,15 @@ const browseBooks = async (req, res) => {
       case 'newest':
         sortOptions = { createdAt: -1 };
         break;
+      case 'oldest':
+        sortOptions = { createdAt: 1 };
+        break;
+      case 'title_asc':
       case 'title':
         sortOptions = { title: 1 };
+        break;
+      case 'title_desc':
+        sortOptions = { title: -1 };
         break;
       case 'rating':
         sortOptions = { 'rating.average': -1 };
@@ -407,6 +421,8 @@ const getDashboard = async (req, res) => {
       activeLoans,
       overdueLoans,
       holds,
+      returnedCount,
+      recentBorrows,
       recentActivity,
       recommendedBooks,
     ] = await Promise.all([
@@ -435,6 +451,22 @@ const getDashboard = async (req, res) => {
         status: 'active',
       }),
 
+      // Returned count
+      Transaction.countDocuments({
+        user: userId,
+        type: 'return',
+      }),
+
+      // Recent borrows (latest 5, any status — for dashboard table)
+      Transaction.find({
+        user: userId,
+        type: 'borrow',
+      })
+        .sort({ createdAt: -1 })
+        .limit(5)
+        .populate('book', 'title authors coverImage')
+        .lean(),
+
       // Recent activity (last 5)
       Transaction.find({ user: userId })
         .sort({ createdAt: -1 })
@@ -458,6 +490,7 @@ const getDashboard = async (req, res) => {
       activeLoans: activeLoans.length,
       overdueLoans,
       holds,
+      returned: returnedCount,
       maxAllowed: req.user.maxBooksAllowed,
       available: req.user.maxBooksAllowed - activeLoans.length - holds,
       fineAmount: req.user.fineAmount,
@@ -474,9 +507,22 @@ const getDashboard = async (req, res) => {
       };
     });
 
+    // Add status info to recent borrows
+    const recentBorrowsWithInfo = recentBorrows.map(loan => {
+      const daysRemaining = dayjs(loan.dueDate).diff(dayjs(), 'day');
+      return {
+        ...loan,
+        daysRemaining,
+        isOverdue: loan.status === 'overdue' || (loan.status === 'active' && daysRemaining < 0),
+        isReturned: loan.status === 'returned',
+        daysOverdue: daysRemaining < 0 ? Math.abs(daysRemaining) : 0,
+      };
+    });
+
     success(res, 'Dashboard data retrieved', {
       stats,
       activeLoans: loansWithDueInfo,
+      recentBorrows: recentBorrowsWithInfo,
       recentActivity,
       recommendedBooks,
     });
@@ -525,6 +571,57 @@ const getCategories = async (req, res) => {
   }
 };
 
+/**
+ * @desc    Update student profile
+ * @route   PUT /api/student/profile
+ * @access  Private (Student)
+ */
+const updateProfile = async (req, res) => {
+  try {
+    const { firstName, lastName, phone, department } = req.body;
+    const updates = {};
+
+    if (firstName !== undefined) updates.firstName = firstName.trim();
+    if (lastName !== undefined) updates.lastName = lastName.trim();
+    if (phone !== undefined) updates.phone = phone.trim();
+    if (department !== undefined) updates.course = department.trim();
+
+    if (Object.keys(updates).length === 0) {
+      return error(res, 'No valid fields to update', 400);
+    }
+
+    const user = await User.findByIdAndUpdate(req.user._id, updates, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!user) {
+      return error(res, 'User not found', 404);
+    }
+
+    logger.info('Profile updated', { userId: user._id, fields: Object.keys(updates) });
+
+    success(res, 'Profile updated successfully', {
+      user: {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+        studentId: user.studentId,
+        department: user.course,
+        status: user.status,
+        maxBooksAllowed: user.maxBooksAllowed,
+        createdAt: user.createdAt,
+      },
+    });
+  } catch (err) {
+    logger.error('Update profile error', { error: err.message });
+    error(res, 'Error updating profile', 500);
+  }
+};
+
 module.exports = {
   browseBooks,
   getBookDetails,
@@ -535,4 +632,5 @@ module.exports = {
   getMyHolds,
   getDashboard,
   getCategories,
+  updateProfile,
 };

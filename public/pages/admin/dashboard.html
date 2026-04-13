@@ -78,7 +78,7 @@
                 <div class="topbar-right">
                     <button class="topbar-icon-btn" id="notificationBtn">
                         <span class="material-icons-outlined">notifications</span>
-                        <span class="notification-dot"></span>
+                        <span class="notification-badge" id="notifBadge"></span>
                     </button>
                     <button class="topbar-icon-btn" id="helpBtn">
                         <span class="material-icons-outlined">help_outline</span>
@@ -183,6 +183,43 @@
                                     <span class="quick-stat-label">Today Returned</span>
                                     <span class="quick-stat-value" id="statTodayReturned">—</span>
                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- Publish Notice -->
+                        <div class="info-card" style="margin-top: 20px;">
+                            <h3 style="margin-bottom: 14px; font-size: 0.85rem; font-weight: 700; color: var(--gray-500); letter-spacing: 0.06em; text-transform: uppercase;">
+                                <span class="material-icons-outlined" style="font-size:16px;vertical-align:middle;margin-right:4px;">campaign</span>
+                                Publish Notice
+                            </h3>
+                            <form id="noticeForm" autocomplete="off">
+                                <div style="margin-bottom: 12px;">
+                                    <input type="text" id="noticeTitle" placeholder="Notice title" required
+                                        style="width:100%;padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:0.85rem;font-family:var(--font-body);outline:none;transition:border 0.2s;"
+                                        onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--gray-200)'">
+                                </div>
+                                <div style="margin-bottom: 12px;">
+                                    <textarea id="noticeMessage" placeholder="Write your notice..." required rows="3"
+                                        style="width:100%;padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:0.85rem;font-family:var(--font-body);resize:vertical;outline:none;transition:border 0.2s;"
+                                        onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--gray-200)'"></textarea>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:10px;">
+                                    <select id="noticePriority"
+                                        style="padding:8px 12px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:0.8rem;font-family:var(--font-body);outline:none;cursor:pointer;background:#fff;">
+                                        <option value="normal">Normal</option>
+                                        <option value="important">Important</option>
+                                        <option value="urgent">Urgent</option>
+                                    </select>
+                                    <button type="submit" id="noticeSubmitBtn"
+                                        style="flex:1;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:0.85rem;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all 0.2s;"
+                                        onmouseenter="this.style.opacity='0.9'" onmouseleave="this.style.opacity='1'">
+                                        Publish
+                                    </button>
+                                </div>
+                            </form>
+
+                            <!-- Recent notices list -->
+                            <div id="adminNoticeList" style="margin-top: 16px; border-top: 1px solid var(--gray-100); padding-top: 12px;">
                             </div>
                         </div>
                     </div>

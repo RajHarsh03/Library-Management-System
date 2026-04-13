@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your account details and profile information.">
+    <title>My Account | The Archivist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/admin/admin.css">
+    <link rel="stylesheet" href="../../styles/student/student.css">
+    <link rel="stylesheet" href="../../styles/mobile-nav.css">
+    <link rel="stylesheet" href="../../styles/global-enhancements.css">
+<script>
+    (function(){try{if(window.innerWidth>768&&localStorage.getItem('lms-student-sidebar-collapsed')!=='0')document.documentElement.classList.add('sidebar-pre-collapsed')}catch(e){}})();
+</script>
+</head>
+<body class="student-app sidebar-collapsed">
+    <div class="app-layout">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
+            <div class="sidebar-brand">
+                <div class="sidebar-brand-icon">
+                    <span class="material-icons-outlined">auto_stories</span>
+                </div>
+                <div class="sidebar-brand-text">
+                    <h2>The Archivist</h2>
+                    <span class="student-brand-sub">Student Portal</span>
+                </div>
+            </div>
+            <button type="button" class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse navigation" aria-expanded="true" aria-controls="sidebar">
+                <span class="material-icons-outlined" aria-hidden="true">chevron_left</span>
+            </button>
+            <button type="button" class="mobile-close-btn" id="mobileCloseBtn" aria-label="Go back" aria-controls="sidebar">
+                <span class="material-icons-outlined" aria-hidden="true">chevron_left</span>
+            </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/student/dashboard" class="nav-item" data-page="dashboard">
+                    <span class="material-icons-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/student/my-books" class="nav-item" data-page="my-books">
+                    <span class="material-icons-outlined">menu_book</span>
+                    <span>My Books</span>
+                </a>
+                <a href="/student/browse" class="nav-item" data-page="browse">
+                    <span class="material-icons-outlined">travel_explore</span>
+                    <span>Browse</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="/student/account" class="nav-item active">
+                    <span class="material-icons-outlined">person</span>
+                    <span>Account</span>
+                </a>
+                <a href="/login" class="nav-item logout-btn">
+                    <span class="material-icons-outlined">logout</span>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span class="material-icons-outlined">menu</span>
+                </button>
+                
+                <div class="topbar-right">
+                    <button type="button" class="topbar-icon-btn" id="notificationBtn" aria-label="Notifications">
+                        <span class="material-icons-outlined">notifications</span>
+                        <span class="notification-badge" id="notifBadge"></span>
+                    </button>
+                    <button type="button" class="topbar-icon-btn" id="helpBtn" aria-label="Help">
+                        <span class="material-icons-outlined">help_outline</span>
+                    </button>
+                    <div class="topbar-profile">
+                        <div class="topbar-profile-info">
+                            <div class="name">Student</div>
+                            <div class="role">Student</div>
+                        </div>
+                        <div class="topbar-avatar">S</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="page-header">
+                    <div class="page-header-left">
+                        <div class="breadcrumb">MY LIBRARY › ACCOUNT</div>
+                        <h1>My Account</h1>
+                    </div>
+                    <div class="page-header-right">
+                        <button type="button" class="acct-edit-btn" id="editProfileBtn" onclick="toggleEditMode()">
+                            <span class="material-icons-outlined">edit</span>
+                            Edit Profile
+                        </button>
+                        <div class="acct-edit-actions" id="editActions" style="display:none;">
+                            <button type="button" class="acct-save-btn" id="saveProfileBtn" onclick="saveProfile()">
+                                <span class="material-icons-outlined">check</span>
+                                Save
+                            </button>
+                            <button type="button" class="acct-cancel-btn" id="cancelEditBtn" onclick="cancelEdit()">
+                                <span class="material-icons-outlined">close</span>
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="account-layout">
+                    <!-- Profile card -->
+                    <div class="account-profile-card">
+                        <div class="account-avatar" id="accountAvatar">S</div>
+                        <h2 class="account-name" id="accountName">Loading...</h2>
+                        <span class="account-role-badge" id="accountRole">Student</span>
+                        <div class="account-joined" id="accountJoined">
+                            <span class="material-icons-outlined">calendar_today</span>
+                            Member since —
+                        </div>
+                    </div>
+
+                    <!-- Details grid -->
+                    <div class="account-details-grid">
+                        <!-- Personal Info -->
+                        <div class="account-section">
+                            <div class="account-section-header">
+                                <span class="material-icons-outlined">person</span>
+                                <h3>Personal Information</h3>
+                            </div>
+                            <div class="account-fields">
+                                <div class="account-field" data-editable="true">
+                                    <label>First Name</label>
+                                    <div class="account-field-value" id="fieldFirstName">—</div>
+                                    <input type="text" class="account-field-input" id="inputFirstName" style="display:none;">
+                                </div>
+                                <div class="account-field" data-editable="true">
+                                    <label>Last Name</label>
+                                    <div class="account-field-value" id="fieldLastName">—</div>
+                                    <input type="text" class="account-field-input" id="inputLastName" style="display:none;">
+                                </div>
+                                <div class="account-field" data-editable="false">
+                                    <label>Email Address <span class="field-lock"><span class="material-icons-outlined">lock</span></span></label>
+                                    <div class="account-field-value" id="fieldEmail">—</div>
+                                </div>
+                                <div class="account-field" data-editable="true">
+                                    <label>Phone Number</label>
+                                    <div class="account-field-value" id="fieldPhone">—</div>
+                                    <input type="tel" class="account-field-input" id="inputPhone" style="display:none;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Library Info -->
+                        <div class="account-section">
+                            <div class="account-section-header">
+                                <span class="material-icons-outlined">badge</span>
+                                <h3>Library Information</h3>
+                            </div>
+                            <div class="account-fields">
+                                <div class="account-field" data-editable="false">
+                                    <label>ID Number <span class="field-lock"><span class="material-icons-outlined">lock</span></span></label>
+                                    <div class="account-field-value" id="fieldStudentId">—</div>
+                                </div>
+                                <div class="account-field" data-editable="true">
+                                    <label>Department</label>
+                                    <div class="account-field-value" id="fieldDepartment">—</div>
+                                    <input type="text" class="account-field-input" id="inputDepartment" style="display:none;">
+                                </div>
+                                <div class="account-field" data-editable="false">
+                                    <label>Account Status <span class="field-lock"><span class="material-icons-outlined">lock</span></span></label>
+                                    <div class="account-field-value" id="fieldStatus">
+                                        <span class="status-dot active"></span> Active
+                                    </div>
+                                </div>
+                                <div class="account-field" data-editable="false">
+                                    <label>Max Borrowing Limit <span class="field-lock"><span class="material-icons-outlined">lock</span></span></label>
+                                    <div class="account-field-value" id="fieldLimit">—</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Library Stats -->
+                        <div class="account-section">
+                            <div class="account-section-header">
+                                <span class="material-icons-outlined">analytics</span>
+                                <h3>Library Activity</h3>
+                            </div>
+                            <div class="account-stats-grid">
+                                <div class="account-mini-stat">
+                                    <span class="account-mini-stat-value" id="acctStatLoans">0</span>
+                                    <span class="account-mini-stat-label">Active Loans</span>
+                                </div>
+                                <div class="account-mini-stat">
+                                    <span class="account-mini-stat-value" id="acctStatReturned">0</span>
+                                    <span class="account-mini-stat-label">Total Returned</span>
+                                </div>
+                                <div class="account-mini-stat">
+                                    <span class="account-mini-stat-value" id="acctStatHolds">0</span>
+                                    <span class="account-mini-stat-label">Active Holds</span>
+                                </div>
+                                <div class="account-mini-stat">
+                                    <span class="account-mini-stat-value" id="acctStatOverdue">0</span>
+                                    <span class="account-mini-stat-label">Overdue</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../scripts/api/config.js"></script>
+    <script src="../../scripts/student/student.js"></script>
+    <script src="../../scripts/student/student-data.js"></script>
+    <script src="../../scripts/mobile-nav.js"></script>
+</body>
+</html>

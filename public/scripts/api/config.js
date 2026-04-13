@@ -175,3 +175,40 @@ const API = (() => {
 
 // Make globally available
 window.API = API;
+
+// ── Notification Badge: fetch unread count on every page ──
+(function initNotificationBadge() {
+    async function fetchNotificationCount() {
+        const badge = document.getElementById('notifBadge');
+        if (!badge || !API.isLoggedIn()) return;
+
+        try {
+            const resp = await fetch('/api/notifications/unread-count', {
+                headers: {
+                    'Authorization': `Bearer ${API.getToken()}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await resp.json();
+            if (data.success) {
+                const count = data.data.unread || 0;
+                if (count > 0) {
+                    badge.textContent = count > 9 ? '9+' : count;
+                    badge.style.display = 'inline-block';
+                } else {
+                    badge.style.display = 'none';
+                }
+            }
+        } catch (e) {
+            // Silently fail — badge stays hidden
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchNotificationCount();
+        // Poll every 60 seconds
+        setInterval(fetchNotificationCount, 60000);
+    });
+
+    window.fetchNotificationCount = fetchNotificationCount;
+})();

@@ -186,12 +186,9 @@ function initStudentNotificationPanel() {
                 headers: { Authorization: `Bearer ${token}` },
             });
             loadStudentNotifications();
-            loadStudentUnreadCount();
+            if (window.fetchNotificationCount) fetchNotificationCount();
         } catch (e) { /* ignore */ }
     });
-
-    loadStudentUnreadCount();
-    setInterval(loadStudentUnreadCount, 60000);
 }
 
 async function loadStudentNotifications() {
@@ -240,20 +237,7 @@ async function loadStudentNotifications() {
     }
 }
 
-async function loadStudentUnreadCount() {
-    try {
-        const token = localStorage.getItem('lms_token') || (window.API && API.getToken && API.getToken());
-        if (!token) return;
-        const resp = await fetch('/api/notifications/unread-count', {
-            headers: { Authorization: `Bearer ${token}` },
-        });
-        const data = await resp.json();
-        const dot = document.querySelector('#notificationBtn .notification-dot');
-        if (dot) {
-            dot.style.display = (data.success && data.data.unread > 0) ? 'block' : 'none';
-        }
-    } catch (e) { /* ignore */ }
-}
+// loadStudentUnreadCount — now handled by global fetchNotificationCount() in config.js
 
 window.markStudentNotifRead = async function (id, el) {
     try {
@@ -267,7 +251,7 @@ window.markStudentNotifRead = async function (id, el) {
             const dot = el.querySelector('.notif-unread-dot');
             if (dot) dot.remove();
         }
-        loadStudentUnreadCount();
+        if (window.fetchNotificationCount) fetchNotificationCount();
     } catch (e) { /* ignore */ }
 };
 

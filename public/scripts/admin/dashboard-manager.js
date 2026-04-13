@@ -204,6 +204,94 @@
         }).join('');
     }
 
+    // ===== Notice Management =====
+    function initNoticeForm() {
+        const form = document.getElementById('noticeForm');
+        if (!form) return;
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('noticeSubmitBtn');
+            const title = document.getElementById('noticeTitle').value.trim();
+            const message = document.getElementById('noticeMessage').value.trim();
+            const priority = document.getElementById('noticePriority').value;
+
+            if (!title || !message) return;
+
+            btn.disabled = true;
+            btn.textContent = 'Publishing...';
+
+            try {
+                const res = await API.post('/notices', { title, message, priority });
+                if (res.success) {
+                    form.reset();
+                    if (window.showToast) showToast('Notice published!', 'success');
+                    loadAdminNotices();
+                } else {
+                    if (window.showToast) showToast(res.message || 'Failed to publish', 'error');
+                }
+            } catch (err) {
+                console.error('Failed to publish notice:', err);
+                if (window.showToast) showToast('Error publishing notice', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Publish';
+            }
+        });
+    }
+
+    async function loadAdminNotices() {
+        const container = document.getElementById('adminNoticeList');
+        if (!container) return;
+
+        try {
+            const res = await API.get('/notices?limit=5');
+            if (!res.success || !res.data || res.data.length === 0) {
+                container.innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;text-align:center;margin:8px 0;">No notices published yet</p>';
+                return;
+            }
+
+            container.innerHTML = res.data.map(n => {
+                const time = timeAgo(n.createdAt);
+                const priorityColors = { urgent: '#ef4444', important: '#f59e0b', normal: '#6b7280' };
+                const color = priorityColors[n.priority] || '#6b7280';
+                const priorityLabel = n.priority !== 'normal'
+                    ? `<span style="display:inline-block;padding:1px 6px;background:${color}12;color:${color};border-radius:4px;font-size:0.65rem;font-weight:600;text-transform:uppercase;margin-left:6px;">${n.priority}</span>`
+                    : '';
+
+                return `<div style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray-100);" data-notice-id="${n._id}">
+                    <div style="flex:1;min-width:0;">
+                        <div style="font-size:0.82rem;font-weight:600;color:var(--gray-800);margin-bottom:2px;">${n.title}${priorityLabel}</div>
+                        <div style="font-size:0.75rem;color:var(--gray-500);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${n.message}</div>
+                        <div style="font-size:0.7rem;color:var(--gray-400);margin-top:3px;">${time}</div>
+                    </div>
+                    <button onclick="window.deleteNotice('${n._id}')" title="Remove notice"
+                        style="background:none;border:none;cursor:pointer;color:var(--gray-400);padding:4px;border-radius:6px;transition:all 0.2s;"
+                        onmouseenter="this.style.color='#ef4444';this.style.background='#fef2f2'"
+                        onmouseleave="this.style.color='var(--gray-400)';this.style.background='none'">
+                        <span class="material-icons-outlined" style="font-size:16px;">close</span>
+                    </button>
+                </div>`;
+            }).join('');
+        } catch (err) {
+            console.error('Failed to load notices:', err);
+            container.innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;text-align:center;">Could not load notices</p>';
+        }
+    }
+
+    window.deleteNotice = async function (id) {
+        if (!confirm('Remove this notice?')) return;
+        try {
+            const res = await API.del(`/notices/${id}`);
+            if (res.success) {
+                if (window.showToast) showToast('Notice removed', 'success');
+                loadAdminNotices();
+            }
+        } catch (err) {
+            console.error('Failed to delete notice:', err);
+        }
+    };
+
     // ===== Init =====
     document.addEventListener('DOMContentLoaded', () => {
         if (!API.requireAuth(['admin'])) return;
@@ -213,5 +301,9 @@
         fetchUserStats();
         fetchTransactionStats();
         fetchRecentBooks();
+
+        // Notice management
+        initNoticeForm();
+        loadAdminNotices();
     });
 })();

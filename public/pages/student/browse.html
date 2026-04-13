@@ -52,9 +52,9 @@
                 </a>
             </nav>
             <div class="sidebar-footer">
-                <a href="#" class="nav-item">
+                <a href="/student/account" class="nav-item">
                     <span class="material-icons-outlined">person</span>
-                    <span>Profile</span>
+                    <span>Account</span>
                 </a>
                 <a href="/login" class="nav-item logout-btn">
                     <span class="material-icons-outlined">logout</span>
@@ -68,14 +68,10 @@
                 <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span class="material-icons-outlined">menu</span>
                 </button>
-                <div class="topbar-search">
-                    <span class="material-icons-outlined">search</span>
-                    <input type="text" placeholder="Search title, author, subject..." id="browseSearch" aria-label="Search catalog">
-                </div>
                 <div class="topbar-right">
                     <button type="button" class="topbar-icon-btn" id="notificationBtn" aria-label="Notifications">
                         <span class="material-icons-outlined">notifications</span>
-                        <span class="notification-dot"></span>
+                        <span class="notification-badge" id="notifBadge"></span>
                     </button>
                     <button type="button" class="topbar-icon-btn" id="helpBtn" aria-label="Help">
                         <span class="material-icons-outlined">help_outline</span>
@@ -93,7 +89,7 @@
             <div class="page-content">
                 <div class="page-header">
                     <div class="page-header-left">
-                        <div class="breadcrumb">DISCOVER <span>â€º CATALOG</span></div>
+                        <div class="breadcrumb">DISCOVER <span>›  CATALOG</span></div>
                         <h1>Browse the collection</h1>
                         <p>Request or place a hold on physical items. E-books open in your institutional reader when available.</p>
                     </div>
@@ -119,6 +115,19 @@
                     <div class="search-filter-panel" id="searchFilterPanel">
                         <div class="search-filter-options">
                             <div class="filter-section">
+                                <label class="filter-label">Sort By</label>
+                                <div class="filter-select-wrap">
+                                    <select id="sortBySelect" class="filter-select">
+                                        <option value="newest">Newest First</option>
+                                        <option value="oldest">Oldest First</option>
+                                        <option value="title_asc">A → Z</option>
+                                        <option value="title_desc">Z → A</option>
+                                        <option value="popularity" selected>Most Popular</option>
+                                        <option value="rating">Highest Rated</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="filter-section">
                                 <label class="filter-label">Availability</label>
                                 <div class="filter-checkboxes">
                                     <label class="filter-checkbox">
@@ -129,15 +138,11 @@
                                         <input type="checkbox" value="unavailable" class="availability-filter">
                                         <span>Checked Out</span>
                                     </label>
-                                    <label class="filter-checkbox">
-                                        <input type="checkbox" value="ebook" class="availability-filter">
-                                        <span>E-book</span>
-                                    </label>
                                 </div>
                             </div>
                             <div class="filter-section">
                                 <label class="filter-label">Category</label>
-                                <div class="filter-checkboxes">
+                                <div class="filter-checkboxes" id="categoryFilters">
                                     <label class="filter-checkbox">
                                         <input type="checkbox" value="all" class="category-filter" checked>
                                         <span>All</span>
@@ -151,14 +156,22 @@
                                         <span>Nonfiction</span>
                                     </label>
                                     <label class="filter-checkbox">
-                                        <input type="checkbox" value="etext" class="category-filter">
-                                        <span>E-text</span>
+                                        <input type="checkbox" value="science" class="category-filter">
+                                        <span>Science</span>
+                                    </label>
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" value="technology" class="category-filter">
+                                        <span>Technology</span>
+                                    </label>
+                                    <label class="filter-checkbox">
+                                        <input type="checkbox" value="history" class="category-filter">
+                                        <span>History</span>
                                     </label>
                                 </div>
                             </div>
                             <div class="filter-actions">
                                 <button class="filter-reset-btn" id="filterResetBtn">Reset</button>
-                                <button class="filter-apply-btn" id="filterApplyBtn">Done</button>
+                                <button class="filter-apply-btn" id="filterApplyBtn">Apply Filters</button>
                             </div>
                         </div>
                     </div>

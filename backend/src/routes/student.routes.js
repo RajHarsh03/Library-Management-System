@@ -18,6 +18,7 @@ const {
   getMyHolds,
   getDashboard,
   getCategories,
+  updateProfile,
 } = require('../controllers/student.controller');
 
 // Import middleware
@@ -53,5 +54,8 @@ router.get('/history', getHistory);
 router.get('/holds', getMyHolds);
 router.post('/hold', holdValidation, placeHold);
 router.delete('/hold/:id', cancelHold);
+
+// Profile
+router.put('/profile', updateProfile);
 
 module.exports = router;
