@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="System Settings - Configure your library management system.">
+    <title>System Settings | The Archivist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/admin/admin.css">
+    <link rel="stylesheet" href="../../styles/mobile-nav.css">
+    <link rel="stylesheet" href="../../styles/global-enhancements.css">
+    <link rel="stylesheet" href="../../styles/admin/settings.css">
+<script>
+    (function(){try{if(window.innerWidth>768&&localStorage.getItem('lms-admin-sidebar-collapsed')!=='0')document.documentElement.classList.add('sidebar-pre-collapsed')}catch(e){}})();
+</script>
+</head>
+<body class="sidebar-collapsed">
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
+            <div class="sidebar-brand">
+                <div class="sidebar-brand-icon">
+                    <span class="material-icons-outlined">auto_stories</span>
+                </div>
+                <div class="sidebar-brand-text">
+                    <h2>The Archivist</h2>
+                    <span>Management Portal</span>
+                </div>
+            </div>
+            <button type="button" class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse navigation" aria-expanded="true" aria-controls="sidebar">
+                <span class="material-icons-outlined" aria-hidden="true">chevron_left</span>
+            </button>
+            <button type="button" class="mobile-close-btn" id="mobileCloseBtn" aria-label="Go back" aria-controls="sidebar">
+                <span class="material-icons-outlined" aria-hidden="true">chevron_left</span>
+            </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/admin/dashboard" class="nav-item" data-page="dashboard">
+                    <span class="material-icons-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/admin/books" class="nav-item" data-page="books">
+                    <span class="material-icons-outlined">auto_stories</span>
+                    <span>Books</span>
+                </a>
+                <a href="/admin/transactions" class="nav-item" data-page="transactions">
+                    <span class="material-icons-outlined">swap_horiz</span>
+                    <span>Transactions</span>
+                </a>
+                <a href="/admin/users" class="nav-item" data-page="users">
+                    <span class="material-icons-outlined">group</span>
+                    <span>Users</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="/admin/settings" class="nav-item active">
+                    <span class="material-icons-outlined">settings</span>
+                    <span>Settings</span>
+                </a>
+                <a href="/login" class="nav-item logout-btn">
+                    <span class="material-icons-outlined">logout</span>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+                    <span class="material-icons-outlined">menu</span>
+                </button>
+                <div class="topbar-greeting" id="topbarGreeting"></div>
+                <div class="topbar-right">
+                    <button class="topbar-icon-btn" id="notificationBtn" aria-label="Notifications">
+                        <span class="material-icons-outlined">notifications</span>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <button class="topbar-icon-btn" aria-label="Help">
+                        <span class="material-icons-outlined">help_outline</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="page-header-text">
+                        <h2>System Settings</h2>
+                        <p class="page-subtitle">Configure library policies, notifications, and system preferences.</p>
+                    </div>
+                    <div class="page-header-actions">
+                        <button class="btn btn-outline" id="resetSettingsBtn">
+                            <span class="material-icons-outlined">restart_alt</span>
+                            RESET DEFAULTS
+                        </button>
+                        <button class="btn btn-primary" id="saveSettingsBtn">
+                            <span class="material-icons-outlined">save</span>
+                            SAVE CHANGES
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Settings Form -->
+                <form id="settingsForm" autocomplete="off">
+                    <!-- Library Information Section -->
+                    <div class="settings-section">
+                        <div class="section-header">
+                            <span class="material-icons-outlined section-icon">business</span>
+                            <div>
+                                <h3>Library Information</h3>
+                                <p>General details about your library.</p>
+                            </div>
+                        </div>
+                        <div class="settings-grid">
+                            <div class="form-group">
+                                <label for="libraryName">Library Name</label>
+                                <input type="text" id="libraryName" name="libraryName" placeholder="e.g. The Archivist">
+                            </div>
+                            <div class="form-group">
+                                <label for="libraryTagline">Tagline</label>
+                                <input type="text" id="libraryTagline" name="libraryTagline" placeholder="e.g. Digital Library Management System">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">Contact Email</label>
+                                <input type="email" id="contactEmail" name="contactEmail" placeholder="e.g. admin@library.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactPhone">Contact Phone</label>
+                                <input type="tel" id="contactPhone" name="contactPhone" placeholder="e.g. +91 12345 67890">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="address">Address</label>
+                                <textarea id="address" name="address" rows="2" placeholder="Library physical address"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Circulation Policies Section -->
+                    <div class="settings-section">
+                        <div class="section-header">
+                            <span class="material-icons-outlined section-icon">menu_book</span>
+                            <div>
+                                <h3>Circulation Policies</h3>
+                                <p>Rules governing book loans, returns, and fines.</p>
+                            </div>
+                        </div>
+                        <div class="settings-grid three-col">
+                            <div class="form-group">
+                                <label for="maxBooksPerStudent">Max Books per Student</label>
+                                <input type="number" id="maxBooksPerStudent" name="maxBooksPerStudent" min="1" max="50">
+                                <span class="form-hint">Maximum books a single student can borrow</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="defaultLoanDays">Default Loan Period (days)</label>
+                                <input type="number" id="defaultLoanDays" name="defaultLoanDays" min="1" max="365">
+                                <span class="form-hint">How many days books can be borrowed</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="maxRenewals">Max Renewals</label>
+                                <input type="number" id="maxRenewals" name="maxRenewals" min="0" max="10">
+                                <span class="form-hint">How many times a loan can be renewed</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="finePerDay">Fine per Day (₹)</label>
+                                <input type="number" id="finePerDay" name="finePerDay" min="0" step="0.50">
+                                <span class="form-hint">Daily fine for overdue books</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="maxFineAmount">Max Fine Amount (₹)</label>
+                                <input type="number" id="maxFineAmount" name="maxFineAmount" min="0" step="1">
+                                <span class="form-hint">Maximum fine cap per transaction</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="gracePeriodDays">Grace Period (days)</label>
+                                <input type="number" id="gracePeriodDays" name="gracePeriodDays" min="0" max="30">
+                                <span class="form-hint">Days after due date before fines start</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notification Settings Section -->
+                    <div class="settings-section">
+                        <div class="section-header">
+                            <span class="material-icons-outlined section-icon">notifications_active</span>
+                            <div>
+                                <h3>Notifications</h3>
+                                <p>Control how the system communicates with users.</p>
+                            </div>
+                        </div>
+                        <div class="settings-list">
+                            <div class="setting-toggle-row">
+                                <div class="setting-info">
+                                    <span class="setting-label">Email Notifications</span>
+                                    <span class="setting-desc">Send email alerts for due dates, overdue notices, and account updates.</span>
+                                </div>
+                                <label class="toggle" for="enableEmailNotifications">
+                                    <input type="checkbox" id="enableEmailNotifications" name="enableEmailNotifications">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-toggle-row">
+                                <div class="setting-info">
+                                    <span class="setting-label">Overdue Alerts</span>
+                                    <span class="setting-desc">Notify admin when books become overdue.</span>
+                                </div>
+                                <label class="toggle" for="enableOverdueAlerts">
+                                    <input type="checkbox" id="enableOverdueAlerts" name="enableOverdueAlerts">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-inline-row">
+                                <div class="setting-info">
+                                    <span class="setting-label">Due Date Reminder</span>
+                                    <span class="setting-desc">Send reminder before the book is due.</span>
+                                </div>
+                                <div class="inline-input">
+                                    <input type="number" id="dueDateReminderDays" name="dueDateReminderDays" min="1" max="14">
+                                    <span>days before</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Settings Section -->
+                    <div class="settings-section">
+                        <div class="section-header">
+                            <span class="material-icons-outlined section-icon">admin_panel_settings</span>
+                            <div>
+                                <h3>System</h3>
+                                <p>Access control and maintenance options.</p>
+                            </div>
+                        </div>
+                        <div class="settings-list">
+                            <div class="setting-toggle-row">
+                                <div class="setting-info">
+                                    <span class="setting-label">Allow Student Registration</span>
+                                    <span class="setting-desc">When disabled, only admins can create new student accounts.</span>
+                                </div>
+                                <label class="toggle" for="allowStudentRegistration">
+                                    <input type="checkbox" id="allowStudentRegistration" name="allowStudentRegistration">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-toggle-row">
+                                <div class="setting-info">
+                                    <span class="setting-label">Maintenance Mode</span>
+                                    <span class="setting-desc">Put the system in maintenance mode. Students will see a maintenance message.</span>
+                                </div>
+                                <label class="toggle" for="maintenanceMode">
+                                    <input type="checkbox" id="maintenanceMode" name="maintenanceMode">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="form-group maintenance-msg-group" id="maintenanceMsgGroup" style="display:none;">
+                                <label for="maintenanceMessage">Maintenance Message</label>
+                                <textarea id="maintenanceMessage" name="maintenanceMessage" rows="2" placeholder="Message shown to students during maintenance"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div class="settings-section danger-zone">
+                        <div class="section-header">
+                            <span class="material-icons-outlined section-icon">warning</span>
+                            <div>
+                                <h3>Danger Zone</h3>
+                                <p>Irreversible actions that affect the entire system.</p>
+                            </div>
+                        </div>
+                        <div class="danger-actions">
+                            <div class="danger-item">
+                                <div>
+                                    <strong>Reset All Settings</strong>
+                                    <p>Restore all settings to their factory defaults. This cannot be undone.</p>
+                                </div>
+                                <button type="button" class="btn btn-danger" id="dangerResetBtn">
+                                    <span class="material-icons-outlined">restart_alt</span>
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Confirm Reset Modal -->
+    <div class="modal-overlay" id="resetModalOverlay">
+        <div class="modal-panel">
+            <div class="modal-icon danger">
+                <span class="material-icons-outlined">warning</span>
+            </div>
+            <h3>Reset All Settings?</h3>
+            <p>This will restore every setting to its default value. Your current configuration will be permanently lost.</p>
+            <div class="modal-actions">
+                <button class="btn btn-outline" id="cancelResetBtn">Cancel</button>
+                <button class="btn btn-danger" id="confirmResetBtn">Reset Everything</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../scripts/api/config.js"></script>
+    <script src="../../scripts/admin/admin.js"></script>
+    <script src="../../scripts/admin/settings-manager.js"></script>
+</body>
+</html>

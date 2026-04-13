@@ -5,6 +5,7 @@
 
 const { validationResult } = require('express-validator');
 const User = require('../models/User');
+const Settings = require('../models/Settings');
 const { success, error, validationError } = require('../utils/response');
 const { generateToken, setTokenCookie } = require('../middleware/auth');
 const logger = require('../utils/logger');
@@ -23,6 +24,19 @@ const register = async (req, res) => {
     }
 
     const { firstName, lastName, email, password, role, course, year } = req.body;
+
+    // Check if student registration is allowed (skip check for admin-created users)
+    const isAdminCreating = req.user && req.user.role === 'admin';
+    if (!isAdminCreating && (!role || role === 'student')) {
+      try {
+        const settings = await Settings.getSettings();
+        if (!settings.allowStudentRegistration) {
+          return error(res, 'Student registration is currently disabled. Please contact the administrator.', 403);
+        }
+      } catch (e) {
+        // If settings can't be loaded, allow registration (fail-open)
+      }
+    }
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });

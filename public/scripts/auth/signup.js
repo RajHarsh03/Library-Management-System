@@ -45,6 +45,31 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentStep = 1;
     const errorTimeouts = new WeakMap(); // Store timeout IDs for auto-dismiss
 
+    // ===== Check if registration is allowed =====
+    (async function checkRegistrationStatus() {
+        try {
+            const resp = await fetch('/api/settings/public');
+            const data = await resp.json();
+            if (data.success && data.data) {
+                if (!data.data.allowStudentRegistration) {
+                    // Disable the form and show message
+                    signupForm.style.opacity = '0.5';
+                    signupForm.style.pointerEvents = 'none';
+                    const banner = document.createElement('div');
+                    banner.style.cssText = 'background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;padding:14px 20px;border-radius:12px;margin-bottom:20px;font-size:0.88rem;font-weight:500;text-align:center;';
+                    banner.textContent = 'Student registration is currently disabled. Please contact the administrator.';
+                    signupForm.parentNode.insertBefore(banner, signupForm);
+                }
+                if (data.data.maintenanceMode) {
+                    const banner = document.createElement('div');
+                    banner.style.cssText = 'background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;padding:14px 20px;border-radius:12px;margin-bottom:20px;font-size:0.88rem;font-weight:500;text-align:center;';
+                    banner.textContent = data.data.maintenanceMessage || 'System is under maintenance.';
+                    signupForm.parentNode.insertBefore(banner, signupForm);
+                }
+            }
+        } catch (e) { /* fail silently */ }
+    })();
+
     // ===== Toast Notification System =====
     function showToast(message, type = 'info') {
         const container = document.getElementById('toastContainer');

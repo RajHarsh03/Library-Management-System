@@ -8,6 +8,7 @@ const dayjs = require('dayjs');
 const Transaction = require('../models/Transaction');
 const Book = require('../models/Book');
 const User = require('../models/User');
+const Settings = require('../models/Settings');
 const { success, error, paginated, validationError } = require('../utils/response');
 const logger = require('../utils/logger');
 
@@ -105,7 +106,11 @@ const borrowBook = async (req, res) => {
       return validationError(res, errors);
     }
 
-    const { bookId, userId, days = 14 } = req.body;
+    const { bookId, userId, days } = req.body;
+
+    // Load system settings
+    const settings = await Settings.getSettings();
+    const loanDays = days || settings.defaultLoanDays || 14;
 
     // Check if book exists and is available
     const book = await Book.findById(bookId);
@@ -127,15 +132,16 @@ const borrowBook = async (req, res) => {
       return error(res, 'User account is not active', 403);
     }
 
-    // Check user's borrowing limit
+    // Check user's borrowing limit (from settings)
+    const maxBooks = settings.maxBooksPerStudent || user.maxBooksAllowed || 5;
     const activeBorrows = await Transaction.countDocuments({
       user: userId,
       type: 'borrow',
       status: { $in: ['active', 'overdue'] },
     });
 
-    if (activeBorrows >= user.maxBooksAllowed) {
-      return error(res, `User has reached maximum borrowing limit (${user.maxBooksAllowed} books)`, 400);
+    if (activeBorrows >= maxBooks) {
+      return error(res, `User has reached maximum borrowing limit (${maxBooks} books)`, 400);
     }
 
     // Check for pending fines
@@ -143,14 +149,14 @@ const borrowBook = async (req, res) => {
       return error(res, 'User has pending fines. Please clear fines before borrowing.', 400);
     }
 
-    // Create transaction
-    const dueDate = dayjs().add(days, 'day').toDate();
+    // Create transaction with settings-driven values
+    const dueDate = dayjs().add(loanDays, 'day').toDate();
     const transaction = await Transaction.create({
       book: bookId,
       user: userId,
       type: 'borrow',
       dueDate,
-      maxRenewals: user.role === 'student' ? 2 : 3,
+      maxRenewals: settings.maxRenewals || 2,
     });
 
     // Update book
@@ -261,7 +267,8 @@ const renewBook = async (req, res) => {
       return error(res, 'This loan cannot be renewed', 400);
     }
 
-    const days = req.body.days || 14;
+    const settings = await Settings.getSettings();
+    const days = req.body.days || settings.defaultLoanDays || 14;
     await transaction.renew(days);
 
     logger.info('Book renewed', {
@@ -317,11 +324,17 @@ const getOverdue = async (req, res) => {
       }),
     ]);
 
-    // Add calculated fields
+    // Add calculated fields using settings
+    let settingsFinePerDay = 5;
+    try {
+      const settings = await Settings.getSettings();
+      settingsFinePerDay = settings.finePerDay || 5;
+    } catch (e) { /* fallback */ }
+
     const transactionsWithCalcs = transactions.map(t => ({
       ...t,
       daysOverdue: dayjs().diff(dayjs(t.dueDate), 'day'),
-      currentFine: dayjs().diff(dayjs(t.dueDate), 'day') * 5,
+      currentFine: dayjs().diff(dayjs(t.dueDate), 'day') * settingsFinePerDay,
     }));
 
     paginated(res, 'Overdue transactions retrieved', transactionsWithCalcs, {

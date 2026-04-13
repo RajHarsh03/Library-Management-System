@@ -5,6 +5,7 @@
 
 const mongoose = require('mongoose');
 const dayjs = require('dayjs');
+const Settings = require('./Settings');
 
 const transactionSchema = new mongoose.Schema({
   // References
@@ -123,13 +124,22 @@ transactionSchema.index({ type: 1, status: 1 });
 transactionSchema.index({ createdAt: -1 });
 
 // Pre-save middleware
-transactionSchema.pre('save', function(next) {
+transactionSchema.pre('save', async function(next) {
   this.updatedAt = Date.now();
   
   // Calculate fine if overdue and returned
   if (this.returnDate && this.status === 'completed' && this.dueDate < this.returnDate) {
-    const daysOverdue = dayjs(this.returnDate).diff(dayjs(this.dueDate), 'day');
-    this.fineAmount = daysOverdue * 5; // ₹5 per day
+    try {
+      const settings = await Settings.getSettings();
+      const totalDaysLate = dayjs(this.returnDate).diff(dayjs(this.dueDate), 'day');
+      const daysOverdue = Math.max(0, totalDaysLate - (settings.gracePeriodDays || 0));
+      let fine = daysOverdue * (settings.finePerDay || 5);
+      if (settings.maxFineAmount > 0) fine = Math.min(fine, settings.maxFineAmount);
+      this.fineAmount = fine;
+    } catch (e) {
+      const daysOverdue = dayjs(this.returnDate).diff(dayjs(this.dueDate), 'day');
+      this.fineAmount = daysOverdue * 5;
+    }
   }
   
   next();
@@ -183,10 +193,19 @@ transactionSchema.methods.returnBook = async function(condition = 'good', proces
     this.processedBy = processedBy;
   }
   
-  // Calculate fine if overdue
+  // Calculate fine if overdue (settings-aware)
   if (this.dueDate < this.returnDate) {
-    const daysOverdue = dayjs(this.returnDate).diff(dayjs(this.dueDate), 'day');
-    this.fineAmount = daysOverdue * 5;
+    try {
+      const settings = await Settings.getSettings();
+      const totalDaysLate = dayjs(this.returnDate).diff(dayjs(this.dueDate), 'day');
+      const daysOverdue = Math.max(0, totalDaysLate - (settings.gracePeriodDays || 0));
+      let fine = daysOverdue * (settings.finePerDay || 5);
+      if (settings.maxFineAmount > 0) fine = Math.min(fine, settings.maxFineAmount);
+      this.fineAmount = fine;
+    } catch (e) {
+      const daysOverdue = dayjs(this.returnDate).diff(dayjs(this.dueDate), 'day');
+      this.fineAmount = daysOverdue * 5;
+    }
   }
   
   return this.save();
@@ -197,9 +216,17 @@ transactionSchema.methods.markOverdue = async function() {
   if (this.isOverdue() && this.status === 'active') {
     this.status = 'overdue';
     
-    // Calculate current fine
-    const daysOverdue = this.getDaysOverdue();
-    this.fineAmount = daysOverdue * 5;
+    // Calculate current fine (settings-aware)
+    try {
+      const settings = await Settings.getSettings();
+      const totalDaysLate = this.getDaysOverdue();
+      const daysOverdue = Math.max(0, totalDaysLate - (settings.gracePeriodDays || 0));
+      let fine = daysOverdue * (settings.finePerDay || 5);
+      if (settings.maxFineAmount > 0) fine = Math.min(fine, settings.maxFineAmount);
+      this.fineAmount = fine;
+    } catch (e) {
+      this.fineAmount = this.getDaysOverdue() * 5;
+    }
     
     return this.save();
   }

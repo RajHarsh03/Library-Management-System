@@ -22,6 +22,7 @@ const {
 
 // Import middleware
 const { protect, restrictTo } = require('../middleware/auth');
+const maintenanceGuard = require('../middleware/maintenance');
 
 // Validation rules
 const holdValidation = [
@@ -31,9 +32,10 @@ const holdValidation = [
     .withMessage('Book ID is required'),
 ];
 
-// All routes require student authentication
+// All routes require student authentication + maintenance check
 router.use(protect);
 router.use(restrictTo('student'));
+router.use(maintenanceGuard);
 
 // Dashboard
 router.get('/dashboard', getDashboard);

@@ -1,12 +1,43 @@
 // Student portal — shared behavior
 
 document.addEventListener('DOMContentLoaded', () => {
+    checkMaintenanceMode();
     initStudentSidebar();
     initSidebarCollapse('lms-student-sidebar-collapsed');
     initStudentTopbar();
     initStudentTableSearch();
     initBrowseSearch();
 });
+
+// ===== Maintenance Mode Check =====
+async function checkMaintenanceMode() {
+    try {
+        const resp = await fetch('/api/settings/public');
+        const data = await resp.json();
+        if (data.success && data.data && data.data.maintenanceMode) {
+            showMaintenanceBanner(data.data.maintenanceMessage);
+        }
+    } catch (e) { /* fail silently */ }
+}
+
+function showMaintenanceBanner(message) {
+    const content = document.querySelector('.page-content') || document.querySelector('.content-area') || document.querySelector('.main-content');
+    if (!content) return;
+    const banner = document.createElement('div');
+    banner.style.cssText = `
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        padding: 48px 32px; margin: 32px auto; max-width: 520px; text-align: center;
+        background: linear-gradient(135deg, #fef3c7, #fde68a); border: 1px solid #f59e0b;
+        border-radius: 16px; box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15);
+    `;
+    banner.innerHTML = `
+        <span class="material-icons-outlined" style="font-size:48px;color:#d97706;margin-bottom:12px;">construction</span>
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.2rem;color:#92400e;margin-bottom:8px;">System Under Maintenance</h3>
+        <p style="font-size:0.88rem;color:#78350f;line-height:1.6;">${message || 'The library system is currently under maintenance. Please try again later.'}</p>
+    `;
+    // Insert at the top of content
+    content.insertBefore(banner, content.firstChild);
+}
 
 function initStudentSidebar() {
     const file = window.location.pathname.split('/').pop().replace('.html', '');

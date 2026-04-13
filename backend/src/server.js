@@ -21,6 +21,7 @@ const bookRoutes = require('./routes/book.routes');
 const userRoutes = require('./routes/user.routes');
 const transactionRoutes = require('./routes/transaction.routes');
 const studentRoutes = require('./routes/student.routes');
+const settingsRoutes = require('./routes/settings.routes');
 
 // Create Express app
 const app = express();
@@ -95,6 +96,7 @@ app.use('/api/books', bookRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/student', studentRoutes);
+app.use('/api/settings', settingsRoutes);
 
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, '../../public')));
@@ -115,6 +117,7 @@ app.get('/admin/dashboard', servePage('pages/admin/dashboard.html'));
 app.get('/admin/books', servePage('pages/admin/books.html'));
 app.get('/admin/users', servePage('pages/admin/users.html'));
 app.get('/admin/transactions', servePage('pages/admin/transactions.html'));
+app.get('/admin/settings', servePage('pages/admin/settings.html'));
 
 // Student pages
 app.get('/student/dashboard', servePage('pages/student/dashboard.html'));
