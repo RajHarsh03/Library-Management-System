@@ -30,7 +30,8 @@ function initSidebar() {
         logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
             if (confirm('Are you sure you want to logout?')) {
-                window.location.href = '../auth/index.html';
+                if (window.API) API.clearAuth();
+                window.location.href = '/login';
             }
         });
     }
@@ -113,25 +114,47 @@ function initSidebarCollapse(storageKey) {
 
 // ===== Topbar =====
 function initTopbar() {
-    const searchInput = document.querySelector('.topbar-search input');
-    if (searchInput) {
-        searchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const query = searchInput.value.trim();
-                if (query) {
-                    // Handle search - for now just log
-                    console.log('Search:', query);
+    // Greeting based on time of day
+    const greetingEl = document.getElementById('topbarGreeting');
+    if (greetingEl) {
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            let greetText;
+            if (hour >= 5 && hour < 12) {
+                greetText = 'Good Morning';
+            } else if (hour >= 12 && hour < 17) {
+                greetText = 'Good Afternoon';
+            } else if (hour >= 17 && hour < 21) {
+                greetText = 'Good Evening';
+            } else {
+                greetText = 'Good Evening';
+            }
+
+            // Get logged-in user name
+            let userName = 'Admin';
+            if (window.API && API.getUser) {
+                const user = API.getUser();
+                if (user) {
+                    userName = user.firstName || user.name || 'Admin';
                 }
             }
-        });
+
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+
+            greetingEl.innerHTML =
+                `<div class="greeting-primary">${greetText}, <span class="greeting-name">${userName}</span></div>` +
+                `<div class="greeting-sub">${dateStr}</div>`;
+        }
+        updateGreeting();
+        // Update every minute to stay real-time
+        setInterval(updateGreeting, 60000);
     }
 
     // Notification bell
     const notifBtn = document.querySelector('.topbar-icon-btn');
     if (notifBtn) {
         notifBtn.addEventListener('click', () => {
-            // Toggle notification panel
             const dot = notifBtn.querySelector('.notification-dot');
             if (dot) dot.style.display = 'none';
         });
@@ -229,12 +252,9 @@ function generateSidebarHTML(activePage) {
     </div>`;
 }
 
-function generateTopbarHTML(searchPlaceholder, userName, userRole) {
+function generateTopbarHTML() {
     return `
-    <div class="topbar-search">
-        <span class="material-icons-outlined">search</span>
-        <input type="text" placeholder="${searchPlaceholder}" id="topbarSearch">
-    </div>
+    <div class="topbar-greeting" id="topbarGreeting"></div>
     <div class="topbar-right">
         <button class="topbar-icon-btn" id="notificationBtn">
             <span class="material-icons-outlined">notifications</span>
@@ -243,13 +263,6 @@ function generateTopbarHTML(searchPlaceholder, userName, userRole) {
         <button class="topbar-icon-btn" id="helpBtn">
             <span class="material-icons-outlined">help_outline</span>
         </button>
-        <div class="topbar-profile">
-            <div class="topbar-profile-info">
-                <div class="name">${userName}</div>
-                <div class="role">${userRole}</div>
-            </div>
-            <div class="topbar-avatar">${userName.split(' ').map(n => n[0]).join('')}</div>
-        </div>
     </div>`;
 }
 

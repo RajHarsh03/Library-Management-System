@@ -74,10 +74,7 @@
                 <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span class="material-icons-outlined">menu</span>
                 </button>
-                <div class="topbar-search">
-                    <span class="material-icons-outlined">search</span>
-                    <input type="text" placeholder="Search archives, users, or records..." id="topbarSearch">
-                </div>
+                <div class="topbar-greeting" id="topbarGreeting"></div>
                 <div class="topbar-right">
                     <button class="topbar-icon-btn" id="notificationBtn">
                         <span class="material-icons-outlined">notifications</span>
@@ -86,13 +83,6 @@
                     <button class="topbar-icon-btn" id="helpBtn">
                         <span class="material-icons-outlined">help_outline</span>
                     </button>
-                    <div class="topbar-profile">
-                        <div class="topbar-profile-info">
-                            <div class="name">Alex Mercer</div>
-                            <div class="role">Chief Archivist</div>
-                        </div>
-                        <div class="topbar-avatar">AM</div>
-                    </div>
                 </div>
         </header>
 
@@ -160,99 +150,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div class="cell-book">
-                                        <div class="cell-book-cover">
-                                            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=100&h=140&fit=crop" alt="Book">
-                                        </div>
-                                        <div class="cell-book-info">
-                                            <div class="title">The Architecture of Silence</div>
-                                            <div class="subtitle">History & Arts</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Julianne Frost</td>
-                                <td><span class="isbn-badge">978-3-16-148410-0</span></td>
-                                <td><span class="status-badge available">Available</span></td>
-                                <td>
-                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
-                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="cell-book">
-                                        <div class="cell-book-cover">
-                                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=100&h=140&fit=crop" alt="Book">
-                                        </div>
-                                        <div class="cell-book-info">
-                                            <div class="title">Digital Forensics</div>
-                                            <div class="subtitle">Technology & Security</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Dr. Elias Vance</td>
-                                <td><span class="isbn-badge">978-0-12-385059-1</span></td>
-                                <td><span class="status-badge issued">Issued</span></td>
-                                <td>
-                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
-                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="cell-book">
-                                        <div class="cell-book-cover">
-                                            <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=100&h=140&fit=crop" alt="Book">
-                                        </div>
-                                        <div class="cell-book-info">
-                                            <div class="title">Urban Narratives</div>
-                                            <div class="subtitle">Sociology</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Markus Aurelio</td>
-                                <td><span class="isbn-badge">978-1-56-118410-4</span></td>
-                                <td><span class="status-badge available">Available</span></td>
-                                <td>
-                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
-                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="cell-book">
-                                        <div class="cell-book-cover">
-                                            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=100&h=140&fit=crop" alt="Book">
-                                        </div>
-                                        <div class="cell-book-info">
-                                            <div class="title">Cognitive Design</div>
-                                            <div class="subtitle">Psychology</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Sarah Ben-Gera</td>
-                                <td><span class="isbn-badge">978-4-02-148410-0</span></td>
-                                <td><span class="status-badge issued">Issued</span></td>
-                                <td>
-                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
-                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
-                                </td>
-                            </tr>
+                            <!-- Dynamic content loaded by books-manager.js -->
                         </tbody>
                     </table>
 
                     <!-- Pagination -->
                     <div class="table-footer">
-                        <span class="table-footer-info">Showing 1 to 4 of 12,482 volumes</span>
-                        <div class="pagination">
-                            <button class="page-btn" data-page="prev"><span class="material-icons-outlined">chevron_left</span></button>
-                            <button class="page-btn active" data-page="1">1</button>
-                            <button class="page-btn" data-page="2">2</button>
-                            <button class="page-btn" data-page="3">3</button>
-                            <button class="page-btn" data-page="next"><span class="material-icons-outlined">chevron_right</span></button>
-                        </div>
+                        <span class="table-footer-info">Loading...</span>
+                        <div class="pagination"></div>
                     </div>
                 </div>
             </div>
@@ -271,99 +176,8 @@
         </main>
     </div>
 
+    <script src="../../scripts/api/config.js"></script>
     <script src="../../scripts/admin/admin.js"></script>
+    <script src="../../scripts/admin/books-manager.js"></script>
     <script src="../../scripts/mobile-nav.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const filterBtn = document.getElementById('filterBtn');
-            const filterPanel = document.getElementById('filterPanel');
-            const statusCheckboxes = document.querySelectorAll('.status-checkbox');
-            const resetFilterBtn = document.getElementById('resetFilterBtn');
-            const booksTable = document.getElementById('booksTable');
-            const searchInput = document.getElementById('searchInput');
-            const clearSearchBtn = document.getElementById('clearSearchBtn');
-
-            // Toggle filter panel
-            filterBtn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                filterPanel.style.display = filterPanel.style.display === 'none' ? 'block' : 'none';
-            });
-
-            // Close filter panel when clicking outside
-            document.addEventListener('click', function (e) {
-                if (!e.target.closest('#filterBtn') && !e.target.closest('#filterPanel')) {
-                    filterPanel.style.display = 'none';
-                }
-            });
-
-            // Search input event
-            searchInput.addEventListener('input', function () {
-                clearSearchBtn.style.display = this.value.trim() ? 'block' : 'none';
-                applyFilter();
-            });
-
-            // Clear search button
-            clearSearchBtn.addEventListener('click', function () {
-                searchInput.value = '';
-                clearSearchBtn.style.display = 'none';
-                applyFilter();
-            });
-
-            // Apply filter when checkbox changes
-            statusCheckboxes.forEach(function (checkbox) {
-                checkbox.addEventListener('change', applyFilter);
-            });
-
-            // Reset filter
-            resetFilterBtn.addEventListener('click', function () {
-                statusCheckboxes.forEach(f => f.checked = false);
-                applyFilter();
-            });
-
-            function applyFilter() {
-                const searchQuery = searchInput.value.trim().toLowerCase();
-                const selectedStatuses = Array.from(statusCheckboxes)
-                    .filter(cb => cb.checked)
-                    .map(cb => cb.value);
-
-                const rows = booksTable.querySelectorAll('tbody tr');
-                rows.forEach(function (row) {
-                    let shouldShow = true;
-
-                    // Check search query
-                    if (searchQuery) {
-                        const cells = row.querySelectorAll('td');
-                        let matchesSearch = false;
-                        if (cells.length > 0) {
-                            const title = cells[0]?.textContent.toLowerCase() || '';
-                            const author = cells[1]?.textContent.toLowerCase() || '';
-                            const isbn = cells[2]?.textContent.toLowerCase() || '';
-                            matchesSearch = title.includes(searchQuery) || author.includes(searchQuery) || isbn.includes(searchQuery);
-                        }
-                        shouldShow = matchesSearch;
-                    }
-
-                    // Check status filter
-                    if (shouldShow && selectedStatuses.length > 0) {
-                        const statusBadge = row.querySelector('.status-badge');
-                        let rowStatus = null;
-
-                        if (statusBadge) {
-                            if (statusBadge.classList.contains('available')) {
-                                rowStatus = 'available';
-                            } else if (statusBadge.classList.contains('issued')) {
-                                rowStatus = 'issued';
-                            } else if (statusBadge.classList.contains('reserved')) {
-                                rowStatus = 'reserved';
-                            }
-                        }
-
-                        shouldShow = rowStatus && selectedStatuses.includes(rowStatus);
-                    }
-
-                    row.style.display = shouldShow ? '' : 'none';
-                });
-            }
-        });
-    </script>
 </html>

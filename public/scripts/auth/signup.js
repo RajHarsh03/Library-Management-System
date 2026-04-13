@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ===== Form Submission - Step 2 =====
-    signupForm.addEventListener('submit', (e) => {
+    signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         // Clear previous errors
@@ -309,31 +309,41 @@ document.addEventListener('DOMContentLoaded', () => {
         signupBtn.classList.add('loading');
         signupBtn.disabled = true;
 
-        // Simulate API call
-        setTimeout(() => {
-            signupBtn.classList.remove('loading');
-            signupBtn.disabled = false;
-
-            // Success
-            showToast('Account created successfully! Let\'s begin the journey', 'success');
-
-            // Simulate form data submission
-            const formData = {
-                firstName: firstNameInput.value,
-                lastName: lastNameInput.value,
-                email: emailInput.value,
-                phone: phoneInput.value,
-                mobileVerification: mobileVerificationInput.checked,
-                newsletter: false
+        try {
+            // Call the real backend API
+            const userData = {
+                firstName: firstNameInput.value.trim(),
+                lastName: lastNameInput.value.trim(),
+                email: emailInput.value.trim(),
+                password: passwordInput.value,
+                role: 'student',
             };
 
-            console.log('Form Data:', formData);
+            // Add optional phone
+            if (phoneInput.value.trim()) {
+                userData.phone = phoneInput.value.trim();
+            }
 
-            // Redirect to login after 2 seconds
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 2000);
-        }, 1500);
+            const data = await API.register(userData);
+
+            if (data.success) {
+                showToast('Account created successfully! Redirecting to login...', 'success');
+
+                // Redirect to login after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            } else {
+                showToast(data.message || 'Registration failed', 'error');
+                signupBtn.classList.remove('loading');
+                signupBtn.disabled = false;
+            }
+        } catch (err) {
+            const message = err.message || 'Registration failed. Please try again.';
+            showToast(message, 'error');
+            signupBtn.classList.remove('loading');
+            signupBtn.disabled = false;
+        }
     });
 
     // ===== Counter Animation =====

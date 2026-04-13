@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ===== Form Submission =====
-    loginForm.addEventListener('submit', (e) => {
+    loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         let valid = true;
 
@@ -156,17 +156,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
         loginBtn.classList.add('loading');
 
-        // Simulate authentication
-        setTimeout(() => {
-            showToast('Authentication successful. Redirecting...', 'success');
-            setTimeout(() => {
-                if (currentRole === 'admin') {
-                    window.location.href = '../admin/dashboard.html';
-                } else {
-                    window.location.href = '../student/dashboard.html';
-                }
-            }, 600);
-        }, 1200);
+        try {
+            // Call the real backend API
+            const data = await API.login(emailInput.value.trim(), passwordInput.value);
+
+            if (data.success) {
+                const user = data.data.user;
+                showToast('Authentication successful. Redirecting...', 'success');
+
+                setTimeout(() => {
+                    if (user.role === 'admin' || user.role === 'librarian') {
+                        window.location.href = '/admin/dashboard';
+                    } else {
+                        window.location.href = '/student/dashboard';
+                    }
+                }, 600);
+            } else {
+                showToast(data.message || 'Login failed', 'error');
+                loginBtn.classList.remove('loading');
+            }
+        } catch (err) {
+            const message = err.message || 'Login failed. Please check your credentials.';
+            showToast(message, 'error');
+            loginBtn.classList.remove('loading');
+        }
     });
 
     // ===== Input Focus Animations =====

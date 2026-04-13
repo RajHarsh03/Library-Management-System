@@ -74,10 +74,7 @@
                 <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span class="material-icons-outlined">menu</span>
                 </button>
-                <div class="topbar-search">
-                    <span class="material-icons-outlined">search</span>
-                    <input type="text" placeholder="Search user directory..." id="topbarSearch">
-                </div>
+                <div class="topbar-greeting" id="topbarGreeting"></div>
                 <div class="topbar-right">
                     <button class="topbar-icon-btn" id="notificationBtn">
                         <span class="material-icons-outlined">notifications</span>
@@ -86,13 +83,6 @@
                     <button class="topbar-icon-btn" id="helpBtn">
                         <span class="material-icons-outlined">help_outline</span>
                     </button>
-                    <div class="topbar-profile">
-                        <div class="topbar-profile-info">
-                            <div class="name">Admin Curator</div>
-                            <div class="role">Super Admin</div>
-                        </div>
-                        <div class="topbar-avatar">AC</div>
-                    </div>
                 </div>
         </header>
 
@@ -161,8 +151,7 @@
                 </div>
 
                 <!-- Users Table -->
-                <div class="table-container">
-                    <table class="data-table" id="usersTable">
+                <div class="table-container">                    <table class="data-table" id="usersTable">
                         <thead>
                             <tr>
                                 <th>User Identity</th>
@@ -173,93 +162,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div class="cell-user">
-                                        <div class="cell-user-avatar">ER</div>
-                                        <div class="cell-user-info">
-                                            <div class="name">Elena Rodriguez</div>
-                                            <div class="email">elena.rod@university.edu</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><span class="role-badge student">STUDENT</span></td>
-                                <td>Sept 12, 2023</td>
-                                <td><span class="status-badge active">Active</span></td>
-                                <td>
-                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
-                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="cell-user">
-                                        <div class="cell-user-avatar">MT</div>
-                                        <div class="cell-user-info">
-                                            <div class="name">Marcus Thorne</div>
-                                            <div class="email">m.thorne@archivist.sys</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><span class="role-badge admin">ADMIN</span></td>
-                                <td>Jan 05, 2022</td>
-                                <td><span class="status-badge active">Active</span></td>
-                                <td>
-                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
-                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="cell-user">
-                                        <div class="cell-user-avatar" style="background:linear-gradient(135deg,#f3e8ff,#e2e6ef);color:#7c3aed;">JS</div>
-                                        <div class="cell-user-info">
-                                            <div class="name">Julian Sterling</div>
-                                            <div class="email">julian.s@university.edu</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><span class="role-badge faculty">FACULTY</span></td>
-                                <td>Mar 22, 2023</td>
-                                <td><span class="status-badge suspended">Suspended</span></td>
-                                <td>
-                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
-                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="cell-user">
-                                        <div class="cell-user-avatar">AO</div>
-                                        <div class="cell-user-info">
-                                            <div class="name">Amara Okafor</div>
-                                            <div class="email">amara.ok@research.inst</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td><span class="role-badge student">STUDENT</span></td>
-                                <td>Nov 01, 2023</td>
-                                <td><span class="status-badge active">Active</span></td>
-                                <td>
-                                    <button class="action-btn"><span class="material-icons-outlined">edit</span></button>
-                                    <button class="action-btn"><span class="material-icons-outlined">more_vert</span></button>
-                                </td>
-                            </tr>
+                            <!-- Dynamic content loaded by users-manager.js -->
                         </tbody>
                     </table>
 
                     <!-- Pagination -->
                     <div class="table-footer">
-                        <span class="table-footer-info">Showing <strong>1 - 4</strong> of <strong>2,548</strong> results</span>
-                        <div class="pagination">
-                            <button class="page-btn" data-page="prev"><span class="material-icons-outlined">chevron_left</span></button>
-                            <button class="page-btn active" data-page="1">1</button>
-                            <button class="page-btn" data-page="2">2</button>
-                            <button class="page-btn" data-page="3">3</button>
-                            <button class="page-btn" style="pointer-events:none;color:var(--gray-300);">...</button>
-                            <button class="page-btn" data-page="637">637</button>
-                            <button class="page-btn" data-page="next"><span class="material-icons-outlined">chevron_right</span></button>
-                        </div>
+                        <span class="table-footer-info">Loading...</span>
+                        <div class="pagination"></div>
                     </div>
                 </div>
             </div>
@@ -278,127 +188,9 @@
         </main>
     </div>
 
+    <script src="../../scripts/api/config.js"></script>
     <script src="../../scripts/admin/admin.js"></script>
+    <script src="../../scripts/admin/users-manager.js"></script>
     <script src="../../scripts/mobile-nav.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const roleFilterBtn = document.querySelector('.filter-btn-role');
-            const statusFilterBtn = document.querySelector('.filter-btn-status');
-            const roleFilterPanel = document.querySelector('.role-filter-panel');
-            const statusFilterPanel = document.querySelector('.status-filter-panel');
-            const roleCheckboxes = document.querySelectorAll('.role-checkbox');
-            const statusCheckboxes = document.querySelectorAll('.status-checkbox');
-            const resetRoleFilterBtn = document.querySelector('.reset-role-filter');
-            const resetStatusFilterBtn = document.querySelector('.reset-status-filter');
-            const usersTable = document.getElementById('usersTable');
-            const allRows = Array.from(usersTable.querySelectorAll('tbody tr'));
-
-            let selectedRoles = [];
-            let selectedStatuses = [];
-
-            // Toggle Role Filter Panel
-            roleFilterBtn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                roleFilterPanel.style.display = roleFilterPanel.style.display === 'none' ? 'block' : 'none';
-                statusFilterPanel.style.display = 'none';
-            });
-
-            // Toggle Status Filter Panel
-            statusFilterBtn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                statusFilterPanel.style.display = statusFilterPanel.style.display === 'none' ? 'block' : 'none';
-                roleFilterPanel.style.display = 'none';
-            });
-
-            // Close filter panels when clicking outside
-            document.addEventListener('click', function (e) {
-                if (!e.target.closest('.filter-btn-role') && !e.target.closest('.role-filter-panel')) {
-                    roleFilterPanel.style.display = 'none';
-                }
-                if (!e.target.closest('.filter-btn-status') && !e.target.closest('.status-filter-panel')) {
-                    statusFilterPanel.style.display = 'none';
-                }
-            });
-
-            // Role filter checkboxes
-            roleCheckboxes.forEach(function (checkbox) {
-                checkbox.addEventListener('change', function () {
-                    selectedRoles = Array.from(roleCheckboxes)
-                        .filter(cb => cb.checked)
-                        .map(cb => cb.value);
-                    applyAllFilters();
-                });
-            });
-
-            // Status filter checkboxes
-            statusCheckboxes.forEach(function (checkbox) {
-                checkbox.addEventListener('change', function () {
-                    selectedStatuses = Array.from(statusCheckboxes)
-                        .filter(cb => cb.checked)
-                        .map(cb => cb.value);
-                    applyAllFilters();
-                });
-            });
-
-            // Reset role filter
-            resetRoleFilterBtn.addEventListener('click', function () {
-                roleCheckboxes.forEach(cb => cb.checked = false);
-                selectedRoles = [];
-                applyAllFilters();
-            });
-
-            // Reset status filter
-            resetStatusFilterBtn.addEventListener('click', function () {
-                statusCheckboxes.forEach(cb => cb.checked = false);
-                selectedStatuses = [];
-                applyAllFilters();
-            });
-
-            function applyAllFilters() {
-                allRows.forEach(function (row) {
-                    let shouldShow = true;
-
-                    // Check role filter
-                    if (selectedRoles.length > 0) {
-                        const roleBadge = row.querySelector('.role-badge');
-                        let rowRole = null;
-
-                        if (roleBadge) {
-                            if (roleBadge.classList.contains('student')) {
-                                rowRole = 'student';
-                            } else if (roleBadge.classList.contains('faculty')) {
-                                rowRole = 'faculty';
-                            } else if (roleBadge.classList.contains('admin')) {
-                                rowRole = 'admin';
-                            }
-                        }
-
-                        if (!rowRole || !selectedRoles.includes(rowRole)) {
-                            shouldShow = false;
-                        }
-                    }
-
-                    // Check status filter
-                    if (shouldShow && selectedStatuses.length > 0) {
-                        const statusBadge = row.querySelector('.status-badge');
-                        let rowStatus = null;
-
-                        if (statusBadge) {
-                            if (statusBadge.classList.contains('active')) {
-                                rowStatus = 'active';
-                            } else if (statusBadge.classList.contains('suspended')) {
-                                rowStatus = 'suspended';
-                            }
-                        }
-
-                        if (!rowStatus || !selectedStatuses.includes(rowStatus)) {
-                            shouldShow = false;
-                        }
-                    }
-
-                    row.style.display = shouldShow ? '' : 'none';
-                });
-            }
-        });
-    </script>
 </body>
+</html>
