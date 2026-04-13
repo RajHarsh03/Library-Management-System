@@ -91,6 +91,22 @@ const updateValidation = [
     .withMessage('Price cannot be negative'),
 ];
 
+// Middleware to parse JSON string fields from multipart/form-data
+function parseFormDataJson(req, res, next) {
+  // When using FormData, arrays come as JSON strings — parse them
+  if (typeof req.body.authors === 'string') {
+    try { req.body.authors = JSON.parse(req.body.authors); } catch (e) { /* leave as-is */ }
+  }
+  if (typeof req.body.categories === 'string') {
+    try { req.body.categories = JSON.parse(req.body.categories); } catch (e) { /* leave as-is */ }
+  }
+  // Parse numeric fields
+  if (req.body.totalCopies) req.body.totalCopies = Number(req.body.totalCopies);
+  if (req.body.pages) req.body.pages = Number(req.body.pages);
+  if (req.body.price) req.body.price = Number(req.body.price);
+  next();
+}
+
 // Public routes
 router.get('/', getBooks);
 router.get('/categories', getCategories);
@@ -98,9 +114,9 @@ router.get('/stats', protect, restrictTo('admin', 'librarian'), getStats);
 router.get('/:id', getBook);
 
 // Protected routes (Admin/Librarian only)
-router.post('/', protect, restrictTo('admin', 'librarian'), upload.single('coverImage'), bookValidation, createBook);
+router.post('/', protect, restrictTo('admin', 'librarian'), upload.single('coverImage'), parseFormDataJson, bookValidation, createBook);
 router.post('/bulk', protect, restrictTo('admin', 'librarian'), bulkCreate);
-router.put('/:id', protect, restrictTo('admin', 'librarian'), upload.single('coverImage'), updateValidation, updateBook);
+router.put('/:id', protect, restrictTo('admin', 'librarian'), upload.single('coverImage'), parseFormDataJson, updateValidation, updateBook);
 router.delete('/:id', protect, restrictTo('admin'), deleteBook);
 router.patch('/:id/restore', protect, restrictTo('admin'), restoreBook);
 
