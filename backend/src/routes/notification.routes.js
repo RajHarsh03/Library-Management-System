@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
     if (req.user.role === 'admin') {
       notifications = await Notification.getAdminNotifications(parseInt(limit));
     } else {
-      notifications = await Notification.getStudentNotifications(req.user._id, parseInt(limit));
+      notifications = await Notification.getStudentNotifications(req.user._id, parseInt(limit), req.user.createdAt);
     }
 
     // Mark which are read by this user
@@ -46,7 +46,7 @@ router.get('/unread-count', async (req, res) => {
     if (req.user.role === 'admin') {
       notifications = await Notification.getAdminNotifications(50);
     } else {
-      notifications = await Notification.getStudentNotifications(req.user._id, 50);
+      notifications = await Notification.getStudentNotifications(req.user._id, 50, req.user.createdAt);
     }
     const userId = req.user._id.toString();
     const unread = notifications.filter(n => !n.readBy.some(id => id.toString() === userId)).length;
@@ -75,7 +75,15 @@ router.post('/read-all', async (req, res) => {
     if (req.user.role === 'admin') {
       filter = { audience: { $in: ['admin', 'all'] } };
     } else {
-      filter = { $or: [{ user: req.user._id }, { audience: { $in: ['student', 'all'] } }] };
+      filter = {
+        $or: [
+          { user: req.user._id },
+          {
+            audience: { $in: ['student', 'all'] },
+            ...(req.user.createdAt ? { createdAt: { $gte: req.user.createdAt } } : {}),
+          },
+        ],
+      };
     }
     await Notification.updateMany(filter, { $addToSet: { readBy: req.user._id } });
     res.json({ success: true, message: 'All notifications marked as read' });

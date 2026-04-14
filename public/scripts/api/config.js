@@ -180,15 +180,22 @@ window.API = API;
 (function initNotificationBadge() {
     async function fetchNotificationCount() {
         const badge = document.getElementById('notifBadge');
-        if (!badge || !API.isLoggedIn()) return;
+        if (!badge) return;
+
+        const token = localStorage.getItem('auth_token') || localStorage.getItem('lms_token');
+        if (!token) return;
 
         try {
             const resp = await fetch('/api/notifications/unread-count', {
                 headers: {
-                    'Authorization': `Bearer ${API.getToken()}`,
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
             });
+
+            // Handle rate-limit or non-OK responses gracefully
+            if (!resp.ok) return;
+
             const data = await resp.json();
             if (data.success) {
                 const count = data.data.unread || 0;
@@ -200,14 +207,15 @@ window.API = API;
                 }
             }
         } catch (e) {
-            // Silently fail — badge stays hidden
+            // Silently fail — badge stays as-is
         }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        fetchNotificationCount();
-        // Poll every 60 seconds
-        setInterval(fetchNotificationCount, 60000);
+        // Initial fetch after a short delay to let auth settle
+        setTimeout(fetchNotificationCount, 500);
+        // Poll every 30 seconds
+        setInterval(fetchNotificationCount, 30000);
     });
 
     window.fetchNotificationCount = fetchNotificationCount;

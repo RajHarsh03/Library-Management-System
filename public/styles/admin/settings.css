@@ -541,7 +541,9 @@
 
 @media (max-width: 768px) {
     .content-area {
-        padding: 20px 16px;
+        padding: 16px 12px;
+        overflow-x: hidden;
+        max-width: 100vw;
     }
 
     .page-header {

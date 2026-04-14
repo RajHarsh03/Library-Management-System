@@ -9,7 +9,7 @@ const notificationSchema = new mongoose.Schema({
   // Who this notification is for ('admin', 'student', 'all')
   audience: {
     type: String,
-    enum: ['admin', 'student', 'all'],
+    enum: ['admin', 'student', 'all', 'user'],
     default: 'admin',
     index: true,
   },
@@ -74,13 +74,20 @@ notificationSchema.statics.getAdminNotifications = async function (limit = 20) {
 };
 
 // Static: Get notifications for a specific student
-notificationSchema.statics.getStudentNotifications = async function (userId, limit = 20) {
-  return this.find({
+// Only shows broadcast notifications created AFTER the user's account was created
+notificationSchema.statics.getStudentNotifications = async function (userId, limit = 20, userCreatedAt = null) {
+  const query = {
     $or: [
+      // User-specific notifications (always show)
       { user: userId },
-      { audience: { $in: ['student', 'all'] } },
+      // Broadcast notifications for students/all — only after user was created
+      {
+        audience: { $in: ['student', 'all'] },
+        ...(userCreatedAt ? { createdAt: { $gte: userCreatedAt } } : {}),
+      },
     ],
-  })
+  };
+  return this.find(query)
     .sort({ createdAt: -1 })
     .limit(limit)
     .lean();

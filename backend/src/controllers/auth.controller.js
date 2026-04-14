@@ -80,7 +80,7 @@ const register = async (req, res) => {
         title: 'Welcome to The Archivist!',
         message: `Hi ${user.firstName}, your student account has been created. Browse the catalog and start borrowing books today!`,
         type: 'account',
-        audience: 'student',
+        audience: 'user',
         user: user._id,
         icon: 'waving_hand',
         priority: 'normal',

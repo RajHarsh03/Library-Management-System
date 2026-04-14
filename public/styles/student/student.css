@@ -1365,12 +1365,45 @@ body.student-app .topbar-search input:focus-visible {
 
 @media (max-width: 768px) {
     body.student-app .topbar {
-        padding: 14px 18px;
+        padding: 10px 14px;
+        gap: 8px;
+    }
+
+    body.student-app .topbar-right {
+        gap: 6px;
+    }
+
+    body.student-app .topbar-icon-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+    }
+
+    body.student-app .topbar-icon-btn .material-icons-outlined {
+        font-size: 1.1rem;
+    }
+
+    body.student-app .topbar-avatar {
+        width: 34px;
+        height: 34px;
+        font-size: 0.72rem;
+    }
+
+    body.student-app .mobile-menu-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        margin-right: auto;
+    }
+
+    body.student-app .mobile-menu-btn .material-icons-outlined {
+        font-size: 1.15rem;
     }
 
     body.student-app .page-content {
-        padding-left: 18px;
-        padding-right: 18px;
+        padding-left: 14px;
+        padding-right: 14px;
+        overflow-x: hidden;
     }
 
     .student-welcome {
@@ -1404,12 +1437,72 @@ body.student-app .topbar-search input:focus-visible {
         grid-template-columns: 1fr 1fr;
         gap: 12px;
     }
+
+    /* Dashboard cards stack on mobile */
+    .dash-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dash-card {
+        border-radius: 14px;
+    }
+
+    .notice-item {
+        padding: 12px 12px;
+    }
+
+    .notice-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+    }
+
+    .notice-icon .material-icons-outlined {
+        font-size: 17px;
+    }
+
+    .notice-title {
+        font-size: 0.8rem;
+    }
+
+    .notice-msg {
+        font-size: 0.74rem;
+    }
 }
 
 @media (max-width: 480px) {
+    body.student-app .topbar {
+        padding: 8px 10px;
+    }
+
+    body.student-app .topbar-right {
+        gap: 4px;
+    }
+
+    body.student-app .topbar-icon-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    body.student-app .topbar-icon-btn .material-icons-outlined {
+        font-size: 1rem;
+    }
+
+    body.student-app .mobile-menu-btn {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+    }
+
+    body.student-app .topbar-avatar {
+        width: 30px;
+        height: 30px;
+        font-size: 0.65rem;
+    }
+
     body.student-app .page-content {
-        padding-left: 12px;
-        padding-right: 12px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     body.student-app .stat-card {
@@ -1429,6 +1522,14 @@ body.student-app .topbar-search input:focus-visible {
         grid-template-columns: 1fr 1fr;
         gap: 8px;
         margin-bottom: 12px;
+    }
+
+    .dash-greeting h2 {
+        font-size: 1.15rem;
+    }
+
+    .dash-greeting p {
+        font-size: 0.78rem;
     }
 }
 

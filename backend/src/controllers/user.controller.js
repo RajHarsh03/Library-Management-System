@@ -147,6 +147,20 @@ const createUser = async (req, res) => {
       createdBy: req.user._id,
     });
 
+    // Send welcome notification to the new student
+    if (user.role === 'student') {
+      const Notification = require('../models/Notification');
+      await Notification.createSystemNotification({
+        title: 'Welcome to The Archivist!',
+        message: `Hi ${user.firstName}, your account has been created by the administrator. Browse the catalog and start borrowing books!`,
+        type: 'account',
+        audience: 'user',
+        user: user._id,
+        icon: 'waving_hand',
+        priority: 'normal',
+      });
+    }
+
     success(res, 'User created successfully', {
       user: {
         id: user._id,
