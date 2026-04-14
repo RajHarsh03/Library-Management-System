@@ -608,10 +608,68 @@
         gap: 14px;
     }
 
+    /* Allow table to scroll horizontally */
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .data-table {
+        min-width: 700px;
+    }
+
+    .data-table thead th {
+        padding: 10px 12px;
+        font-size: 0.65rem;
+    }
+
+    .data-table tbody td {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+    }
+
+    .cell-book {
+        gap: 8px;
+    }
+
+    .cell-book-cover {
+        width: 32px;
+        height: 44px;
+    }
+
+    .cell-book-info .title {
+        font-size: 0.8rem;
+    }
+
+    .cell-book-info .subtitle {
+        font-size: 0.65rem;
+    }
+
+    .status-badge {
+        padding: 4px 10px;
+        font-size: 0.65rem;
+    }
+
+    .action-btn {
+        width: 30px;
+        height: 30px;
+    }
+
+    .action-btn .material-icons-outlined {
+        font-size: 16px;
+    }
+
     .table-footer {
         flex-direction: column;
         gap: 12px;
         align-items: center;
+        padding: 12px 14px;
+    }
+
+    .page-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.75rem;
     }
 
     .toast {
@@ -623,5 +681,9 @@
         top: 12px;
         right: 12px;
         left: 12px;
+    }
+
+    .bottom-cards .info-card {
+        padding: 16px;
     }
 }
